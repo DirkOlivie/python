@@ -1,0 +1,53 @@
+import loopanalyseseries2
+import sys
+sys.path.insert(0,'/nird/home/olivie/code/python/routines/source')
+import cfiglayout
+
+
+#figlayout=cfiglayout.CFigLayout(xrange=[0.,130.])
+figlayout=cfiglayout.CFigLayout(xrange=[1950,2015])
+#figlayout=cfiglayout.CFigLayout()
+
+
+# 2. NORESM2.5 and NORESM2-MM (CMIP6)
+#------------------------------------------------------------------------
+#
+code='n20260423_noresm2.5_hist_ohso2'
+#
+expidlist=[ \
+           'nhist.ne16pg3_tn14.nhist_cmip7.constLU.20260118', \
+           'nhist.ne16pg3_tn14.nhist_cmip7.constLU.20260118.dust.seasaltdist', \
+           'nhist.ne16pg3_tn14.nhist_cmip7.constLU.20260118.dust.seasaltdist.hygr1p2'] 
+#
+legendlist=[ \
+           'Reference', \
+           'dst+sslt', \
+           'dst+sslt+hygr'] 
+#
+refidlist=expidlist
+#
+wlist=[1.,0.]
+#
+smoothlist=[0,0,0]
+#
+shiftlist=[0,0,0]
+#
+colorlist     =   [0,1,2]
+
+linestylelist =   [0,0,0]
+#
+
+description='typevarcommon-varcommon'
+variablelist=[\
+              'FSDS','FSDSC', \
+              'PRECC','PRECL', \
+              'TREFHT', \
+              'SWCF','LWCF','PRECT','CLDTOT','CLDLOW','CLDMED','CLDHGH', \
+              'U10', \
+              'TGCLDLWP','TGCLDIWP', \
+              'cb_BC','cb_OM','cb_SULFATE','cb_DUST','cb_SALT', \
+              'AODVISdivDAYFOC']
+typevarlist=['glob']
+freqtype='YEA'
+#
+loopanalyseseries2.loopanalyseseries2(expidlist=expidlist,refidlist=refidlist,wlist=wlist,legendlist=legendlist,shiftlist=shiftlist,smoothlist=smoothlist,variablelist=variablelist,typevarlist=typevarlist,freqtype=freqtype,description=description,code=code,figlayout=figlayout,colorlist=colorlist,linestylelist=linestylelist)
