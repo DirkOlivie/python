@@ -6,6 +6,13 @@ def getreadyearlist(yearlist, scenario, activity, i4mpdownload):
     MODIFICATIONS
         (2026-03-15) added i4mpdownload as argument
 
+
+    INPUT
+        yearlist
+        scenario
+        activity
+        i4mpdownload
+
     '''
     nyear=len(yearlist)
 

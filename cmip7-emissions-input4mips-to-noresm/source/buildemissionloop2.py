@@ -39,11 +39,11 @@ def buildemissionloop2(groupdescriptionlist,resolutionlist, vertintplist, period
                 for vertintp in vertintplist :
                     for noresmversion in noresmversionlist :
                         for groupdescription in groupdescriptionlist :
-                            activity=groupdescription['activity']
-                            vertdist=groupdescription['vertdist']
-                            sectorliststring=groupdescription['sectorliststring']
-                            specieslist=groupdescription['specieslist']
-                            i4mpdownload=groupdescription['i4mpdownload']
+                            activity         = groupdescription['activity']
+                            vertdist         = groupdescription['vertdist']
+                            sectorliststring = groupdescription['sectorliststring']
+                            specieslist      = groupdescription['specieslist']
+                            i4mpdownload     = groupdescription['i4mpdownload']
                             for species in specieslist :
 
                                 print('Hallo')  

@@ -19,21 +19,23 @@ figlayout=cfiglayout.CFigLayout(xrange=[1476.,1485.])
 #
 expidlist=[ \
            'n1850esmGaxg.n30b23LM.508.20260824', \
-           'n1850esmGaxgGHG.LM.n30b24.20260916']  
+           'n1850esmGaxgGHG.LM.n30b24.20260916', \
+           'n1850esmGaxgGHG.LM.n30b24.20260919']  
 #
 legendlist=[ \
-            'b23 (#507)', \
-            'b24 (GHG)'] 
+            'b23 (#508)', \
+            'b24 (GHG, 20260916)', \
+            'b24 (GHG, 20260919)'] 
 #
 refidlist=expidlist # become 1 object
 #
 wlist=[1.,0.]
 #
-smoothlist=[0,0]
-shiftlist=[0,0]
-colorlist     =   [0,1]
-linestylelist =   [2,2]
-linewidthlist =   [1,1]
+smoothlist=[0,0,0]
+shiftlist=[0,0,0]
+colorlist     =   [0,1,2]
+linestylelist =   [2,2,2]
+linewidthlist =   [1,1,1]
 
 #
 # tempocn
@@ -55,24 +57,28 @@ loopanalyseseries2.loopanalyseseries2(expidlist=expidlist,refidlist=refidlist,wl
 expidlist= \
            ['n1850esmGaxg.n30b23LM.508.20260824']*3 \
           +['n1850esmGaxgGHG.LM.n30b24.20260916']*3 \
+          +['n1850esmGaxgGHG.LM.n30b24.20260919']*3
 #
 legendlist=[ \
-            'b23 (#507, NH)', \
-            'b23 (#507, tropics)', \
-            'b23 (#507, SH)', \
-            'b24 (GHG, NH)', \
-            'b24 (GHG, tropics)', \
-            'b24 (GHG, SH)'] 
+            'b23 (#508, NH)', \
+            'b23 (#508, tropics)', \
+            'b23 (#508, SH)', \
+            'b24 (GHG, NH, 20260916)', \
+            'b24 (GHG, tropics, 20260916)', \
+            'b24 (GHG, SH, 20260916)', \
+            'b24 (GHG, NH, 20260919)', \
+            'b24 (GHG, tropics, 20260919)', \
+            'b24 (GHG, SH, 20260919)']
 #
 refidlist=expidlist # become 1 object
 #
 wlist=[1.,0.]
 #
-smoothlist=[0,0,0,0,0,0]
-shiftlist=[0,0,0,0,0,0]
-colorlist     =   [0,0,0,1,1,1]
-linestylelist =   [0,1,2,0,1,2]
-linewidthlist =   [1,1,1,1,1,1]
+smoothlist=[0,0,0,0,0,0,0,0,0]
+shiftlist=[0,0,0,0,0,0,1,1,1]
+colorlist     =   [0,0,0,1,1,1,2,2,2]
+linestylelist =   [0,1,2,0,1,2,0,1,2]
+linewidthlist =   [1,1,1,1,1,1,1,1,1]
 
 #
 # tempocn
@@ -80,7 +86,7 @@ description='varcommon'
 variablelist=[\
               'CO2_surfacelayer', \
               'TMCO2']  
-typevarlist=['NH','28S28N','SH','NH','28S28N','SH']
+typevarlist=['NH','28S28N','SH','NH','28S28N','SH','NH','28S28N','SH']
 freqtype='monthly'
 #
 code='n20260903_noresm2.5_picontrol_co2_zonal'
@@ -92,22 +98,26 @@ loopanalyseseries2.loopanalyseseries2(expidlist=expidlist,refidlist=refidlist,wl
 #------------------------------------------------------------------------
 #
 expidlist= \
-          ['n1850esmGaxgGHG.LM.n30b24.20260916']*3
+          ['n1850esmGaxgGHG.LM.n30b24.20260916']*3 #
+#         +['n1850esmGaxgGHG.LM.n30b24.20260919']*3
 #
 legendlist=[ \
-            'b24 (GHG, NH)', \
-            'b24 (GHG, tropics)', \
-            'b24 (GHG, SH)'] 
+            'b24 (GHG, NH, 20260916)', \
+            'b24 (GHG, tropics, 20260916)', \
+            'b24 (GHG, SH, 20260916)']
+#            'b24 (GHG, NH, 20260919)', \
+#            'b24 (GHG, tropics, 20260919)', \
+#            'b24 (GHG, SH, 20260919)'] 
 #
 refidlist=expidlist # become 1 object
 #
 wlist=[1.,0.]
 #
-smoothlist=[0,0,0]
-shiftlist=[0,0,0]
-colorlist     =   [1,1,1]
-linestylelist =   [0,1,2]
-linewidthlist =   [1,1,1]
+smoothlist=[0,0,0]#,0,0,0]
+shiftlist=[0,0,0]#,0,0,0]
+colorlist     =   [1,1,1]#,2,2,2]
+linestylelist =   [0,1,2]#,0,1,2]
+linewidthlist =   [1,1,1]#,1,1,1]
 
 #
 # tempocn
@@ -115,7 +125,7 @@ description='varcommon'
 variablelist=[\
               'CO2_surfacelayer', \
               'TMCO2']  
-typevarlist=['NH','28S28N','SH']
+typevarlist=['NH','28S28N','SH']#,'NH','28S28N','SH']
 freqtype='monthly'
 #
 code='n20260903_noresm2.5_picontrol_co2_zonal_ghgonly'
@@ -127,30 +137,44 @@ loopanalyseseries2.loopanalyseseries2(expidlist=expidlist,refidlist=refidlist,wl
 #------------------------------------------------------------------------
 #
 expidlist= \
-          ['n1850esmGaxgGHG.LM.n30b24.20260916']*4
+          ['n1850esmGaxgGHG.LM.n30b24.20260916']*2 \
+         +['n1850esmGaxgGHG.LM.n30b24.20260919']*2
 #
 legendlist=[ \
-            'b24 (GHG) - total', \
-            'b24 (GHG) - land', \
-            'b24 (GHG) - ocean', \
-            'b24 (GHG) - fossil fuel']
+            'b24 (GHG, 20260916) - total', \
+#            'b24 (GHG, 20260916) - land', \
+#            'b24 (GHG, 20260916) - ocean', \
+#            'b24 (GHG, 20260916) - fossil fuel', \
+            'b24 (GHG, 20260916) - total (offline sum)', \
+            'b24 (GHG, 20260919) - total', \
+#            'b24 (GHG, 20260919) - land', \
+#            'b24 (GHG, 20260919) - ocean', \
+#            'b24 (GHG, 20260919) - fossil fuel', \
+            'b24 (GHG, 20260919) - total (offline sum)']
+#
+legendlist=[ \
+            'b24 (GHG, 20260916) - SFCO2', \
+            'b24 (GHG, 20260916) - SFCO2_FFF+SFCO2_LND+SFCO2_OCN', \
+            'b24 (GHG, 20260919) - SFCO2', \
+            'b24 (GHG, 20260919) - SFCO2_FFF+SFCO2_LND+SFCO2_OCN']
 #
 refidlist=expidlist # become 1 object
 #
 wlist=[1.,0.]
 #
-smoothlist=[0,0,0,0]
-shiftlist=[0,0,0,0]
-colorlist     =   [0,1,2,3]
-linestylelist =   [2,2,2,2]
-linewidthlist =   [1,1,1,1]
+smoothlist=[0,0,0,0] #,0,0,0,0,0,0]
+shiftlist=[0,0,0,0]# ,0,0,0,0,0,0]
+colorlist     =   [0,1,2,3]# ,4,0,1,2,3,4]
+linestylelist =   [0,2,0,2]# ,0,2,2,2,2,2]
+linewidthlist =   [2,2,2,2]# ,1,1,1,1,1,1]
 
 #
 # tempocn
 description='typevarcommon'
 variablelist=[\
-              'SFCO2','SFCO2_LND','SFCO2_OCN','SFCO2_FFF']  
-typevarlist=['']
+#              'SFCO2','SFCO2_LND','SFCO2_OCN','SFCO2_FFF','SFCO2_FFFLNDOCN','SFCO2','SFCO2_LND','SFCO2_OCN','SFCO2_FFF','SFCO2_FFFLNDOCN']  
+              'SFCO2','SFCO2_FFFLNDOCN','SFCO2','SFCO2_FFFLNDOCN']  
+typevarlist=['glob']
 freqtype='monthly'
 #
 code='n20260903_noresm2.5_picontrol_co2_speciated'

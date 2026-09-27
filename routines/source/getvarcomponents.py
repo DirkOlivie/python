@@ -666,6 +666,7 @@ def getbasicvarcomponents(var, expid):
           or expid=='n1850GaxgGHG.LM.n30b24.516.20260909' \
           or expid=='n1850GaxgGHG.LM.n30b24.517.20260911' \
           or expid=='n1850GaxgGHG.LM.n30b24.517.branch.20260913' \
+          or expid=='n1850GaxgGHG.LM.nor30b24.525.20260923' \
            ) : componentlist=['masstrocn']; weightlist=[1.]
         else : componentlist=[var]; weightlist=[1.]            
 

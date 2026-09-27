@@ -4,7 +4,7 @@ sys.path.insert(0,'/nird/home/olivie/code/python/routines/source')
 import cfiglayout
 
 
-figlayout=cfiglayout.CFigLayout(xrange=[0.,300.])
+figlayout=cfiglayout.CFigLayout(xrange=[0.,380.])
 
 
 # 2. NORESM2.5 and NORESM2-MM (CMIP6) and cesm3

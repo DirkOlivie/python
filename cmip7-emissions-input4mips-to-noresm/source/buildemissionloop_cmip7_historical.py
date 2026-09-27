@@ -49,16 +49,16 @@ def main():
 #   version='version20260723'
 
 #   periodlist=['1850-1850']#,'1849-2025']
-#   periodlist=['1849-2023']
-    periodlist=['1850-1850']
-#    resolutionlist=['1.9x2.5','ne16pg3']#,'0.9x1.25','ne16pg3','ne30pg3']
+    periodlist=['1849-2023']
+ #   periodlist=['1850-1850']
+#   resolutionlist=['1.9x2.5']#,'ne16pg3']#,'0.9x1.25','ne16pg3','ne30pg3']
     resolutionlist=['0.9x1.25'] 
 #   resolutionlist=['ne16pg3']
 #   resolutionlist=['ne30pg3']
     project='cmip7'
 #
-    overwrite=False
-#   overwrite=True
+#   overwrite=False
+    overwrite=True
 #
 #   do something for commonblock
 #

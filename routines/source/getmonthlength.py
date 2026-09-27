@@ -4,7 +4,7 @@ def getmonthlength(year, month, calendar) :
     INPUT   
         year
         month
-        calendar : 'gregorian' | 'no_leap'    
+        calendar : 'gregorian' | 'no_leap' | '365_day'    
 
     MODIFICATIONS
         (2024-09-25) Creation
@@ -12,7 +12,7 @@ def getmonthlength(year, month, calendar) :
 
     '''
 #
-    if ( calendar != 'gregorian' and calendar != 'noleap' ) :
+    if ( calendar != 'gregorian' and calendar != 'noleap' and calendar != '365_day' ) :
         print('+++ getmonthlength +++')
         print('No calendar recognized : ', noleap)
         quit()

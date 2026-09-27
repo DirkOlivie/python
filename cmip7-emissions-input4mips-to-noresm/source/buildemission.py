@@ -427,44 +427,47 @@ def buildemission(period, species, activity, sectorliststring, vertdist, resolut
         lonid[0:nlon] = longitude[0:nlon]
         areaid[0:nlat,0:nlon] = area[0:nlat,0:nlon] 
     elif ( gridtype == 'irregular' ) :
-        latid[0:ncol] = latitude[0:ncol]
-        lonid[0:ncol] = longitude[0:ncol]
+        latid[0:ncol]  = latitude[0:ncol]
+        lonid[0:ncol]  = longitude[0:ncol]
         areaid[0:ncol] = area[0:ncol] 
     else :  
         print('No gridtype recognized : ', gridtype)
         quit()
 
-
+#   Fill in height variables
     if ( dim == '3-dim' ) :  levid[0:nlev]   = altitude[0:nlev]
     if ( dim == '3-dim' ) : ilevid[0:nlev+1] = altitude_int[0:nlev+1]
 #
 #   Add the emission
-#   convert yearlist to readyearlist
+#   convert yearlist -> readyearlist
     readyearlist=getreadyearlist.getreadyearlist(yearlist=yearlist, scenario=scenario, activity=activity, i4mpdownload=i4mpdownload) # this should not depend on sector, as sectors end up in same file with same time axis
 
+#   split readyearlist in different blocks
     yearblocklist=yearlist2blocklist.yearlist2blocklist(yearlist=readyearlist, activity=activity, resolution=resolution)
 
 #   
-#    print('yearlist      : ', yearlist)
-#    print('readyearlist  : ', readyearlist)
-#    print('yearblocklist : ', yearblocklist)  
+    print('yearlist      : ', yearlist)
+    print('readyearlist  : ', readyearlist)
+    print('yearblocklist : ', yearblocklist)  
     
     itime0=0 # important
 
     nblock=len(yearblocklist)    
+#   
+#   loop over all yearblocks
     for iblock in range(nblock) :
         readyear0=yearblocklist[iblock][0]       # first element in specific block
-        readyear1=yearblocklist[iblock][-1]      # last element in specific block
+        readyear1=yearblocklist[iblock][-1]      # last  element in specific block
 
         nyear=readyear1-readyear0+1
 
         itime1=itime0 + nyear*nmonth
 
+#       loop over all contributing emission sectors
         for isector in range(0,nsector) :
             sector=sectorlist[isector]
 
             F = composefield.composefield(activity=activity, sector=sector, species=species, dim=dim, vertdist=vertdist, year0=readyear0, year1=readyear1, longitude=longitude, latitude=latitude, resolution=resolution, altitude_int=altitude_int, scenario=readscenario, i4mpdownload=i4mpdownload, filelocation=filelocation)
-
 
             if   ( dim == '2-dim' and gridtype == 'latlon'    ) : sectoridlist[isector][itime0:itime1       ,0:nlat,0:nlon]=F['field'][0:nyear*nmonth,       0:nlat,0:nlon]
             elif ( dim == '3-dim' and gridtype == 'latlon'    ) : sectoridlist[isector][itime0:itime1,0:nlev,0:nlat,0:nlon]=F['field'][0:nyear*nmonth,0:nlev,0:nlat,0:nlon]
@@ -475,7 +478,7 @@ def buildemission(period, species, activity, sectorliststring, vertdist, resolut
                 print('No dim recognized : ', dim)
                 quit()
 
-            dateid[   itime0:itime1] = date[itime0:itime1]
+            dateid[   itime0:itime1] = date[   itime0:itime1]
             datesecid[itime0:itime1] = datesec[itime0:itime1]
             timeid[   itime0:itime1] = 0 # timid, daysince(refdate=17500101L,enddate=date(itime)), OFFSET=[itime]
 

@@ -49,7 +49,8 @@ expidlist=[ \
            'n1850Gaxg.LM.n30b24.516.20260909', \
            'n1850GaxgGHG.LM.n30b24.516.20260909', \
            'n1850GaxgGHG.LM.n30b24.517.20260911', \
-           'n1850GaxgGHG.LM.n30b24.517.branch.20260913']
+           'n1850GaxgGHG.LM.n30b24.517.branch.20260913', \
+           'n1850GaxgGHG.LM.nor30b24.525.20260923']
 #
 legendlist=['NorESM2-MM', \
             'NorESM2-LM', \
@@ -75,17 +76,18 @@ legendlist=['NorESM2-MM', \
             'b24 (#516)', \
             'b24 (#516, GHG)', \
             'b24 (#517, GHG)', \
-            'b24 (#517, GHG, branch)']
+            'b24 (#517, GHG, branch)', \
+            'b24 (#525, GHG)']
 #
 refidlist=expidlist # become 1 object
 #
 wlist=[1.,0.]
 #
-smoothlist=[0,0,                  0,0,0,0,0, 0,0,0,0,0, 0, 0, 0, 0,0, 0,0,0,0]
-shiftlist=[-1199+1350,-1599+1350, 0,0,0,0,0, 0,0,0,0,0, 0, 0, 0, 0,0, 0,0,0,0]
-colorlist     =   [0,1,           2,2,2,2,2, 3,3,3,3,3, 4, 5, 6, 7,8, 9,10,11,12]
-linestylelist =   [2,2,           0,0,0,0,0, 0,0,0,0,0, 0, 0, 0, 0,0, 0,0,0,0]
-linewidthlist =   [1,1,           1,1,1,1,1, 1,1,1,1,1, 2, 2, 2, 2,2, 2,2,2,2]
+smoothlist=[0,0,                  0,0,0,0,0, 0,0,0,0,0, 0, 0, 0, 0,0, 0,0,0,0,0]
+shiftlist=[-1199+1350,-1599+1350, 0,0,0,0,0, 0,0,0,0,0, 0, 0, 0, 0,0, 0,0,0,0,0]
+colorlist     =   [0,1,           2,2,2,2,2, 3,3,3,3,3, 4, 5, 6, 7,8, 9,10,11,12,13]
+linestylelist =   [2,2,           0,0,0,0,0, 0,0,0,0,0, 0, 0, 0, 0,0, 0,0,0,0,0]
+linewidthlist =   [1,1,           1,1,1,1,1, 1,1,1,1,1, 2, 2, 2, 2,2, 2,2,2,2,2]
 
 #
 # tempocn
@@ -127,10 +129,10 @@ freqtype='YEA'
 typevarlist=['glob']
 variablegrouplist=[\
 #                   ['AOD_VISdivDAYFOC']*2+['AODVISdivDAYFOC']*(nexpid-2)
-                   ['PRECCPRECL']*(nexpid-7)+['PRECT']*7, \
-                   ['SFDMS']*(nexpid-8)+['emis_DMS']*8, \
-                   ['EMI_DUST_TOT_noresm2']*(nexpid-8)+['emis_DUST']*8, \
-                   ['EMI_SALT_TOT_noresm2']*(nexpid-8)+['emis_SALT']*8 \
+                   ['PRECCPRECL']*(nexpid-8)+['PRECT']*8, \
+                   ['SFDMS']*(nexpid-9)+['emis_DMS']*9, \
+                   ['EMI_DUST_TOT_noresm2']*(nexpid-9)+['emis_DUST']*9, \
+                   ['EMI_SALT_TOT_noresm2']*(nexpid-9)+['emis_SALT']*9 \
 #                   ['SFisoprene']*(nexpid-9)+['emis_isoprene']*9, \
 #                   ['SFmonoterp']*(nexpid-9)+['emis_monoterp']*9 \
                   ]
@@ -150,13 +152,13 @@ for variablelist in variablegrouplist :
 
 
 # REMOVE LAST element
-del expidlist[    -7]
-del legendlist[   -7]
-del shiftlist[    -7]
-del smoothlist[   -7]
-del linestylelist[-7]
-del linewidthlist[-7]
-del colorlist[    -7]
+del expidlist[    -8]
+del legendlist[   -8]
+del shiftlist[    -8]
+del smoothlist[   -8]
+del linestylelist[-8]
+del linewidthlist[-8]
+del colorlist[    -8]
 
 description='typevarcommon-varcommon'
 

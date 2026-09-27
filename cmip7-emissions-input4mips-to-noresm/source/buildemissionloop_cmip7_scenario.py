@@ -54,8 +54,8 @@ def main():
 #  resolutionlist=['ne30pg3']
     project='cmip7'
 #
-    overwrite=False
-#   overwrite=True
+#   overwrite=False
+    overwrite=True
 #
 #   do something for commonblock
 #

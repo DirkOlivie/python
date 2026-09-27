@@ -8,9 +8,17 @@ import composefieldsingle
 def composefield(activity, sector, species, dim, vertdist, longitude, latitude, resolution, altitude_int, year0, year1, scenario, i4mpdownload, filelocation) :
 #----------------------
     '''
-    INPUT
-        sector : can be 'ALL' but can also be an individual sector name
+    REMARK
+        - conversion from kg/m2/s or kg/m3/s --> molecules/cm2/s or molecules/cm3/s
+        - adds components with weighting factors [via getspeciesinfo]
 
+    INPUT
+        activity : 
+        sector   : can be 'ALL' but can also be an individual sector name
+        species
+        dim
+        vertdist
+        
 
     MODIFICATION
 	    (2021-05-19)

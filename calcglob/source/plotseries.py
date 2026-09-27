@@ -78,7 +78,7 @@ def plotseries_internal (ax,data,legendlist,shiftlist,smoothlist,freqtype,typeva
             newunitslist[iexpid] = 'ppm'
         elif ( variable in ['CO2_surfacelayer'] \
             and units == 'kg kg-1' ) :
-            factorlist[iexpid]=44./28.94
+            factorlist[iexpid]=28.94/44.
             units='mol mol-1'
         elif ( ( variable == 'cb_O3'  \
             or variable == 'ozone_columnburden' \

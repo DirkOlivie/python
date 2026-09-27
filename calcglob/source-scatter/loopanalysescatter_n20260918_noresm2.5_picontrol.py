@@ -67,7 +67,7 @@ legendlist=['#488','#493','#496','#506','#509','#515','#520', \
 
 colorlist=np.arange(0,nexpid)
 linestylelist=[0]*(nexpid-1) + [2]
-regressionlist=[0,0,0,0,0,0,0,-1]
+regressionlist=[0,0,0,1,1,1,1,-1]
 
 #
 code=generalcode+'_ne30pg3'
