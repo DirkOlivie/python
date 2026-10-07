@@ -49,8 +49,11 @@ expidlist=[ \
            'n1850Gaxg.LM.n30b24.516.20260909', \
            'n1850GaxgGHG.LM.n30b24.516.20260909', \
            'n1850GaxgGHG.LM.n30b24.517.20260911', \
-           'n1850GaxgGHG.LM.n30b24.517.branch.20260913', \
-           'n1850GaxgGHG.LM.nor30b24.525.20260923']
+#           'n1850GaxgGHG.LM.n30b24.517.branch.20260913', \
+           'n1850GaxgGHG.LM.nor30b24.525.20260923', \
+            \
+           'n1850GaxgGHG.LM.nor30b25.526.redout.20260928']
+
 #
 legendlist=['NorESM2-MM', \
             'NorESM2-LM', \
@@ -76,18 +79,20 @@ legendlist=['NorESM2-MM', \
             'b24 (#516)', \
             'b24 (#516, GHG)', \
             'b24 (#517, GHG)', \
-            'b24 (#517, GHG, branch)', \
-            'b24 (#525, GHG)']
+#            'b24 (#517, GHG, branch)', \
+            'b24 (#525, GHG)', \
+             \
+            'b25 (#526, GHG)']
 #
 refidlist=expidlist # become 1 object
 #
 wlist=[1.,0.]
 #
-smoothlist=[0,0,                  0,0,0,0,0, 0,0,0,0,0, 0, 0, 0, 0,0, 0,0,0,0,0]
-shiftlist=[-1199+1350,-1599+1350, 0,0,0,0,0, 0,0,0,0,0, 0, 0, 0, 0,0, 0,0,0,0,0]
-colorlist     =   [0,1,           2,2,2,2,2, 3,3,3,3,3, 4, 5, 6, 7,8, 9,10,11,12,13]
-linestylelist =   [2,2,           0,0,0,0,0, 0,0,0,0,0, 0, 0, 0, 0,0, 0,0,0,0,0]
-linewidthlist =   [1,1,           1,1,1,1,1, 1,1,1,1,1, 2, 2, 2, 2,2, 2,2,2,2,2]
+smoothlist=[0,0,                  0,0,0,0,0, 0,0,0,0,0, 0, 0, 0, 0,0, 0,0,0,0,     0]
+shiftlist=[-1199+1350,-1599+1350, 0,0,0,0,0, 0,0,0,0,0, 0, 0, 0, 0,0, 0,0,0,0,     0]
+colorlist     =   [0,1,           2,2,2,2,2, 3,3,3,3,3, 4, 5, 6, 7,8, 9,10,11,12, 13]
+linestylelist =   [2,2,           0,0,0,0,0, 0,0,0,0,0, 0, 0, 0, 0,0, 0,0,0,0,     0]
+linewidthlist =   [1,1,           1,1,1,1,1, 1,1,1,1,1, 2, 2, 2, 2,2, 2,2,2,2,     2]
 
 #
 # tempocn
@@ -129,7 +134,7 @@ freqtype='YEA'
 typevarlist=['glob']
 variablegrouplist=[\
 #                   ['AOD_VISdivDAYFOC']*2+['AODVISdivDAYFOC']*(nexpid-2)
-                   ['PRECCPRECL']*(nexpid-8)+['PRECT']*8, \
+                   ['PRECCPRECL']*(nexpid-8)+['PRECT']*7+['PRECCPRECL']*1, \
                    ['SFDMS']*(nexpid-9)+['emis_DMS']*9, \
                    ['EMI_DUST_TOT_noresm2']*(nexpid-9)+['emis_DUST']*9, \
                    ['EMI_SALT_TOT_noresm2']*(nexpid-9)+['emis_SALT']*9 \

@@ -25,7 +25,10 @@ def daysince(refdate, enddate, calendar):
 #    
 #    print('+++ daysince +++')
 #
-    if ( calendar != 'gregorian' and calendar != 'noleap' and calendar != '365_day' ) :
+    if ( calendar != 'gregorian' \
+     and calendar != 'Gregorian' \
+     and calendar != 'noleap' \
+     and calendar != '365_day' ) :
         print('+++ daysince +++')
         print('No calendar recognized : ', calendar)
         quit()

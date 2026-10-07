@@ -23,7 +23,7 @@ def intpstandard(D, longitude, latitude, resolution, filelocation, altitude_int=
         longitude     : final/desired longitude
         latitude      : final/desired latitude
         resolution    : final/desired grid 'latlon' or 'irregular'     
-        filelocation  :
+        filelocation  : 
         altitude_int  : final/desired altitude_int
 
     CALLS
@@ -33,7 +33,8 @@ def intpstandard(D, longitude, latitude, resolution, filelocation, altitude_int=
         intpfieldirregular
                 
     MODIFICATIONS
-        (205-10-18) added possibility for irregular grid
+        (2025-10-18) added possibility for irregular grid
+        (2025-09-29) added yearlist and monthlist to output structure
 
     '''
 
@@ -86,6 +87,9 @@ def intpstandard(D, longitude, latitude, resolution, filelocation, altitude_int=
                  'area_units' : 'm2', \
 #
                  'dim'        : D['dim'], \
+#
+                 'yearlist'  : D['yearlist'], \
+                 'monthlist' : D['monthlist'], \
                  'ntime'      : D['ntime']}
 #
 #   3-dimensional
@@ -118,6 +122,9 @@ def intpstandard(D, longitude, latitude, resolution, filelocation, altitude_int=
                 'levbnds'   : altitude_int, \
                 'lev_units' : D['altitude_units'], \
                 'dim'       : D['dim'], \
+#
+                'yearlist'  : D['yearlist'], \
+                'monthlist' : D['monthlist'], \
                 'ntime'     : D['ntime'] }     
     else :
         print('No dimension recognized = ', D['dim'])

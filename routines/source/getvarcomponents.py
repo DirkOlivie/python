@@ -590,6 +590,12 @@ def getbasicvarcomponents(var, expid):
           or expid == 'N1850.MM.nor30b24.515.20260908' \
           or expid == 'N1850.MM.nor30b24.520.20260913' \
             \
+          or expid == 'n1850GaxgGHG.LM.nor30b25.526.redout.20260928' \
+          or expid == 'n1850GaxgGHG.LM.nor30b25.528.20260928' \
+            \
+          or expid == 'n1850esmGaxgGHG.LM.n30b25.20260928' \
+          or expid == 'n1850esmGaxgGHG.LM.n30b25.529.20261002' \
+            \
           or expid == 'n1850Gg.ne16pg3_tn14_gl4.noresm3_0_beta16.Run13.Olivia.2026-05-18_pseudo_hybrid' \
           or expid == 'n1850.ne16pg3_tn14.noresm3_0_beta18.Run14.Olivia.2026-05-28' \
           or expid == 'n1850.ne16pg3_tn14.noresm3_0_beta18.Run14-A.Olivia.2026-06-01' \
@@ -667,6 +673,9 @@ def getbasicvarcomponents(var, expid):
           or expid=='n1850GaxgGHG.LM.n30b24.517.20260911' \
           or expid=='n1850GaxgGHG.LM.n30b24.517.branch.20260913' \
           or expid=='n1850GaxgGHG.LM.nor30b24.525.20260923' \
+            \
+          or expid=='n1850GHG.MM.nor30b25.527.20260928' \
+          or expid=='n1850GHG.MM.nor30b25.527.redout.20260929' \
            ) : componentlist=['masstrocn']; weightlist=[1.]
         else : componentlist=[var]; weightlist=[1.]            
 

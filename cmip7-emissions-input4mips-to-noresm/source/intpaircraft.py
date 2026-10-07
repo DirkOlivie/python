@@ -72,6 +72,7 @@ def intpaircraft(D, longitude, latitude, resolution, levbnds, filelocation):
 
     MODIFICATIONS
         (2025-10-18) Extension to irregular grid
+        (2026-09-29) Added yearlist and monthlist in output structure
 
     '''
 
@@ -243,6 +244,9 @@ def intpaircraft(D, longitude, latitude, resolution, levbnds, filelocation):
              'lev_units'  : 'km', \
 #
              'dim'        : '3d', \
+             'yearlist'   : D['yearlist'], \
+             'monthlist'  : D['monthlist'], \
+
              'ntime'      : ntime}  
 #
     globaltotal=checkglobaltotal.checkglobaltotal(D=data)

@@ -11,8 +11,8 @@ def readndimnc(variable, filename):
 
     nc_fid= Dataset(filename, 'r')
 
-    shape = nc_fid.variables[variable].ndim
+    ndim = nc_fid.variables[variable].ndim
 
     nc_fid.close
 
-    return shape
+    return ndim

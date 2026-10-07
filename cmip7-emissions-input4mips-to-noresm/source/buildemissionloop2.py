@@ -2,9 +2,12 @@ import numpy as np
 
 import buildemission
 
-def buildemissionloop2(groupdescriptionlist,resolutionlist, vertintplist, periodlist, version, noresmversionlist, scenariolist, project, filelocation, overwrite):
+def buildemissionloop2(activitydescriptionlist,resolutionlist, vertintplist, periodlist, version, noresmversionlist, scenariohybrid, project, filelocation, overwrite):
 #---------------------
     '''
+    MODIFICATION
+        (2026-09-27) : i4mpdownload replaced by origindescriptionlist
+
     INPUT
         vertdist
         resolutionlist
@@ -35,17 +38,17 @@ def buildemissionloop2(groupdescriptionlist,resolutionlist, vertintplist, period
     #
     for period in periodlist :
         for resolution in resolutionlist :
-            for scenario in scenariolist :
-                for vertintp in vertintplist :
-                    for noresmversion in noresmversionlist :
-                        for groupdescription in groupdescriptionlist :
-                            activity         = groupdescription['activity']
-                            vertdist         = groupdescription['vertdist']
-                            sectorliststring = groupdescription['sectorliststring']
-                            specieslist      = groupdescription['specieslist']
-                            i4mpdownload     = groupdescription['i4mpdownload']
-                            for species in specieslist :
+            for vertintp in vertintplist :
+                for noresmversion in noresmversionlist :
+                    for activitydescription in activitydescriptionlist :
+                        activity         = activitydescription['activity']
+                        vertdist         = activitydescription['vertdist']
+                        sectorliststring = activitydescription['sectorliststring']
+                        specieslist      = activitydescription['specieslist']
+#                            i4mpdownload         = activitydescription['i4mpdownload']
+                        origindescriptionlist = activitydescription['origindescriptionlist']
+                        for species in specieslist :
 
-                                print('Hallo')  
+                            print('Hallo')  
 
-                                buildemission.buildemission(vertdist=vertdist,resolution=resolution,vertintp=vertintp, activity=activity,sectorliststring=sectorliststring,species=species,period=period, version=version, noresmversion=noresmversion, scenario=scenario, i4mpdownload=i4mpdownload, project=project, filelocation=filelocation, overwrite=overwrite)
+                            buildemission.buildemission(vertdist=vertdist,resolution=resolution,vertintp=vertintp, activity=activity,sectorliststring=sectorliststring,species=species,period=period, version=version, noresmversion=noresmversion, scenariohybrid=scenariohybrid, origindescriptionlist=origindescriptionlist, project=project, filelocation=filelocation, overwrite=overwrite)

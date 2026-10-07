@@ -114,7 +114,7 @@ if ( False ) :
 
     analyseseriesnoresmemissionsloop2.analyseseriesnoresmemissionsloop2(directory=directory,filenamelist=filenamelist,freqtype=freqtype)
 
-if ( True ) :
+if ( False ) :
     directory='/scratch/olivie/code/python/cmip7-emissions-input4mips-to-noresm/data/output/version20260820/individual/CMIP/1.9x2.5'
 
     filenamelist=[ \
@@ -122,3 +122,78 @@ if ( True ) :
 
     analyseseriesnoresmemissionsloop2.analyseseriesnoresmemissionsloop2(directory=directory,filenamelist=filenamelist,freqtype=freqtype)
 
+if ( True ) :
+    directory='/scratch/olivie/code/python/cmip7-emissions-input4mips-to-noresm/data/output/version20260927/individual/histclimo/1.9x2.5'
+
+    filenamelist=[
+            'emissions_cmip7_noresm3_BC_airALL_vertical_histclimo_1850-2023_1.9x2.5_CEDS-CMIP-2025-04-18_version20260927', \
+            'emissions_cmip7_noresm3_BC_anthroprofALL_vertical_histclimo_1850-2023_1.9x2.5_CEDS-CMIP-2025-04-18_version20260927', \
+            'emissions_cmip7_noresm3_BC_anthrosurfALL_surface_histclimo_1850-2023_1.9x2.5_CEDS-CMIP-2025-04-18_version20260927', \
+            'emissions_cmip7_noresm3_BC_bbALL_vertical_histclimo_1850-2023_1.9x2.5_DRES-CMIP-BB4CMIP7-2-0_version20260927', \
+            'emissions_cmip7_noresm3_BENZENE_anthrosurfgasALL_surface_histclimo_1850-2023_1.9x2.5_CEDS-CMIP-2025-04-18_version20260927', \
+            'emissions_cmip7_noresm3_BENZENE_bbsurfALL_surface_histclimo_1850-2023_1.9x2.5_DRES-CMIP-BB4CMIP7-2-0_version20260927', \
+            'emissions_cmip7_noresm3_BIGALK_anthrosurfgasALL_surface_histclimo_1850-2023_1.9x2.5_CEDS-CMIP-2025-04-18_version20260927', \
+            'emissions_cmip7_noresm3_BIGALK_bbsurfALL_surface_histclimo_1850-2023_1.9x2.5_DRES-CMIP-BB4CMIP7-2-0_version20260927', \
+            'emissions_cmip7_noresm3_BIGENE_anthrosurfgasALL_surface_histclimo_1850-2023_1.9x2.5_CEDS-CMIP-2025-04-18_version20260927', \
+            'emissions_cmip7_noresm3_BIGENE_bbsurfALL_surface_histclimo_1850-2023_1.9x2.5_DRES-CMIP-BB4CMIP7-2-0_version20260927', \
+            'emissions_cmip7_noresm3_C2H2_anthrosurfgasALL_surface_histclimo_1850-2023_1.9x2.5_CEDS-CMIP-2025-04-18_version20260927', \
+            'emissions_cmip7_noresm3_C2H2_bbsurfALL_surface_histclimo_1850-2023_1.9x2.5_DRES-CMIP-BB4CMIP7-2-0_version20260927', \
+            'emissions_cmip7_noresm3_C2H4_anthrosurfgasALL_surface_histclimo_1850-2023_1.9x2.5_CEDS-CMIP-2025-04-18_version20260927', \
+            'emissions_cmip7_noresm3_C2H4_bbsurfALL_surface_histclimo_1850-2023_1.9x2.5_DRES-CMIP-BB4CMIP7-2-0_version20260927', \
+            'emissions_cmip7_noresm3_C2H5OH_anthrosurfgasALL_surface_histclimo_1850-2023_1.9x2.5_CEDS-CMIP-2025-04-18_version20260927', \
+            'emissions_cmip7_noresm3_C2H5OH_bbsurfALL_surface_histclimo_1850-2023_1.9x2.5_DRES-CMIP-BB4CMIP7-2-0_version20260927', \
+            'emissions_cmip7_noresm3_C2H6_anthrosurfgasALL_surface_histclimo_1850-2023_1.9x2.5_CEDS-CMIP-2025-04-18_version20260927', \
+            'emissions_cmip7_noresm3_C2H6_bbsurfALL_surface_histclimo_1850-2023_1.9x2.5_DRES-CMIP-BB4CMIP7-2-0_version20260927', \
+            'emissions_cmip7_noresm3_C3H6_anthrosurfgasALL_surface_histclimo_1850-2023_1.9x2.5_CEDS-CMIP-2025-04-18_version20260927', \
+            'emissions_cmip7_noresm3_C3H6_bbsurfALL_surface_histclimo_1850-2023_1.9x2.5_DRES-CMIP-BB4CMIP7-2-0_version20260927', \
+            'emissions_cmip7_noresm3_C3H8_anthrosurfgasALL_surface_histclimo_1850-2023_1.9x2.5_CEDS-CMIP-2025-04-18_version20260927', \
+            'emissions_cmip7_noresm3_C3H8_bbsurfALL_surface_histclimo_1850-2023_1.9x2.5_DRES-CMIP-BB4CMIP7-2-0_version20260927', \
+            'emissions_cmip7_noresm3_CH2O_anthrosurfgasALL_surface_histclimo_1850-2023_1.9x2.5_CEDS-CMIP-2025-04-18_version20260927', \
+            'emissions_cmip7_noresm3_CH2O_bbsurfALL_surface_histclimo_1850-2023_1.9x2.5_DRES-CMIP-BB4CMIP7-2-0_version20260927', \
+            'emissions_cmip7_noresm3_CH3CHO_anthrosurfgasALL_surface_histclimo_1850-2023_1.9x2.5_CEDS-CMIP-2025-04-18_version20260927', \
+            'emissions_cmip7_noresm3_CH3CHO_bbsurfALL_surface_histclimo_1850-2023_1.9x2.5_DRES-CMIP-BB4CMIP7-2-0_version20260927', \
+            'emissions_cmip7_noresm3_CH3CN_anthrosurfgasALL_surface_histclimo_1850-2023_1.9x2.5_CEDS-CMIP-2025-04-18_version20260927', \
+            'emissions_cmip7_noresm3_CH3CN_bbsurfALL_surface_histclimo_1850-2023_1.9x2.5_DRES-CMIP-BB4CMIP7-2-0_version20260927', \
+            'emissions_cmip7_noresm3_CH3COCH3_anthrosurfgasALL_surface_histclimo_1850-2023_1.9x2.5_CEDS-CMIP-2025-04-18_version20260927', \
+            'emissions_cmip7_noresm3_CH3COCH3_bbsurfALL_surface_histclimo_1850-2023_1.9x2.5_DRES-CMIP-BB4CMIP7-2-0_version20260927', \
+            'emissions_cmip7_noresm3_CH3COCHO_bbsurfALL_surface_histclimo_1850-2023_1.9x2.5_DRES-CMIP-BB4CMIP7-2-0_version20260927', \
+            'emissions_cmip7_noresm3_CH3COOH_anthrosurfgasALL_surface_histclimo_1850-2023_1.9x2.5_CEDS-CMIP-2025-04-18_version20260927', \
+            'emissions_cmip7_noresm3_CH3COOH_bbsurfALL_surface_histclimo_1850-2023_1.9x2.5_DRES-CMIP-BB4CMIP7-2-0_version20260927', \
+            'emissions_cmip7_noresm3_CH3OH_anthrosurfgasALL_surface_histclimo_1850-2023_1.9x2.5_CEDS-CMIP-2025-04-18_version20260927', \
+            'emissions_cmip7_noresm3_CH3OH_bbsurfALL_surface_histclimo_1850-2023_1.9x2.5_DRES-CMIP-BB4CMIP7-2-0_version20260927', \
+            'emissions_cmip7_noresm3_CO_airALL_vertical_histclimo_1850-2023_1.9x2.5_CEDS-CMIP-2025-04-18_version20260927', \
+            'emissions_cmip7_noresm3_CO_anthrosurfgasALL_surface_histclimo_1850-2023_1.9x2.5_CEDS-CMIP-2025-04-18_version20260927', \
+            'emissions_cmip7_noresm3_CO_bbsurfALL_surface_histclimo_1850-2023_1.9x2.5_DRES-CMIP-BB4CMIP7-2-0_version20260927', \
+            'emissions_cmip7_noresm3_DMS_bbsurfALL_surface_histclimo_1850-2023_1.9x2.5_DRES-CMIP-BB4CMIP7-2-0_version20260927', \
+            'emissions_cmip7_noresm3_GLYALD_bbsurfALL_surface_histclimo_1850-2023_1.9x2.5_DRES-CMIP-BB4CMIP7-2-0_version20260927', \
+            'emissions_cmip7_noresm3_H2_bbsurfALL_surface_histclimo_1850-2023_1.9x2.5_DRES-CMIP-BB4CMIP7-2-0_version20260927', \
+            'emissions_cmip7_noresm3_HCN_anthrosurfgasALL_surface_histclimo_1850-2023_1.9x2.5_CEDS-CMIP-2025-04-18_version20260927', \
+            'emissions_cmip7_noresm3_HCN_bbsurfALL_surface_histclimo_1850-2023_1.9x2.5_DRES-CMIP-BB4CMIP7-2-0_version20260927', \
+            'emissions_cmip7_noresm3_HCOOH_anthrosurfgasALL_surface_histclimo_1850-2023_1.9x2.5_CEDS-CMIP-2025-04-18_version20260927', \
+            'emissions_cmip7_noresm3_HCOOH_bbsurfALL_surface_histclimo_1850-2023_1.9x2.5_DRES-CMIP-BB4CMIP7-2-0_version20260927', \
+            'emissions_cmip7_noresm3_ISOP_bbsurfALL_surface_histclimo_1850-2023_1.9x2.5_DRES-CMIP-BB4CMIP7-2-0_version20260927', \
+            'emissions_cmip7_noresm3_MEK_anthrosurfgasALL_surface_histclimo_1850-2023_1.9x2.5_CEDS-CMIP-2025-04-18_version20260927', \
+            'emissions_cmip7_noresm3_MEK_bbsurfALL_surface_histclimo_1850-2023_1.9x2.5_DRES-CMIP-BB4CMIP7-2-0_version20260927', \
+            'emissions_cmip7_noresm3_MTERP_bbsurfALL_surface_histclimo_1850-2023_1.9x2.5_DRES-CMIP-BB4CMIP7-2-0_version20260927', \
+            'emissions_cmip7_noresm3_NH3_anthrosurfgasALL_surface_histclimo_1850-2023_1.9x2.5_CEDS-CMIP-2025-04-18_version20260927', \
+            'emissions_cmip7_noresm3_NH3_bbsurfALL_surface_histclimo_1850-2023_1.9x2.5_DRES-CMIP-BB4CMIP7-2-0_version20260927', \
+            'emissions_cmip7_noresm3_NO2_airALL_vertical_histclimo_1850-2023_1.9x2.5_CEDS-CMIP-2025-04-18_version20260927', \
+            'emissions_cmip7_noresm3_NO_anthrosurfgasALL_surface_histclimo_1850-2023_1.9x2.5_CEDS-CMIP-2025-04-18_version20260927', \
+            'emissions_cmip7_noresm3_NO_bbsurfALL_surface_histclimo_1850-2023_1.9x2.5_DRES-CMIP-BB4CMIP7-2-0_version20260927', \
+            'emissions_cmip7_noresm3_OC_airALL_vertical_histclimo_1850-2023_1.9x2.5_CEDS-CMIP-2025-04-18_version20260927', \
+            'emissions_cmip7_noresm3_OC_anthroprofALL_vertical_histclimo_1850-2023_1.9x2.5_CEDS-CMIP-2025-04-18_version20260927', \
+            'emissions_cmip7_noresm3_OC_anthrosurfALL_surface_histclimo_1850-2023_1.9x2.5_CEDS-CMIP-2025-04-18_version20260927', \
+            'emissions_cmip7_noresm3_OC_bbALL_vertical_histclimo_1850-2023_1.9x2.5_DRES-CMIP-BB4CMIP7-2-0_version20260927', \
+            'emissions_cmip7_noresm3_S_airALL_vertical_histclimo_1850-2023_1.9x2.5_CEDS-CMIP-2025-04-18_version20260927', \
+            'emissions_cmip7_noresm3_S_anthroprofALL_vertical_histclimo_1850-2023_1.9x2.5_CEDS-CMIP-2025-04-18_version20260927', \
+            'emissions_cmip7_noresm3_S_anthrosurfALL_surface_histclimo_1850-2023_1.9x2.5_CEDS-CMIP-2025-04-18_version20260927', \
+            'emissions_cmip7_noresm3_S_bbALL_vertical_histclimo_1850-2023_1.9x2.5_DRES-CMIP-BB4CMIP7-2-0_version20260927', \
+            'emissions_cmip7_noresm3_S_volcALL_vertical_histclimo_1850-2023_1.9x2.5_Aerocom2006_version20260927', \
+            'emissions_cmip7_noresm3_S_volcstratclim1850-2021ALL_vertical_histclimo_1850-2023_1.9x2.5_UOEXETER-CMIP-2-2-1_version20260927', \
+            'emissions_cmip7_noresm3_TOLUENE_anthrosurfgasALL_surface_histclimo_1850-2023_1.9x2.5_CEDS-CMIP-2025-04-18_version20260927', \
+            'emissions_cmip7_noresm3_TOLUENE_bbsurfALL_surface_histclimo_1850-2023_1.9x2.5_DRES-CMIP-BB4CMIP7-2-0_version20260927', \
+            'emissions_cmip7_noresm3_XYLENES_anthrosurfgasALL_surface_histclimo_1850-2023_1.9x2.5_CEDS-CMIP-2025-04-18_version20260927', \
+            'emissions_cmip7_noresm3_XYLENES_bbsurfALL_surface_histclimo_1850-2023_1.9x2.5_DRES-CMIP-BB4CMIP7-2-0_version20260927']
+
+
+    analyseseriesnoresmemissionsloop2.analyseseriesnoresmemissionsloop2(directory=directory,filenamelist=filenamelist,freqtype=freqtype)

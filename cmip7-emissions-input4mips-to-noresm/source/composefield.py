@@ -16,8 +16,17 @@ def composefield(activity, sector, species, dim, vertdist, longitude, latitude, 
         activity : 
         sector   : can be 'ALL' but can also be an individual sector name
         species
-        dim
+        dim      : '2-dim' | '3-dim' 
         vertdist
+        longitude
+        latitude
+        resolution : '0.9x1.25' | '1.9x2.5' | 'ne16pg3' | 'ne30pg3'
+        altitude_int
+        year0 : first year to read
+        year1 : last year to read
+        scenario 
+        i4mpdownload
+
         
 
     MODIFICATION
@@ -58,7 +67,7 @@ def composefield(activity, sector, species, dim, vertdist, longitude, latitude, 
 #       loop over all contributing species      
         for iorig in range(0,norig) :
 
-#           
+#           read the data           
             Ftmp = composefieldsingle.composefieldsingle(activity=activity, sector=complist[icomp], species=speciesinfo['origspecieslist'][iorig], dim=dim, vertdist=vertdist, year0=year0, year1=year1, longitude=longitude, latitude=latitude, resolution=resolution, altitude_int=altitude_int, scenario=scenario, i4mpdownload=i4mpdownload, filelocation=filelocation)
 #
 #           weight the contribution	 

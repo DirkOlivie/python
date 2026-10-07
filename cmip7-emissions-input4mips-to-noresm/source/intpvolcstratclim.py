@@ -13,6 +13,7 @@ import xlon2ilon
 import xlat2ilat
 import xlonxlat2icol
 import intplev
+import year0year1_to_yearlistmonthlist
 
 sys.path.insert(0,'/nird/home/olivie/code/python/cmip7-emissions-volc/source')
 import readareatopography
@@ -59,6 +60,10 @@ def intpvolcstratclim(activity, longitude, latitude, resolution, levbnds, sector
 	    xlon2ilon
 	    xlat2ilat
         intplev
+
+    MODIFCATIONS
+        (2026-09-29) added yearlist and monthlist
+
     '''
 #
 #   averaged climatology over the period : 
@@ -214,6 +219,9 @@ def intpvolcstratclim(activity, longitude, latitude, resolution, levbnds, sector
         print('No gridtype recognized')
         quit()
 
+#   
+#   yearlist, monthlist
+    yearlist, monthlist = year0year1_to_yearlistmonthlist.year0year1_to_yearlistmonthlist(year0=year0, year1=year1)
 
 #   data structure
     data = { 'activity'   : 'volc', \
@@ -232,6 +240,8 @@ def intpvolcstratclim(activity, longitude, latitude, resolution, levbnds, sector
              'levbnds'    : levbnds, \
              'lev_units'  : 'km', \
              'dim'        : '3d', \
+             'yearlist'   : yearlist, \
+             'monthlist'  : monthlist, \
              'ntime'      : ntime}  
 #
 #   write out globl total (as a check)

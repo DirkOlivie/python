@@ -12,9 +12,12 @@ def getmonthlength(year, month, calendar) :
 
     '''
 #
-    if ( calendar != 'gregorian' and calendar != 'noleap' and calendar != '365_day' ) :
+    if ( calendar != 'gregorian' \
+     and calendar != 'Gregorian' \
+     and calendar != 'noleap' \
+     and calendar != '365_day' ) :
         print('+++ getmonthlength +++')
-        print('No calendar recognized : ', noleap)
+        print('No calendar recognized : ', calendar)
         quit()
 #
     monthlengthlist=[31,28,31,30,31,30,31,31,30,31,30,31]

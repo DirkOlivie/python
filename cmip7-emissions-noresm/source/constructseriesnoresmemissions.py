@@ -1,12 +1,18 @@
 from netCDF4 import Dataset
 import numpy as np
 
+import filename2speciesactivity
+
 import sys
 sys.path.insert(0,'/nird/home/olivie/code/python/calcglob/source')
 import fillstatistics
 
 sys.path.insert(0,'/nird/home/olivie/scripts-python')
 import areafraction
+
+sys.path.insert(0,'/nird/home/olivie/code/python/cmip7-emissions-input4mips-to-noresm/source')
+import getspeciesinfo
+
 
 def constructseriesnoresmemissions(filename, freqtype):
 #---------------------------------
@@ -25,6 +31,7 @@ def constructseriesnoresmemissions(filename, freqtype):
     MODIFICATIONS
         (2026-04-03) : added H2
         (2026-08-26) : added S
+        (2026-10-07) : introduced 
 
     '''
 #
@@ -35,18 +42,25 @@ def constructseriesnoresmemissions(filename, freqtype):
 #   OM_NI
 #   SO2, SO4_PR
 
-    if   ( '_BC_AX_'  in filename ) : species='BC'  ; Mw=12.
-    elif ( '_BC_N_'   in filename ) : species='BC'  ; Mw=12.
-    elif ( '_OM_NI_'  in filename ) : species='OM'  ; Mw=12.
-    elif ( '_SO2_'    in filename ) : species='SO2' ; Mw=64.
-    elif ( '_SO4_PR_' in filename ) : species='SO4' ; Mw=96.
-    elif ( '_H2_'     in filename ) : species='H2'  ; Mw=2.
-    elif ( '_S_'      in filename ) : species='S'   ; Mw=32.
-    else :
-        print('+++ constructseriesnoresmemissions +++')
-        print('No species recognized : ', filename)
-        quit()
+#   COMMENTED OUT 2026-10-07
+#    if   ( '_BC_AX_'  in filename ) : species='BC'  ; Mw=12.
+#    elif ( '_BC_N_'   in filename ) : species='BC'  ; Mw=12.
+#    elif ( '_OM_NI_'  in filename ) : species='OM'  ; Mw=12.
+#    elif ( '_SO2_'    in filename ) : species='SO2' ; Mw=64.
+#    elif ( '_SO4_PR_' in filename ) : species='SO4' ; Mw=96.
+#    elif ( '_H2_'     in filename ) : species='H2'  ; Mw=2.
+#    elif ( '_S_'      in filename ) : species='S'   ; Mw=32.
+#    else :
+#        print('+++ constructseriesnoresmemissions +++')
+#        print('No species recognized : ', filename)
+#        quit()
 
+#   derive species and activity from filename
+    species, activity = filename2speciesactivity.filename2speciesactivity(filename)
+
+#   obtain M2
+    speciesinfo = getspeciesinfo.getspeciesinfo(species=species, activity=activity)
+    Mw = speciesinfo['Mw']
         
 #   open NetCDF file
     print(filename)

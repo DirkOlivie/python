@@ -26,9 +26,20 @@ def composefieldsingle(activity, sector, species, dim, vertdist, year0, year1, l
     REMARK
 
      INPUT
-	    ...
-	    species : original species name
-	    ...
+	    activity :
+        sector   :
+	    species  : original species name (as used in input4MIPs
+	    dim      :
+        vertdist : 
+        year0    :
+        year1    :
+        longitude  :
+        latitude   :
+        resolution :
+        altitude_int
+        scenario
+        i4mpdownload :
+        filelocation
 
     CALLED BY
 	    composefield

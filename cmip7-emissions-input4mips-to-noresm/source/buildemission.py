@@ -2,14 +2,21 @@ import os
 import numpy as np
 from netCDF4 import Dataset
 import netCDF4 as nc
+import copy
 
 import getgridtype
 import getspeciesinfo
 import getfullsectorlist
 import getfinallevels
 import getreadyearlist
-import yearlist2blocklist
+#import yearlist2blocklist
+import origindescriptionlist2origindescriptionblocklist
+import origindescriptionlist_check_contiguous
+import origindescriptionlist_check_average_contiguous
+import origindescriptionlist_check_average
+import origindescriptionlist2ascii
 import composefield
+import averagefield
 
 import sys
 sys.path.insert(0,'/nird/home/olivie/scripts-python')
@@ -18,7 +25,7 @@ sys.path.insert(0,'/nird/home/olivie/code/python/cmip7-emissions-volc/source')
 import readareatopography
 
 #
-def buildemission(period, species, activity, sectorliststring, vertdist, resolution, vertintp, version, noresmversion, scenario, i4mpdownload, project, filelocation, overwrite):
+def buildemission(period, species, activity, sectorliststring, vertdist, resolution, vertintp, version, noresmversion, scenariohybrid, origindescriptionlist, project, filelocation, overwrite):
 #----------------
     '''
     MODIFICATIONS
@@ -39,7 +46,7 @@ def buildemission(period, species, activity, sectorliststring, vertdist, resolut
         version
         noresmversion : 'noresm_c1.2' | 'noresm2'
         scenario
-        i4mpdownload
+        origindescriptionlist (replaces i4mpdownload)
         project : 'cmip7'
         filelocation
         overwrite 
@@ -59,42 +66,54 @@ def buildemission(period, species, activity, sectorliststring, vertdist, resolut
     print('+++ Starting : buildemission +++')
 #
 #   sectorliststring -> sectorlist
+#   ------------------------------
     sectorlist=sectorliststring.split('-')
+    nsector=len(sectorlist)
 
 #   period -> yearlist
-    line=period.split('-')
+#   ------------------
+#    line=period.split('-')
 #   standard method
-    if ( len(line) == 2) : #  
+#    if ( len(line) == 2) : #  
 #       1850-2015 
-        year0 = int(line[0])
-        year1 = int(line[1])
-        yearlist=np.arange(year0,year1+1) # list  of consecutive years
+#        year0 = int(line[0])
+#        year1 = int(line[1])
+#        yearlist=np.arange(year0,year1+1) # list  of consecutive years
 #   exceptions
-    elif ( len(line) == 3 ) :
-        if   ( period == '2015-2100-decadal'        ) : yearlist=[     2015,2020,2030,2040,2050,2060,2070,2080,2090,2100          ]
-        elif ( period == '2014-2301-decadal'        ) : yearlist=[2014,2015,2020,2030,2040,2050,2060,2070,2080,2090,2100,     2301]
-        elif ( period == '2014-2301-decadalwith2250') : yearlist=[2014,2015,2020,2030,2040,2050,2060,2070,2080,2090,2100,2250,2301]
-        elif ( period == '2014-2051-covid'          ) : yearlist=[2014,2015,2019,2020,2021,2023,2030,2040,2050,2051]
-        elif ( period == '2014-2051-halfdecadal'    ) : yearlist=[2014,2015,2020,2025,2030,2035,2040,2045,2050,2051]
-        elif ( period == '2022-2101-cmip7scenario'  ) : yearlist=[2022,2023,2024,2025,2030,2035,2040,2045,2050,2055,2060,2065,2070,2075,2080,2085,2090,2095,2100,2101] 
-        else :
-            print('No period recognized = ', period)
-            quit()                        
+#    elif ( len(line) == 3 ) :
+#        if   ( period == '2015-2100-decadal'        ) : yearlist=[     2015,2020,2030,2040,2050,2060,2070,2080,2090,2100          ]
+#        elif ( period == '2014-2301-decadal'        ) : yearlist=[2014,2015,2020,2030,2040,2050,2060,2070,2080,2090,2100,     2301]
+#        elif ( period == '2014-2301-decadalwith2250') : yearlist=[2014,2015,2020,2030,2040,2050,2060,2070,2080,2090,2100,2250,2301]
+#        elif ( period == '2014-2051-covid'          ) : yearlist=[2014,2015,2019,2020,2021,2023,2030,2040,2050,2051]
+#        elif ( period == '2014-2051-halfdecadal'    ) : yearlist=[2014,2015,2020,2025,2030,2035,2040,2045,2050,2051]
+#        elif ( period == '2022-2101-cmip7scenario'  ) : yearlist=[2022,2023,2024,2025,2030,2035,2040,2045,2050,2055,2060,2065,2070,2075,2080,2085,2090,2095,2100,2101] 
+#        else :
+#            print('+++ buildemission +++')
+#            print('No period recognized = ', period)
+#            quit()                        
+#
+#    else :
+#        print('+++ buildemission +++')
+#        print('Period not in correct format : ', period)
+#        quit(
+#
+    yearlist=[]
+    for origindescription in origindescriptionlist :
+        yearlist.append(origindescription['year'])
+
+    year0=yearlist[ 0]
+    year1=yearlist[-1]
+
 
     print('Doing ... ', species)
     print('verdist = ', vertdist)
     print('sectorlist = ', sectorlist)
 #
-#   Navogadro
-    Nav=6.022e23
-
-#   nsector
-    nsector=len(sectorlist)
-
 #   original species
+#   ----------------
     speciesinfo = getspeciesinfo.getspeciesinfo(species=species,activity=activity)             
 
-#   final dimesions / final units
+#   final dimensions / final units
     if ( vertdist == 'surface-to-surface' ) :
         dim='2-dim'
         finalunits='molecules cm-2 s-1'
@@ -108,7 +127,8 @@ def buildemission(period, species, activity, sectorliststring, vertdist, resolut
         print('No dim recognized = ', dim)
         quit()
 
-# final horizontal resolution
+#   final horizontal resolution : latitude, longitude, area
+#   -------------------------------------------------------
     gridtype=getgridtype.getgridtype(resolution=resolution)
 
 #    if (  resolution == '0.9x1.25' ) :
@@ -159,13 +179,14 @@ def buildemission(period, species, activity, sectorliststring, vertdist, resolut
 
 #
 # readscenario
-    if (   scenario == 'ScenarioMIP_IAMC-IMAGE-ssp119-1-1-lineardecrease2250'             ) : readscenario = 'ScenarioMIP_IAMC-IMAGE-ssp119-1-1'
-    elif ( scenario == 'ScenarioMIP_IAMC-IMAGE-ssp126-1-1-lineardecrease2250'             ) : readscenario = 'ScenarioMIP_IAMC-IMAGE-ssp126-1-1'
-    elif ( scenario == 'ScenarioMIP_IAMC-MESSAGE-GLOBIOM-ssp245-1-1-lineardecrease2250'   ) : readscenario = 'ScenarioMIP_IAMC-MESSAGE-GLOBIOM-ssp245-1-1'
-    elif ( scenario == 'ScenarioMIP_IAMC-REMIND-MAGPIE-ssp534-over-1-1-lineardecrease2250') : readscenario = 'ScenarioMIP_IAMC-REMIND-MAGPIE-ssp534-over-1-1'
-    else                                                                                    : readscenario = scenario
+#    if (   scenario == 'ScenarioMIP_IAMC-IMAGE-ssp119-1-1-lineardecrease2250'             ) : readscenario = 'ScenarioMIP_IAMC-IMAGE-ssp119-1-1'
+#    elif ( scenario == 'ScenarioMIP_IAMC-IMAGE-ssp126-1-1-lineardecrease2250'             ) : readscenario = 'ScenarioMIP_IAMC-IMAGE-ssp126-1-1'
+#    elif ( scenario == 'ScenarioMIP_IAMC-MESSAGE-GLOBIOM-ssp245-1-1-lineardecrease2250'   ) : readscenario = 'ScenarioMIP_IAMC-MESSAGE-GLOBIOM-ssp245-1-1'
+#    elif ( scenario == 'ScenarioMIP_IAMC-REMIND-MAGPIE-ssp534-over-1-1-lineardecrease2250') : readscenario = 'ScenarioMIP_IAMC-REMIND-MAGPIE-ssp534-over-1-1'
+#    else                                                                                    : readscenario = scenario
 
 #   final vertical resolution : find nlev, altitude and altitude_int
+#   -------------------------
     if ( dim == '2-dim' ) :
         altitude_int=None
 
@@ -175,7 +196,7 @@ def buildemission(period, species, activity, sectorliststring, vertdist, resolut
 # 
         for sector in sectorlist :
 
-            if ( sector == 'ALL' ) : complist=getfullsectorlist.getfullsectorlist(activity=activity,scenario=readscenario,i4mpdownload=i4mpdownload)
+            if ( sector == 'ALL' ) : complist=getfullsectorlist.getfullsectorlist(activity=activity,scenario=origindescriptionlist[0]['scenariolist'][0],i4mpdownload=origindescriptionlist[0]['i4mpdownloadlist'][0])
             else                   : complist=[sector]
 
             for comp in complist :
@@ -201,9 +222,14 @@ def buildemission(period, species, activity, sectorliststring, vertdist, resolut
                         print('Different sectors have different vertical resolutions')
                         quit()
 #
+    else :
+        print('+++ buildemission +++')
+        print('No dim recognized : ', dim)
+        quit()
 #
-#   III. time
-#
+###############
+#   III. time #
+###############
     nmonth=12
 
     nyear=len(yearlist)
@@ -219,7 +245,9 @@ def buildemission(period, species, activity, sectorliststring, vertdist, resolut
   
     datesec[:]=0
 #
-#   IV. new file
+#######################
+#   IV. new file name #
+#######################
 #
     cyear0=str("%4.4i"% year0)
     cyear1=str("%2.2i"% year1)
@@ -252,18 +280,18 @@ def buildemission(period, species, activity, sectorliststring, vertdist, resolut
 #    if ( suffix ne '' ) then suffix='_'+suffix  ; add '_' in front 
 
 #   FILENAME
-    filename='emissions_'+project+'_'+noresmversion+'_'+species+'_'+activity+sectorgroupname+'_'+cdim+'_'+cperiod+'_'+resolution+'_'+i4mpdownload+'_'+version+suffix+'.nc'
+    filename='emissions_'+project+'_'+noresmversion+'_'+species+'_'+activity+sectorgroupname+'_'+cdim+'_'+scenariohybrid+'_'+cperiod+'_'+resolution+'_'+origindescriptionlist[0]['i4mpdownloadlist'][0]+'_'+version+suffix
 
 ##############
 #   New file #
 ##############
 
 #   create new directory
-    outdir='/scratch/olivie/code/python/cmip7-emissions-input4mips-to-noresm/data/output/'+version+'/individual/'+scenario+'/'+resolution
+    outdir='/scratch/olivie/code/python/cmip7-emissions-input4mips-to-noresm/data/output/'+version+'/individual/'+scenariohybrid+'/'+resolution
     if  not os.path.isdir(outdir) : os.makedirs(outdir)
 
 #   create new NetCDF file
-    fn = outdir+'/'+filename    
+    fn = outdir+'/'+filename+'.nc'    
 #
 #   no overwriting
     if ( os.path.isfile(fn) and ( overwrite == False) ) : return
@@ -381,7 +409,7 @@ def buildemission(period, species, activity, sectorliststring, vertdist, resolut
     for sector in sectorlist :
 
         if ( sector == 'ALL' ) :
-            complist=getfullsectorlist.getfullsectorlist(activity=activity,scenario=readscenario,i4mpdownload=i4mpdownload)
+            complist=getfullsectorlist.getfullsectorlist(activity=activity,scenario=origindescriptionlist[0]['scenariolist'][0],i4mpdownload=origindescriptionlist[0]['i4mpdownloadlist'][0])
 
 #           to make one long name        
             csector=''
@@ -416,6 +444,10 @@ def buildemission(period, species, activity, sectorliststring, vertdist, resolut
 #    ds.domtmax, 12., /FLOAT
     ds.t_units = 'month'
     ds.t_display_units = 'Time month'
+#
+#   origin
+    origin = origindescriptionlist2ascii.origindescriptionlist2ascii(origindescriptionlist)
+    ds.origin = origin
 
 ##################
 #   WRITE FIELDS #
@@ -440,34 +472,105 @@ def buildemission(period, species, activity, sectorliststring, vertdist, resolut
 #
 #   Add the emission
 #   convert yearlist -> readyearlist
-    readyearlist=getreadyearlist.getreadyearlist(yearlist=yearlist, scenario=scenario, activity=activity, i4mpdownload=i4mpdownload) # this should not depend on sector, as sectors end up in same file with same time axis
+#    readyearlist=getreadyearlist.getreadyearlist(yearlist=yearlist, scenario=scenario, activity=activity, i4mpdownload=i4mpdownload) # this should not depend on sector, as sectors end up in same file with same time axis
 
 #   split readyearlist in different blocks
-    yearblocklist=yearlist2blocklist.yearlist2blocklist(yearlist=readyearlist, activity=activity, resolution=resolution)
+#   yearblocklist=yearlist2blocklist.yearlist2blocklist(yearlist=readyearlist, activity=activity, resolution=resolution)
+    origindescriptionblocklist=origindescriptionlist2origindescriptionblocklist.origindescriptionlist2origindescriptionblocklist(origindescriptionlist=origindescriptionlist, activity=activity, resolution=resolution)
+
 
 #   
-    print('yearlist      : ', yearlist)
-    print('readyearlist  : ', readyearlist)
-    print('yearblocklist : ', yearblocklist)  
-    
+#    print('yearlist      : ', yearlist)
+#    print('readyearlist  : ', readyearlist)
+#    print('yearblocklist : ', yearblocklist)  
+    print('origindescriptionlist : ', origindescriptionlist)
+    print('origindescriptionblocklist : ', origindescriptionblocklist) 
+   
     itime0=0 # important
 
-    nblock=len(yearblocklist)    
+    nblock=len(origindescriptionblocklist)    
 #   
 #   loop over all yearblocks
     for iblock in range(nblock) :
-        readyear0=yearblocklist[iblock][0]       # first element in specific block
-        readyear1=yearblocklist[iblock][-1]      # last  element in specific block
+#        readyear0=yearblocklist[iblock][0]       # first element in specific block
+#        readyear1=yearblocklist[iblock][-1]      # last  element in specific block
 
-        nyear=readyear1-readyear0+1
+        if ( origindescriptionlist_check_contiguous.origindescriptionlist_check_contiguous(origindescriptionblocklist[iblock]) ) :
+#           contiguous - non-averaging - single/multiple years
+            readyear0    = origindescriptionblocklist[iblock][0]['origyearlist'][0]
+            readyear1    = origindescriptionblocklist[iblock][-1]['origyearlist'][0]
+            i4mpdownload = origindescriptionblocklist[iblock][0]['i4mpdownloadlist'][0]
+            scenario     = origindescriptionblocklist[iblock][0]['scenariolist'][0]
+
+            nyear=readyear1-readyear0+1
+
+            print('emissionbuild year0 : ', readyear0)
+            print('emissionbuild year1 : ', readyear1)
+
+        elif ( origindescriptionlist_check_average_contiguous.origindescriptionlist_check_average_contiguous(origindescriptionblocklist[iblock]) ) :
+#           contiguous - non-averaging - single/multiple years
+            readyear0       = origindescriptionblocklist[iblock][0]['origyearlist'][0]
+            readyear1       = origindescriptionblocklist[iblock][0]['origyearlist'][-1]
+            origweightlist  = origindescriptionblocklist[iblock][0]['origweightlist']
+            i4mpdownload    = origindescriptionblocklist[iblock][0]['i4mpdownloadlist'][0]
+            scenario        = origindescriptionblocklist[iblock][0]['scenariolist'][0]
+
+            nyear=1
+
+            print('emissionbuild year0 : ', readyear0)
+            print('emissionbuild year1 : ', readyear1)
+
+        elif ( origindescriptionlist_check_average.origindescriptionlist_check_average(origindescriptionblocklist[iblock]) ) : 
+#           averaging - single year
+            origyearlist     = origindescriptionblocklist[iblock][0]['origyearlist']
+            origweightlist   = origindescriptionblocklist[iblock][0]['origweightlist']
+            i4mpdownloadlist = origindescriptionblocklist[iblock][0]['i4mpdownloadlist'] 
+            scenariolist     = origindescriptionblocklist[iblock][0]['scenariolist']
+
+            nyear=1
+
+        else :
+
+            print('+++ buildemission +++')
+            print('No distinction between contaguous and average')
+            quit()
 
         itime1=itime0 + nyear*nmonth
 
 #       loop over all contributing emission sectors
         for isector in range(0,nsector) :
             sector=sectorlist[isector]
+                        
+            if ( origindescriptionlist_check_contiguous.origindescriptionlist_check_contiguous(origindescriptionblocklist[iblock]) ) :  
+                F = composefield.composefield(activity=activity, sector=sector, species=species, dim=dim, vertdist=vertdist, year0=readyear0, year1=readyear1, longitude=longitude, latitude=latitude, resolution=resolution, altitude_int=altitude_int, scenario=scenario, i4mpdownload=i4mpdownload, filelocation=filelocation)
 
-            F = composefield.composefield(activity=activity, sector=sector, species=species, dim=dim, vertdist=vertdist, year0=readyear0, year1=readyear1, longitude=longitude, latitude=latitude, resolution=resolution, altitude_int=altitude_int, scenario=readscenario, i4mpdownload=i4mpdownload, filelocation=filelocation)
+            elif ( origindescriptionlist_check_average_contiguous.origindescriptionlist_check_average_contiguous(origindescriptionblocklist[iblock]) ) :
+                Ftmp = composefield.composefield(activity=activity, sector=sector, species=species, dim=dim, vertdist=vertdist, year0=readyear0, year1=readyear1, longitude=longitude, latitude=latitude, resolution=resolution, altitude_int=altitude_int, scenario=scenario, i4mpdownload=i4mpdownload, filelocation=filelocation)
+
+                F = averagefield.averagefield(data=Ftmp, weightlist=origweightlist)
+
+            elif ( origindescriptionlist_check_average.origindescriptionlist_check_average(origindescriptionblocklist[iblock])) :
+                
+                n = len(origindescriptionblocklist[iblock][0]['origyearlist'])
+                for i in range(0,n) : 
+                    Ftmp = composefield.composefield(activity=activity, sector=sector, species=species, dim=dim, vertdist=vertdist, year0=origyearlist[i], year1=origyearlist[i], longitude=longitude, latitude=latitude, resolution=resolution, altitude_int=altitude_int, scenario=scenariolist[i], i4mpdownload=i4mpdownloadlist[i], filelocation=filelocation)
+
+#                   scale with weighting factor
+                    Ftmp['field'] = Ftmp['field'] * origweightlist[i]
+
+#                   F will have the date of the first year (is not used anyway)
+                    if ( i == 0 ) :
+                        F = copy.deepcopy(Ftmp)
+                    else :
+                        F['field'] = F['field'] + Ftmp['field']
+
+            else :
+                print('+++ buildemission +++')
+                print('No distinction between contaguous and average')
+                quit()
+
+
+
 
             if   ( dim == '2-dim' and gridtype == 'latlon'    ) : sectoridlist[isector][itime0:itime1       ,0:nlat,0:nlon]=F['field'][0:nyear*nmonth,       0:nlat,0:nlon]
             elif ( dim == '3-dim' and gridtype == 'latlon'    ) : sectoridlist[isector][itime0:itime1,0:nlev,0:nlat,0:nlon]=F['field'][0:nyear*nmonth,0:nlev,0:nlat,0:nlon]
@@ -485,41 +588,16 @@ def buildemission(period, species, activity, sectorliststring, vertdist, resolut
 
         itime0=itime0+ nyear*nmonth
 
-
-
-
-
-#    for iyear in range(0, nyear) :
-#        print('iyear = ', iyear)
-#
-#        itime0=iyear*nmonth
-#        itime1=iyear*nmonth + nmonth
-#        
-#        year=yearlist[iyear]
-        
-#       read different sectors
-#        for isector in range(0,nsector) :
-#            sector=sectorlist[isector]
-
-#               obtain orig year
-#            if   ( scenario == 'hist' and year == 2024 ) : yearread = 2023
-#            elif ( scenario == 'hist' and year == 2025 ) : yearread = 2023
-#            else : yearread=year
-#
-#            F = composefield.composefield(activity=activity, sector=sector, species=species, dim=dim, vertdist=vertdist, year=yearread, longitude=longitude, latitude=latitude, resolution=resolution, altitude_int=altitude_int, scenario=readscenario, i4mpdownload_anthro=i4mpdownload_anthro, i4mpdownload_bb=i4mpdownload_bb, filelocation=filelocation)
-
-
-#            if   ( dim == '2-dim' and gridtype == 'latlon'    ) : sectoridlist[isector][itime0:itime1       ,0:nlat,0:nlon]=F['field'][0:nmonth,       0:nlat,0:nlon]
-#            elif ( dim == '3-dim' and gridtype == 'latlon'    ) : sectoridlist[isector][itime0:itime1,0:nlev,0:nlat,0:nlon]=F['field'][0:nmonth,0:nlev,0:nlat,0:nlon]
-#            elif ( dim == '2-dim' and gridtype == 'irregular' ) : sectoridlist[isector][itime0:itime1       ,0:ncol       ]=F['field'][0:nmonth,       0:ncol       ]
-#            elif ( dim == '3-dim' and gridtype == 'irregular' ) : sectoridlist[isector][itime0:itime1,0:nlev,0:ncol       ]=F['field'][0:nmonth,0:nlev,0:ncol       ]
-#            else :
-#                    print('No dim recognized : ', dim)
-#                    quit()
-##
-#            dateid[   itime0:itime1] = date[itime0:itime1]
-#            datesecid[itime0:itime1] = datesec[itime0:itime1]
-#            timeid[   itime0:itime1] = 0 # timid, daysince(refdate=17500101L,enddate=date(itime)), OFFSET=[itime]
-
     ds.close()
+###############################
+# ASCII FILE WITH ORIGIN DATA #
+###############################
 
+#   create new directory
+    outdir='/scratch/olivie/code/python/cmip7-emissions-input4mips-to-noresm/data/origin-ascii/'+version+'/individual/'+scenariohybrid+'/'+resolution
+    if  not os.path.isdir(outdir) : os.makedirs(outdir)
+
+#   create new Ascii file
+    f=open(outdir+'/'+filename+'.txt','w')
+    f.write(origin)
+    f.close()

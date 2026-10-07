@@ -4,7 +4,7 @@ sys.path.insert(0,'/nird/home/olivie/code/python/routines/source')
 import cfiglayout
 
 
-figlayout=cfiglayout.CFigLayout(xrange=[0.,380.])
+figlayout=cfiglayout.CFigLayout(xrange=[0.,450.])
 
 
 # 2. NORESM2.5 and NORESM2-MM (CMIP6) and cesm3
@@ -24,38 +24,44 @@ expidlist=[ \
            'N1850.n30b23MM.506.20260821', \
            'N1850.MM.nor30b23.509.20260901', \
            'N1850.MM.nor30b24.515.20260908', \
-           'N1850.MM.nor30b24.520.20260913' \
+           'N1850.MM.nor30b24.520.20260913', \
+            \
+           'n1850GHG.MM.nor30b25.527.20260928', \
+           'n1850GHG.MM.nor30b25.527.redout.20260929' \
             ]
 #
-legendlist=['NorESM2-MM (1x1)', \
-            'NorESM2-LM (2x2)', \
+legendlist=['NorESM2-MM', \
+            'NorESM2-LM', \
              \
-            'b12a (1x1, #368)', \
-            'b14 (1x1, #418)', \
-            'b14 (1x1, #419)', \
-            'b14 (1x1, #425)', \
-            'b14 (1x1, #430)', \
+            'b12a (#368)', \
+            'b14 (#418)', \
+            'b14 (#419)', \
+            'b14 (#425)', \
+            'b14 (#430)', \
              \
-            'b23 (1x1, #496)', \
-            'b23 (1x1, #506)', \
-            'b23 (1x1, #509)', \
-            'b24 (1x1, #515)', \
-            'b24 (1x1, #520)'  \
+            'b23 (#496)', \
+            'b23 (#506)', \
+            'b23 (#509)', \
+            'b24 (#515)', \
+            'b24 (#520)', \
+             \
+            'b25 (#527, GHG)', \
+            '', \
            ]
 #
 refidlist=expidlist
 #
 wlist=[1.,0.]
 #
-smoothlist=[0,0, 0,0,0,0,0, 0,0,0,0,0]
+smoothlist=[0,0, 0,0,0,0,0, 0,0,0,0,0, 0,0]
 #
-shiftlist=[-1199,-1599, 0,0,0,0,0, 0,0,0,0,0]
+shiftlist=[-1199,-1599, 0,0,0,0,0, 0,0,0,0,0, 0,0]
 #
-colorlist     =   [0,1, 2,2,2,2,2, 3,4,5,6,7]
+colorlist     =   [0,1, 2,2,2,2,2, 3,4,5,6,7, 8,8]
 
-linestylelist =   [2,2, 0,0,0,0,0, 0,0,0,0,0]
+linestylelist =   [2,2, 0,0,0,0,0, 0,0,0,0,0, 0,0]
 
-linewidthlist = [1,1, 1,1,1,1,1, 2,2,2,2,2]
+linewidthlist = [1,1, 1,1,1,1,1, 2,2,2,2,2, 2,2]
 #
 
 # tempocn
@@ -111,7 +117,8 @@ typevarlist=['glob']
 variablelist=[\
               'AOD_VISdivDAYFOC','AOD_VISdivDAYFOC', \
               'AODVISdivDAYFOC','AODVISdivDAYFOC','AODVISdivDAYFOC','AODVISdivDAYFOC','AODVISdivDAYFOC', \
-              'AODVISdivDAYFOC','AODVISdivDAYFOC','AODVISdivDAYFOC','AODVISdivDAYFOC','AODVISdivDAYFOC']
+              'AODVISdivDAYFOC','AODVISdivDAYFOC','AODVISdivDAYFOC','AODVISdivDAYFOC','AODVISdivDAYFOC', \
+              'AODVISdivDAYFOC','AODVISdivDAYFOC']
 loopanalyseseries2.loopanalyseseries2(expidlist=expidlist,refidlist=refidlist,wlist=wlist,legendlist=legendlist,shiftlist=shiftlist,smoothlist=smoothlist,variablelist=variablelist,typevarlist=typevarlist,freqtype=freqtype,description=description,code=code,figlayout=figlayout,colorlist=colorlist,linestylelist=linestylelist, linewidthlist=linewidthlist)
 
 # MISCELANEOUS
@@ -122,9 +129,9 @@ typevarlist=['glob']
 variablegrouplist=[\
 #                   ['AOD_VISdivDAYFOC']*2+['AODVISdivDAYFOC']*(nexpid-2)
                    ['PRECCPRECL']*(nexpid)+['PRECT']*0, \
-                   ['SFDMS']*(nexpid)+['emis_DMS']*0, \
-                   ['EMI_DUST_TOT_noresm2']*(nexpid)+['emis_DUST']*0, \
-                   ['EMI_SALT_TOT_noresm2']*(nexpid)+['emis_SALT']*0 \
+                   ['SFDMS']*(nexpid-2)+['emis_DMS']*2, \
+                   ['EMI_DUST_TOT_noresm2']*(nexpid-2)+['emis_DUST']*2, \
+                   ['EMI_SALT_TOT_noresm2']*(nexpid-2)+['emis_SALT']*2 \
 #                   ['SFisoprene']*(nexpid-9)+['emis_isoprene']*9, \
 #                   ['SFmonoterp']*(nexpid-9)+['emis_monoterp']*9 \
                   ]

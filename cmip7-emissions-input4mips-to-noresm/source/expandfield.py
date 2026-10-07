@@ -7,6 +7,7 @@ def expandfield(D, sector, activity):
      MODIFICATIONS
     	(2019-07-01) : added possibility of FORE to have regionally different vertical profiles
         (2025-10-18) : added time dimension
+        (2026-09-29) : added yearlist, monthlist to return structure
 
     CALLS
 	    getemissionprofile
@@ -76,6 +77,9 @@ def expandfield(D, sector, activity):
              'altitude_int'   : P['altitude_int'], \
              'altitude_units' : 'km', \
              'dim'            : '3d', \
+#
+             'yearlist'       : D['yearlist'], \
+             'monthlist'      : D['monthlist'], \
              'ntime'          : D['ntime']} 
   
     return data

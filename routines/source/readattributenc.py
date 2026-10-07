@@ -32,6 +32,7 @@ def readattributenc(variable,filename,attribute):
     elif ( attribute == '_FillValue'    ) : attributevalue=nc_fid.variables[variable]._FillValue    # FillValue
     elif ( attribute == 'positive'      ) : attributevalue=nc_fid.variables[variable].positive      # positive
     elif ( attribute == 'formula_terms' ) : attributevalue=nc_fid.variables[variable].formula_terms # formula_terms
+    elif ( attribute == 'molecular_weight' ) : attributevalue=nc_fid.variables[variable].molecular_weight # molecular_weight
     else : 
         print('+++ readattributenc +++')
         print('No attribute recognized : ', attribute)
