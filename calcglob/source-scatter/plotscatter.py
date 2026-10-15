@@ -209,7 +209,8 @@ def plotscatter(xdata,ydata,legendlist,colorlist,linestylelist,freqtypeX,freqtyp
 
 
 #   add legend
-    ax.legend(fontsize=10.0)
+#   ax.legend(fontsize=10.0)
+    ax.legend(fontsize=8.0)
 
 #   PLOTS X- and Y-AXIS
     ax.axhline(0,lw=1.0,color='tab:gray',linestyle='dashed')

@@ -24,20 +24,31 @@ figlayout=cfiglayout.CFigLayout('')
 # x-axis
 description=''
 # 5th very much out of balance [excluded from regression]
-expXlist=[\
-          'N1850.n30b23MM.506.20260821', \
-          'N1850.MM.nor30b23.509.20260901', \
-          'N1850.MM.nor30b24.515.20260908', \
-          'N1850.MM.nor30b24.520.20260913', \
+expXlist=\
+         ['N1850.n30b23MM.506.20260821']*8 \
+        +['N1850.MM.nor30b23.509.20260901']*2 \
+        +['N1850.MM.nor30b24.515.20260908']*4 \
+        +['N1850.MM.nor30b24.520.20260913']*8 \
+        +['n1850GHG.MM.nor30b25.527.redout.20260929']*10 \
           \
-          'b.e30_alpha08b.B1850C_LTso.ne30_t232_wgx3.316']
+        +['b.e30_alpha08b.B1850C_LTso.ne30_t232_wgx3.316']*3
 #
 nexpid=len(expXlist)
 
 refXlist=expXlist
  #
-expXyear0list=expidlist2attributelist.expidlist2attributelist(expidlist=expXlist,attributetype='year0')
-expXyear1list=expidlist2attributelist.expidlist2attributelist(expidlist=expXlist,attributetype='year1')
+expXyear0list=[121,131,141,151,161,171,181,191, \
+               171,181, \
+               171,181,191,201, \
+               201,211,221,231,241,251,261,271, \
+               301,311,321,331,341,351,361,371,381,391, \
+               70,80,90]
+expXyear1list=[130,140,150,160,170,180,190,200, \
+               180,190, \
+               180,190,200,210, \
+               210,220,230,240,250,260,270,280, \
+               310,320,330,340,350,360,370,380,390,400, \
+               79,89,99]
 refXyear0list=expXyear0list
 refXyear1list=expXyear1list
 seasonXlist=['YEA']*nexpid
@@ -55,19 +66,28 @@ wYlist=wXlist
 # variables
 varXlist=['FSLNT']*nexpid
 typevarXlist=['glob']*nexpid
-varYlist=['tempocn_trend']*(nexpid-1)+['thetaogaocn_trend']
+varYlist=['tempocn_trend']*(nexpid-3)+['thetaogaocn_trend']*3
 typevarYlist=['glob']*nexpid
 # 
 legendlist=['']*(nexpid-1)+['CESM3 (#316)']
-legendlist=['#506','#509','#515','#520', \
-            'CESM3 (#316)']
+legendlist=['b23 (#506)','','','','','','','', \
+            'b23 (#509)','', \
+            'b24 (#515)','','','', \
+            'b24 (#520)','','','','','','','', \
+            'b25 (#527, GHG)','','','','','','','','','', \
+            'CESM3 (#316)','','']
 
-colorlist=np.arange(0,nexpid)
-linestylelist=[0]*(nexpid-1) + [2]
-regressionlist=[1,1,1,1,-1]
+colorlist=[0]*8 \
+         +[1]*2 \
+         +[2]*4 \
+         +[3]*8 \
+         +[4]*10 \
+         +[5]*3
+linestylelist=[0]*(nexpid-3) + [2]*3
+regressionlist=[0]*(nexpid-3) + [-1]*3
 
 #
-code=generalcode+'_ne30pg3'
+code=generalcode+'_ne30pg3_decadal'
 
 #
 loopanalysescatter2.loopanalysescatter2(\

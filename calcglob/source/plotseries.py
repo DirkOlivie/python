@@ -158,7 +158,7 @@ def plotseries_internal (ax,data,legendlist,shiftlist,smoothlist,freqtype,typeva
     if ( figlayout.title != '' ) : 
         title=figlayout.title        
     else :
-        title=getidlvar.getidlvar(var=variable) + ' ['+freqtype+'] ['+typevar+']'                       # title
+        title=getidlvar.getidlvar(var=variable) + ' ['+freqtype+'] ['+getidlregion.getidlregion(region=typevar)+']'                       # title
 
 #   region in title
     if ( figlayout.regionintitle ) : title=title+' ['+getidlregion.getidlregion(region=typevar)+']'   # add region to title

@@ -93,6 +93,7 @@ def main():
         volc_desc.append(     {'descriptiontype':'average','year':year,'origyearlist':origyearlist,'scenariolist':['CMIP']*nlen,'i4mpdownloadlist':['Aerocom2006'           ]*nlen})
         volcstrat_desc.append({'descriptiontype':'average','year':year,'origyearlist':origyearlist,'scenariolist':['CMIP']*nlen,'i4mpdownloadlist':['UOEXETER-CMIP-2-2-1'   ]*nlen})
 
+#   generate the description
     bb_desc        = origindescriptionlist_generate.origindescriptionlist_generate(bb_desc)
     anthro_desc    = origindescriptionlist_generate.origindescriptionlist_generate(anthro_desc)    
     volc_desc      = origindescriptionlist_generate.origindescriptionlist_generate(volc_desc)

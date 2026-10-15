@@ -35,7 +35,9 @@ def readsingleseries (expid=None, variable=None, typevar=None, freqtype=None) :
     chem=expidinfo['chem']
     year0=expidinfo['year0']
     year1=expidinfo['year1']
-    globdatadir=expidinfo['globdatadir'] 
+    globdatadir=expidinfo['globdatadir']
+
+#   globdatadir='timeblocks-v3'  # ERIK / Erik / erik
 #
     if ( chem == 'fullchem') : 
         if   ( variable == 'SFisoprene')  : cvariable = 'SFISOP'  

@@ -12,6 +12,12 @@ def getidlregion (region) :
     elif region=='60S28S'     : idlregion='60'+u'\N{DEGREE SIGN}'+'S-28'+u'\N{DEGREE SIGN}'+'S'
     elif region=='90S60S'     : idlregion='90'+u'\N{DEGREE SIGN}'+'S-60'+u'\N{DEGREE SIGN}'+'S'
     elif region=='90S28S'     : idlregion='90'+u'\N{DEGREE SIGN}'+'S-28'+u'\N{DEGREE SIGN}'+'S'
+
+    elif region=='60N90NSEA'     : idlregion='60'+u'\N{DEGREE SIGN}'+'N-90'+u'\N{DEGREE SIGN}'+'N, ocean'
+
+    elif region=='73N90N7W49E'    : idlregion='73'+u'\N{DEGREE SIGN}'+'N-90'+u'\N{DEGREE SIGN}'+'N, 7'+u'\N{DEGREE SIGN}'+'W-49'+u'\N{DEGREE SIGN}'+'E'
+    elif region=='73N90N7W49ESEA' : idlregion='73'+u'\N{DEGREE SIGN}'+'N-90'+u'\N{DEGREE SIGN}'+'N, 7'+u'\N{DEGREE SIGN}'+'W-49'+u'\N{DEGREE SIGN}'+'E, ocean'
+
     elif region=='NORTHATL'   : idlregion='North Atlantic'
     elif region=='INDIANOCN'  : idlregion='Indian Ocean' 
     elif region=='BAYOFBENGA' : idlregion='Bay of Bengal' 
@@ -21,6 +27,8 @@ def getidlregion (region) :
     elif region=='TROPEASTPAC': idlregion='Tropical East Pacific' 
     elif region=='TROPWESTPAC': idlregion='Tropical West Pacific'
 #
-    else : idlregion=region
+    else :         
+        idlregion=region
+
 #
     return idlregion

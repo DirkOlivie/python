@@ -46,8 +46,8 @@ ensembletypelist = ['minmax','minmax', \
 # 
 description='typevarcommon-varcommon'
 variablelist=[\
-              'ICEFRAC']  
-typevarlist=['NH']
+              'ICEFRAC_as_fraction']  
+typevarlist=['NH','73N90N7W49E','73N90N7W49ESEA','60N90NSEA']
 freqtypelist=['YEA','SEP','MAR']
 #
 code='n20260917_noresm2_erik'
@@ -87,8 +87,8 @@ ensembletypelist = ['minmax', \
 # 
 description='typevarcommon-varcommon'
 variablelist=[\
-              'ICEFRAC']  
-typevarlist=['NH']
+              'ICEFRAC_as_fraction']  
+typevarlist=['NH','73N90N7W49E','73N90N7W49ESEA','60N90NSEA']
 freqtypelist=['YEA','SEP','MAR']
 #
 code='n20260917_noresm2_erik_f19'
@@ -128,8 +128,8 @@ ensembletypelist = ['minmax', \
 # 
 description='typevarcommon-varcommon'
 variablelist=[\
-              'ICEFRAC']  
-typevarlist=['NH']
+              'ICEFRAC_as_fraction']  
+typevarlist=['NH','73N90N7W49E','73N90N7W49ESEA','60N90NSEA']
 freqtypelist=['YEA','SEP','MAR']
 #
 code='n20260917_noresm2_erik_f09'

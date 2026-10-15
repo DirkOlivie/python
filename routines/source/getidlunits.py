@@ -15,6 +15,7 @@ def getidlunits (units) :
     elif units=='C'         : idlunits=r'$^\circ$''C'
     elif units=='degC'      : idlunits=r'$^\circ$''C'
     elif units=='degC year-1' : idlunits=r'$^\circ$''C yr'+r'$^{-1}$'
+    elif units=='degC century-1' : idlunits=r'$^\circ$''C century'+r'$^{-1}$'
     elif units=='mm day-1'  : idlunits='mm day'+r'$^{-1}$'
     elif units=='mol mol-1' : idlunits='mol mol'+r'$^{-1}$'
     elif units=='Tg yr-1'   : idlunits='Tg yr'+r'$^{-1}$'

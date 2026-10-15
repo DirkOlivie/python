@@ -11,7 +11,7 @@ figlayout=cfiglayout.CFigLayout(xrange=[1350.,1700.])
 figlayout=cfiglayout.CFigLayout(xrange=[1530.,1850.])
 figlayout=cfiglayout.CFigLayout(xrange=[ 925.,1800.])
 figlayout=cfiglayout.CFigLayout(xrange=[1350.,1750.])
-figlayout=cfiglayout.CFigLayout(xrange=[1400.,1710.])
+figlayout=cfiglayout.CFigLayout(xrange=[1400.,1890.])
 
 
 # 2. NORESM2.5 and NORESM2-MM (CMIP6) and cesm3

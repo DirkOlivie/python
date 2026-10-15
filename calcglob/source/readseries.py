@@ -283,4 +283,10 @@ def readseries (expid=None, variable=None, typevar=None, freqtype=None) :
         print('Dotrend is different from 0 and 1 : ', info['dotrend'])  
         exit()
 #
+#   CHANGING UNITS
+    if ( ( data['variable'] == 'tempocn_trend' \
+        or data['variable'] == 'thetaogaocn_trend' ) and data['units'] == 'degC year-1' ) : 
+        data['valuelist'] = data['valuelist'] * 100
+        data['units']     = 'degC century-1'  
+
     return data

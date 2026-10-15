@@ -12,8 +12,8 @@ def origindescriptionlist_generate(data):
             descriptiontype : 'contiguous'
             period : 1849-2023-annual
                      2030-2100-halfdecadal
-            i4mpdownload :
-            scenario     :
+            i4mpdownload :    [NO "list" in key]
+            scenario     :    [NO "list" in key]
 
         AVERAGE
             descrptiontype    : average
@@ -43,7 +43,7 @@ def origindescriptionlist_generate(data):
                 print('Period have yyyy-yyyy-xxx format : ', period)
                 quit()
  
-#           
+#           make list of years   
             if ( frequency == 'annual' ) :
                 yearlist=np.arange(year0,year1+1) # list  of consecutive years
 

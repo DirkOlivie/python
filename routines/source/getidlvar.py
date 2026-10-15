@@ -23,6 +23,7 @@ def getidlvar (var) :
     elif var=='CDNUMC' : idlvar='Cloud droplet number (column burden)'
     elif var=='U10'    : idlvar='Surface wind (10m)'
     elif var=='ICEFRAC': idlvar='Sea ice'
+    elif var=='ICEFRAC_as_fraction': idlvar='Sea ice'
 
 # column burden
     elif var=='cb_O3'  : idlvar='Ozone (column burden)'

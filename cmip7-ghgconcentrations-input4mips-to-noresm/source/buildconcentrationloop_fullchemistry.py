@@ -2,14 +2,15 @@ import buildconcentrationloop2
 
 '''
 VARIABLES TO BE DEFINED
+    overwrite          : True | False
     version
-    i4mpdownload
+    i4mpdownloadlist   :
     specieslist        : variable name in final file
     overwrite          : True | False
     timeresolutionlist : 'monthly'
     periodlist         : 
-    region             : 'GLOBAL' | 'ZONAL'            : original spatial resolution
-    nlatlist           : 1 | 360                       : final spatial resolution    
+    region             : 'GLOBAL' | 'ZONAL'            : ORIGINAL spatial resolution
+    nlatlist           : 1 | 360                       : FINAL    spatial resolution    
 
 CALLS
     buildconcentrationloop2
@@ -34,4 +35,5 @@ if ( 1 == 1 ) :
     periodlist = ['1850-1850','1750-2023']
 
     timeresolutionlist = ['monthly'] ; regionlist = ['ZONAL']
+
     buildconcentrationloop2.buildconcentrationloop2(scenariolist=scenariolist, timeresolutionlist=timeresolutionlist, time_units=time_units, calendar=calendar, specieslist=specieslist, periodlist=periodlist, regionlist=regionlist, version=version, i4mpdownloadlist=i4mpdownloadlist, nlatlist=nlatlist, overwrite=overwrite)

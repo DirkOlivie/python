@@ -9,7 +9,8 @@ def getbasicvarcomponents(var, expid):
 #    print('gevarcomponents : var = ',var)
 
 # default value
-    if (   var== 'diagsumheatlndocn' )           : componentlist=['diagsumheatlnd','diagsumheatocn'] ; weightlist=[1.,1.]  
+    if   ( var== 'ICEFRAC_as_fraction')          : componentlist=['ICEFRAC'] ; weightlist=[1.]
+    elif ( var== 'diagsumheatlndocn' )           : componentlist=['diagsumheatlnd','diagsumheatocn'] ; weightlist=[1.,1.]  
     elif ( var== 'diagsumheatice' )              : componentlist=['diagsumheatice_nh','diagsumheatice_sh'] ; weightlist=[1.,1.]  
     elif ( var== 'diagsumheatocnice' )           : componentlist=['diagsumheatocn','diagsumheatice_nh','diagsumheatice_sh'] ; weightlist=[1.,1.,1.]  
     elif ( var== 'diagsumheatlndocnice' )        : componentlist=['diagsumheatlnd','diagsumheatocn','diagsumheatice_nh','diagsumheatice_sh'] ; weightlist=[1.,1.,1.,1.]  
