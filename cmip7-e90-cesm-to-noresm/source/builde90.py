@@ -45,7 +45,11 @@ def builde90(species, resolution, period, version, overwrite):
 #   period -> yearlist
     if ( period == 'histclimo' ) : yearlist=[                    1850,1860,1870,1880,1890,1900, \
                                              1910,1920,1930,1940,1950,1960,1970,1980,1990,2000, \
-                                             2010,2020,2023] 
+                                             2010,2020,2023]
+
+    elif ( period == 'scenario' ) : yearlist=[2022,2023,2024, \
+                                              2025,2030,2035,2040,2045,2050,2055,2060,2065,2070,2075,2080,2085,2090,2095,2100]
+ 
     else : 
         print('+++ builde90 +++')
         print('No period recognized : ', period)

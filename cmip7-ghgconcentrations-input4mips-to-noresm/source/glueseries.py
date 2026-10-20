@@ -13,12 +13,12 @@ def glueseries(S0, S1):
         data structure
 
     CALLS
-	    getemptydata
+	    getemptydata (for the new final structure)
 
     '''
 #-----------------------------
 #
-# 	check 
+# 	check units and variable : should be the same
     if ( S0['unit'] != S1['unit'] \
       or S0['name'] != S1['name'] ) :
         print('+++ glueseries +++')
@@ -39,10 +39,11 @@ def glueseries(S0, S1):
 
 #   compare years
     if ( ( year0 + 1 ) != year1 ) :
+        print('+++ glueseries +++')
         print('Data sets do not glue together : ', year0, year1)
         quit()
 
-#   compare months+days
+#   compare months+days : should both be the same (monthly)
     if ( mmdd0 == 1216 and mmdd1 == 116 ) : # monthly data
         print('ok')    
     elif ( mmdd0 == 701 and mmdd1 == 701 ) : # daily data
@@ -71,9 +72,9 @@ def glueseries(S0, S1):
 
 
     S['timestamp'] = S0['timestamp']
-    S['latitude'] = S0['latitude']
-    S['nlat']     = S0['nlat'] 
-    S['scenario'] = S0['scenario']+'_'+S1['scenario']
+    S['latitude']  = S0['latitude']
+    S['nlat']      = S0['nlat'] 
+    S['scenario']  = S0['scenario']+'_'+S1['scenario']
 #
 #   return
     return S

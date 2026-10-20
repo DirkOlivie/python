@@ -8,6 +8,9 @@ import daysince
 def fill1pctco2abrupt4xco2(D, scenario, species):
 #---------------------------
     '''
+    MODIFICATIONS
+        (2026-10-18) : adding possibility for CMIP-abrupt2xCO2 and CMIP-abrupt0p2xCO2
+
     INPUT
         D : structure which contains 1850 data for all years
         scenario
@@ -33,7 +36,9 @@ def fill1pctco2abrupt4xco2(D, scenario, species):
 #   1. year to select from original constant timeseries (1850)
 #-------------------------------------------------------------
     if   ( scenario == 'CMIP-1pctco2'     ) : refyear=0
-    elif ( scenario == 'CMIP-abrupt4xco2' ) : refyear=1850
+    elif ( scenario == 'CMIP-abrupt4xco2' \
+        or scenario == 'CMIP-abrupt2xco2' \
+        or scenario == 'CMIP-abrupt0p5xco2' ) : refyear=1850
     else :
         print('+++ fill1pctco2abrupt4xco2 +++')
         print('No scenario recognized : ', scenario)
@@ -91,10 +96,15 @@ def fill1pctco2abrupt4xco2(D, scenario, species):
                 D['valuelist'][itime,:] = D['valuelist'][itime,:] + globav * factor
 #
 #       4.2 add the 4xco2 contribution
-        elif ( scenario == 'CMIP-abrupt4xco2' and species == 'co2' ) :
+        elif ( scenario == 'CMIP-abrupt4xco2'   and species == 'co2' ) : D['valuelist'][itime,:] = D['valuelist'][itime,:]  + globav * 3.
+#       4.3 add the 2xco2 contribution
+        elif ( scenario == 'CMIP-abrupt2xco2'   and species == 'co2' ) : D['valuelist'][itime,:] = D['valuelist'][itime,:]  + globav * 1.
+#       4.4 add the 0p5xco2 contribution
+        elif ( scenario == 'CMIP-abrupt0p5xco2' and species == 'co2' ) : D['valuelist'][itime,:] = D['valuelist'][itime,:]  - globav * 0.5
+#       
+        else :
+            print('fill1pctco2abrupt4xco2 : Nothing to be done')
 
-            D['valuelist'][itime,:] = D['valuelist'][itime,:]  + globav * 3.
-#
     print('--- fill1pctco2abrupt4xco2 ---')
 #   
     return D

@@ -25,14 +25,22 @@ def getspeciesinfo(species, i4mpdownload) :
 #------------------------
 # 
 #   I. original species
+#   -------------------
 #   default values
     fixedvalue  = None
     source      = 'standard'
 
 #   cmip7
     if ( i4mpdownload == 'CR-CMIP-1-0-0' \
-      or i4mpdownload == 'CR-h-1-0-0' \
-      or i4mpdownload == 'CR-vl-1-0-0' ) :
+#      or i4mpdownload == 'CR-h-1-0-0' \     # should not be used
+#      or i4mpdownload == 'CR-vl-1-0-0' \    # should not be used
+        or i4mpdownload == 'CR-h-1-1-0' \
+        or i4mpdownload == 'CR-hl-1-1-0' \
+        or i4mpdownload == 'CR-l-1-1-0' \
+        or i4mpdownload == 'CR-ln-1-1-0' \
+        or i4mpdownload == 'CR-m-1-1-0' \
+        or i4mpdownload == 'CR-ml-1-1-0' \
+        or i4mpdownload == 'CR-vl-1-1-0' ) :
 
 #       NoreESM species               | input4MIPs species
 #       global
@@ -80,7 +88,7 @@ def getspeciesinfo(species, i4mpdownload) :
             print('No species recognized = ', species)
             quit()
 #   cmip6    
-    elif ( i4mpdonwload == 'cmip6' ) :
+    elif ( i4mpdownload == 'cmip6' ) :
 
 #       global mean
         if (   species == 'CO2'     ) : orgsp='carbon_dioxide' 
@@ -108,7 +116,7 @@ def getspeciesinfo(species, i4mpdownload) :
 
 
 #   II. final species informations
-    
+#   -----------------------------    
 #   global mean 
     if   ( species == 'CO2'     ) : finsp=species   ; finlong=species                     ; finunits='1e-6 mol mol-1'  
     elif ( species == 'CH4'     ) : finsp=species   ; finlong=species                     ; finunits='1e-9 mol mol-1'  
@@ -152,7 +160,9 @@ def getspeciesinfo(species, i4mpdownload) :
         print('No species recognized = ', species)
         quit()
 #
-#   III. create data structure
+#   III. create data structure (with information)
+#   --------------------------
+
     data = { 'origspecies'   : orgsp, \
              'finalspecies'  : finsp, \
              'finallongname' : finlong, \

@@ -15,7 +15,11 @@ import interp1d
 
 def composeseries(scenario, yearrange, species, source, fixedvalue, timeresolution, region, latitude, i4mpdownload):
 #----------------
-    ''' 
+    '''
+    MODIFICATIONS
+        (2026-10-18) : added possibility for CMIP-abrupt2xco2 and CMIP-abrupt0p5xco2
+
+ 
     AIM
 	    getting timeseries of GHGs
 	    history  : do possibly correction for year 2023 (take 2022 values)
@@ -28,7 +32,7 @@ def composeseries(scenario, yearrange, species, source, fixedvalue, timeresoluti
 
     INPUT
 	    scenario       : 'CMIP' | 'ScenarioMIP' | 'CMIP-1pctco2' | 'CMIP-abrupt4xco2'
-	    yearrange      : 2-elementa array : [year0, year1]
+	    yearrange      : 2-elementa array : [year0, year1] : desired year-range
 	    species        : 'co2', 'ch4', ... (GHG name as in original input4MIPs NetCDF file)
         source         : 'standard' | 'fixedvalue' ! 'cesm2cmip6' 
 	    timeresolution : 'monthly' | 'annual'
@@ -48,15 +52,16 @@ def composeseries(scenario, yearrange, species, source, fixedvalue, timeresoluti
 	    buildconcentration
 
     CALLS 
-	    assembleseries
+	    assembleseries : obtains a full coherent timeseries
 	    getemptydata
         interp1d [interpolation over the latitudes]
+        fill1pctco2abrupt4xco2
     '''
 #----------------------------------------------------------------
 #
     print('+++ composeseries +++')
 #
-#   I. read original series (the original period can be longer than what is actually wanted)
+#   I. read original series (the original period can be longer than what is actually wanted) - yearrange is not used here
 #--------------------------
     if ( species != '-' ) :
         S = assembleseries.assembleseries(scenario=scenario, timeresolution=timeresolution, region=region, species=species, source=source, fixedvalue=fixedvalue, i4mpdownload=i4mpdownload) # ORIGINAL SERIES
@@ -143,7 +148,9 @@ def composeseries(scenario, yearrange, species, source, fixedvalue, timeresoluti
 #   IV. Do 4xCO2 and 1pctCO2 [should be done on final interpolated fields]
 #---------------------------
     if ( scenario == 'CMIP-1pctco2' \
-      or scenario == 'CMIP-abrupt4xco2' ) :
+      or scenario == 'CMIP-abrupt4xco2' \
+      or scenario == 'CMIP-abrupt2xco2' \
+      or scenario == 'CMIP-abrupt0p5xco2' ) :
         F = fill1pctco2abrupt4xco2.fill1pctco2abrupt4xco2(D=F, scenario=scenario, species=species)    
 
     else :

@@ -18,6 +18,7 @@ def assembleseries(scenario, timeresolution, region, species, source, fixedvalue
 	    (2023-07-27) : added hist_ssp245_forces_CLE
 		               added hist_ssp245_forces_MFR
 		               added hist_ssp245_forces_LOW	
+        (2026-10-18) : added possibility for 'CMIP-abrupt0p5xco2' and 'CMIP-abrupt2xco2'
 
     INPUT
 	    scenario
@@ -33,6 +34,7 @@ def assembleseries(scenario, timeresolution, region, species, source, fixedvalue
 	    composeries
 
     CALLS
+        constructseries_1850placeholder
 	    assembleseries CALLS ITSELF !!
         glueseries
 	    constructseries
@@ -42,13 +44,15 @@ def assembleseries(scenario, timeresolution, region, species, source, fixedvalue
     '''
 #--------------------------------------------------------------------------------------------
 #
-#   PART I : 1pctCO2 or abrupt4xco2
+#   OPTION I : 1pctCO2 or abrupt4xco2
     if ( scenario == 'CMIP-1pctco2' \
-      or scenario == 'CMIP-abrupt4xco2' ) :
+      or scenario == 'CMIP-abrupt4xco2' \
+      or scenario == 'CMIP-abrupt2xco2' \
+      or scenario == 'CMIP-abrupt0p5xco2' ) :
 
         S = constructseries_1850placeholder.constructseries_1850placeholder(scenario=scenario, timeresolution=timeresolution, region=region, species=species,i4mpdownload=i4mpdownload)
 
-#   PART II : splitting historical+scenario
+#   OPTION II : splitting historical+scenario
     elif ( scenario == 'hist_ScenarioMIP_UoM-AIM-ssp370-1-2-1' ) : 
         line = scenario.split('_')
         print('Scenario (before split) : ', scenario)
@@ -60,20 +64,20 @@ def assembleseries(scenario, timeresolution, region, species, source, fixedvalue
 #
         S = glueseries.glueseries(S0=S0, S1=S1)
 #
-#  PART III : use co2 for non-existing input4MIPs data : H2, CH2BR2 (fixed)
+#   OPTION III : use co2 for non-existing input4MIPs data : H2, CH2BR2 (fixed)
     elif ( source == 'fixedvalue' ) :
 
         S = assembleseries(scenario=scenario, timeresolution=timeresolution, region=region, species='co2', source='standard', fixedvalue=None, i4mpdownload=i4mpdownload) # read co2
         S['valuelist'][:,:] = fixedvalue                                                                                                                                  # impose values   
         S['units'] = 'mol mol-1'                                                                                                                                          # impose units
 
-#  PART IV : use co2 for non-existing input4MIPs data : OCS (cesm2cmip6)
+#   OPTION IV : use co2 for non-existing input4MIPs data : OCS (cesm2cmip6)
     elif ( source == 'cesm2-cmip6' ) :
 
         S = assembleseries(scenario=scenario, timeresolution=timeresolution, region=region, species='co2', source='standard', fixedvalue=None, i4mpdownload=i4mpdownload) # read co2       
         S = fillfromcesm2cmip6.fillfromcesm2cmip6(D=S, species=species)                                                                                                   # impose values 
 
-#   PART V : treat single period (historical or scenario)
+#   OPTION V : treat single period (historical or scenario)
     elif ( source == 'standard' ) :
 #
         print('scenario = ', scenario)
@@ -81,7 +85,7 @@ def assembleseries(scenario, timeresolution, region, species, source, fixedvalue
 
         S = constructseries.constructseries(scenario=scenario, timeresolution=timeresolution, region=region, species=species,i4mpdownload=i4mpdownload)
 #
-#   PART VI 
+#   OPTION VI 
     else :
         print('+++ assembleseries +++')
         print('No choice recognized ...')

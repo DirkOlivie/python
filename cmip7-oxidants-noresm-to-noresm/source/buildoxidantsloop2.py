@@ -2,9 +2,12 @@ import numpy as np
 
 import buildoxidants
 
-def buildoxidantsloop2(bctype, specieslist, expiddescriptionlist, version, overwrite):
+def buildoxidantsloop2(bctype, specieslist, expiddescriptionlist, time_units, calendar, version, overwrite):
 #---------------------
     '''
+    MODIFICATIONS
+        (2026-10-19) : adding arguments : time_units and calendar
+
     INPUT
         specieslist
         periodexpiddescriptionlist
@@ -20,4 +23,4 @@ def buildoxidantsloop2(bctype, specieslist, expiddescriptionlist, version, overw
     '''
 
     #
-    buildoxidants.buildoxidants(bctype=bctype, specieslist=specieslist, expiddescriptionlist=expiddescriptionlist, version=version, overwrite=overwrite)
+    buildoxidants.buildoxidants(bctype=bctype, specieslist=specieslist, expiddescriptionlist=expiddescriptionlist, time_units=time_units, calendar=calendar, version=version, overwrite=overwrite)

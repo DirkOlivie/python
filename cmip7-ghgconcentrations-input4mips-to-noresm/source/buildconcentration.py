@@ -68,17 +68,18 @@ def buildconcentration(scenario, yearrange, specieslist, timeresolution, time_un
         quit()
 
 #   begin/start year wanted
-    year0=yearrange[0]
-    year1=yearrange[1]
+    year0 = yearrange[0]
+    year1 = yearrange[1]
 #
 #   new file
     cyear0=str("%4.4i"% year0)
     cyear1=str("%4.4i"% year1)
 #
+#   cperiod : in the name of the final file
     if ( year0 == year1 ) : cperiod=cyear0
     else                  : cperiod=cyear0+'-'+cyear1 
 
-#   II. LATITUDE RESOLUTION
+#   II. LATITUDE RESOLUTION : take the latitudes from example file
 #--------------------------
 #   latitude timeresolution  
     if ( nlat == 360 ) :
@@ -125,7 +126,7 @@ def buildconcentration(scenario, yearrange, specieslist, timeresolution, time_un
 
 #   DIMENSIONS
     if ( nlat > 1 ) : latdimid = ds.createDimension('lat', nlat)  # latitude dimension (if needed)
-    timedimid = ds.createDimension('time', None)                  # time dimension (if needed)
+    timedimid = ds.createDimension('time', None)                  # time dimension
 
 #   VARIABLES
 #   Define variables corresponding with dimensions
@@ -144,9 +145,8 @@ def buildconcentration(scenario, yearrange, specieslist, timeresolution, time_un
             print('No nlat recognized : ', nlat)
             quit()
 
-# 
+#   Date
     dateid    = ds.createVariable('date'   , 'i4', ('time',))  # integer
-
 
 #   ATTRIBUTES
 #   latitude

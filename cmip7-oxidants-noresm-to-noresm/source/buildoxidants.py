@@ -16,9 +16,12 @@ sys.path.insert(0,'/nird/home/olivie/scripts-python')
 import experimentdefinition
 
 #
-def buildoxidants(bctype, specieslist, expiddescriptionlist, version, overwrite):
+def buildoxidants(bctype, specieslist, expiddescriptionlist, time_units, calendar, version, overwrite):
 #-------------
     '''
+    MODIFICATIONS
+        (2026-10-19) added input arguments time_units and calendar
+
     REMARK
 
     AIM 
@@ -41,8 +44,9 @@ def buildoxidants(bctype, specieslist, expiddescriptionlist, version, overwrite)
     camversion = 'cam'
     h0version  = 'h0'
 #
-    calendar   = 'noleap'
-    time_units = 'days since 1850-01-01'
+#   NOT NEEDED -  NOW GIVEN AS INPUTARGUMENT
+#    calendar   = 'noleap'
+#    time_units = 'days since 1850-01-01'
 
     if   ( time_units == 'days since 0000-01-01' ) : refdate=     101
     elif ( time_units == 'days since 1750-01-01' ) : refdate=17500101

@@ -35,9 +35,9 @@ def origindescriptionlist_generate(data):
         if ( line['descriptiontype'] == 'contiguous' ) : 
             periodsplit=line['period'].split('-')
             if ( len(periodsplit) == 3 ) : 
-                year0 = int(periodsplit[0])
-                year1 = int(periodsplit[1])
-                frequency = periodsplit[2]
+                year0     = int(periodsplit[0])
+                year1     = int(periodsplit[1])
+                frequency =     periodsplit[2]
             else :
                 print('+++ origindescription_generate +++')
                 print('Period have yyyy-yyyy-xxx format : ', period)

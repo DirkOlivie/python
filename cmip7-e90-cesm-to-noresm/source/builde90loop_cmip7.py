@@ -11,6 +11,8 @@ def main():
 
     '''
 
+    
+
 #   I. piControl climatology
 #---------------------------
 #   version='version20260903'
@@ -21,10 +23,11 @@ def main():
     specieslist    = ['E90', \
                       'C2H4','C2H6','C3H6','C3H8','CO','NH3','NO']
     resolutionlist = ['0.9x1.25']
-    periodlist     = ['histclimo']
+#   periodlist     = ['histclimo']
+    periodlist     = ['scenario']
 #
-#   overwrite=False
-    overwrite=True
+    overwrite=False
+#   overwrite=True
 #
     builde90loop2.builde90loop2(specieslist=specieslist, resolutionlist=resolutionlist, periodlist=periodlist, version=version, overwrite=overwrite)
 #
@@ -32,14 +35,13 @@ def main():
 #----------
     specieslist    = ['C2H4','C2H6','C3H6','C3H8','CO','NH3','NO']
     resolutionlist = ['1.9x2.5']
-    periodlist     = ['histclimo']
+#   periodlist     = ['histclimo']
+    periodlist     = ['scenario']
 #
-#   overwrite=False
-    overwrite=True
+    overwrite=False
+#   overwrite=True
 #
     builde90loop2.builde90loop2(specieslist=specieslist, resolutionlist=resolutionlist, periodlist=periodlist, version=version, overwrite=overwrite)
-
-
 
 if __name__ == '__main__':
     main()

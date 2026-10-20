@@ -18,6 +18,7 @@ CALLS
 
 if ( 1 == 1 ) :
 #
+#   overwrite    = False
     overwrite    = True
 #   version      = 'version20260207'
 #   version      = 'version20260522'
@@ -31,13 +32,15 @@ if ( 1 == 1 ) :
     scenariolist     = ['CMIP-1pctco2'] ; i4mpdownloadlist = ['CR-CMIP-1-0-0'] ; periodlist = ['0-166']
 
     timeresolutionlist = ['monthly'] ; regionlist = ['ZONAL']
-    buildconcentrationloop2.buildconcentrationloop2(scenariolist=scenariolist, timeresolutionlist=timeresolutionlist, time_units='days since 0000-01-01', calendar=calendar, specieslist=specieslist, periodlist=periodlist, regionlist=regionlist, version=version, i4mpdownloadlist=i4mpdownloadlist, nlatlist=nlatlist, overwrite=overwrite)
+#    buildconcentrationloop2.buildconcentrationloop2(scenariolist=scenariolist, timeresolutionlist=timeresolutionlist, time_units='days since 0000-01-01', calendar=calendar, specieslist=specieslist, periodlist=periodlist, regionlist=regionlist, version=version, i4mpdownloadlist=i4mpdownloadlist, nlatlist=nlatlist, overwrite=overwrite)
 #
     timeresolutionlist = ['annual','monthly'] ; regionlist = ['GLOBAL']
-    buildconcentrationloop2.buildconcentrationloop2(scenariolist=scenariolist, timeresolutionlist=timeresolutionlist, time_units='days since 0000-01-01', calendar=calendar, specieslist=specieslist, periodlist=periodlist, regionlist=regionlist, version=version, i4mpdownloadlist=i4mpdownloadlist, nlatlist=nlatlist, overwrite=overwrite)
+#    buildconcentrationloop2.buildconcentrationloop2(scenariolist=scenariolist, timeresolutionlist=timeresolutionlist, time_units='days since 0000-01-01', calendar=calendar, specieslist=specieslist, periodlist=periodlist, regionlist=regionlist, version=version, i4mpdownloadlist=i4mpdownloadlist, nlatlist=nlatlist, overwrite=overwrite)
 #
 #   II. abruptx4co2
     scenariolist     = ['CMIP-abrupt4xco2'] ; i4mpdownloadlist = ['CR-CMIP-1-0-0'] ; periodlist = ['1850-1850']
+    scenariolist     = ['CMIP-abrupt2xco2', \
+                        'CMIP-abrupt0p5xco2']
 
     timeresolutionlist = ['monthly'] ; regionlist = ['ZONAL']
     buildconcentrationloop2.buildconcentrationloop2(scenariolist=scenariolist, timeresolutionlist=timeresolutionlist, time_units=time_units, calendar=calendar, specieslist=specieslist, periodlist=periodlist, regionlist=regionlist, version=version, i4mpdownloadlist=i4mpdownloadlist, nlatlist=nlatlist, overwrite=overwrite)
@@ -50,22 +53,22 @@ if ( 1 == 1 ) :
     scenariolist     = ['CMIP'] ; i4mpdownloadlist = ['CR-CMIP-1-0-0'] ; periodlist         = ['1850-1850']
 
     timeresolutionlist = ['monthly'] ; regionlist = ['ZONAL']
-    buildconcentrationloop2.buildconcentrationloop2(scenariolist=scenariolist, timeresolutionlist=timeresolutionlist, time_units=time_units, calendar=calendar, specieslist=specieslist, periodlist=periodlist, regionlist=regionlist, version=version, i4mpdownloadlist=i4mpdownloadlist, nlatlist=nlatlist, overwrite=overwrite)
+#    buildconcentrationloop2.buildconcentrationloop2(scenariolist=scenariolist, timeresolutionlist=timeresolutionlist, time_units=time_units, calendar=calendar, specieslist=specieslist, periodlist=periodlist, regionlist=regionlist, version=version, i4mpdownloadlist=i4mpdownloadlist, nlatlist=nlatlist, overwrite=overwrite)
 #
     timeresolutionlist = ['annual','monthly'] ; regionlist = ['GLOBAL']
-    buildconcentrationloop2.buildconcentrationloop2(scenariolist=scenariolist, timeresolutionlist=timeresolutionlist, time_units=time_units, calendar=calendar, specieslist=specieslist, periodlist=periodlist, regionlist=regionlist, version=version, i4mpdownloadlist=i4mpdownloadlist, nlatlist=nlatlist, overwrite=overwrite)
+#    buildconcentrationloop2.buildconcentrationloop2(scenariolist=scenariolist, timeresolutionlist=timeresolutionlist, time_units=time_units, calendar=calendar, specieslist=specieslist, periodlist=periodlist, regionlist=regionlist, version=version, i4mpdownloadlist=i4mpdownloadlist, nlatlist=nlatlist, overwrite=overwrite)
 
     timeresolutionlist = ['monthly']
     periodlist         = ['1750-2023']
 #   
     regionlist = ['GLOBAL','ZONAL'] # ['ZONAL'] #,'GLOBAL']  # original data
 #
-    buildconcentrationloop2.buildconcentrationloop2(scenariolist=scenariolist, timeresolutionlist=timeresolutionlist, time_units='days since 1750-01-01', calendar=calendar, specieslist=specieslist, periodlist=periodlist, regionlist=regionlist, version=version, i4mpdownloadlist=i4mpdownloadlist, nlatlist=nlatlist, overwrite=overwrite)
+#    buildconcentrationloop2.buildconcentrationloop2(scenariolist=scenariolist, timeresolutionlist=timeresolutionlist, time_units='days since 1750-01-01', calendar=calendar, specieslist=specieslist, periodlist=periodlist, regionlist=regionlist, version=version, i4mpdownloadlist=i4mpdownloadlist, nlatlist=nlatlist, overwrite=overwrite)
 #
 #   
     timeresolutionlist = ['annual']
     regionlist = ['GLOBAL']
-    buildconcentrationloop2.buildconcentrationloop2(scenariolist=scenariolist, timeresolutionlist=timeresolutionlist, time_units='days since 1750-01-01', calendar=calendar, specieslist=specieslist, periodlist=periodlist, regionlist=regionlist, version=version, i4mpdownloadlist=i4mpdownloadlist, nlatlist=nlatlist, overwrite=overwrite)
+#    buildconcentrationloop2.buildconcentrationloop2(scenariolist=scenariolist, timeresolutionlist=timeresolutionlist, time_units='days since 1750-01-01', calendar=calendar, specieslist=specieslist, periodlist=periodlist, regionlist=regionlist, version=version, i4mpdownloadlist=i4mpdownloadlist, nlatlist=nlatlist, overwrite=overwrite)
 #
 #   V. scenarios
     scenariolist       = ['ScenarioMIP']
