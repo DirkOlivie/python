@@ -16,7 +16,10 @@ def getwavelengthweight( wvl_bnds0, wvl_bnds2, spectrum):
 
     RETURN
         weight : 2-dimensioanl array
-    
+
+    CALLS
+        getlenintervaloverlap
+        getboundsintervaloverlap
 
     '''
 #

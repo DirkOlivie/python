@@ -52,6 +52,7 @@ def buildvolcaod(inputperiod,outputperiod,inputversion,outputversion, desiredhei
 
     MODIFICATIONS
         (2025-01-15) creation
+        (2026-10-28) readfield_volc_cmip7_input4mips needs extra inputargument 'origin' 
 
     NETCDF
         Specifier   Datatype                    Old typecodes
@@ -231,9 +232,9 @@ def buildvolcaod(inputperiod,outputperiod,inputversion,outputversion, desiredhei
 #   3. read all data # NO DISTICNCTION BETWEEN SW AND LW
 ######################
 
-    ext = readfield_volc_cmip7_input4mips.readfield_volc_cmip7_input4mips(var='ext',mipversion=inputversion,period=inputperiod) # extinction
-    ssa = readfield_volc_cmip7_input4mips.readfield_volc_cmip7_input4mips(var='ssa',mipversion=inputversion,period=inputperiod) # single scattering albedo - omega
-    asy = readfield_volc_cmip7_input4mips.readfield_volc_cmip7_input4mips(var='asy',mipversion=inputversion,period=inputperiod) # assymetrie               - g
+    ext = readfield_volc_cmip7_input4mips.readfield_volc_cmip7_input4mips(var='ext',mipversion=inputversion,period=inputperiod,origin='input4mips') # extinction
+    ssa = readfield_volc_cmip7_input4mips.readfield_volc_cmip7_input4mips(var='ssa',mipversion=inputversion,period=inputperiod,origin='input4mips') # single scattering albedo - omega
+    asy = readfield_volc_cmip7_input4mips.readfield_volc_cmip7_input4mips(var='asy',mipversion=inputversion,period=inputperiod,origin='input4mips') # assymetrie               - g
 
 #####################
 #   4. modify units # NOT NEEDED ANYMORE - ALREADY DONE DURING READING

@@ -1,6 +1,27 @@
 def getspeciesinfo(species, i4mpdownload) :
 #-----------------
     '''
+    REMARK
+        special treatment for
+            H2
+            CH2BR2
+            CHBR3
+            OCS : varies over historical period - have taken valuce from cmip6 file of NCAR
+
+    REFERENCE
+        cmip7 file of NCAR : inputdata/atm/waccm/lb/CMIP7/LBC_17500116-20221216_CMIP7_0p5degLat_c250326.nc
+            H2     : 5e-7         (constant)
+            CH2BR2 : 1.2e-12      (constant)
+            CHBR3  : 1.2e-12      (constant)
+            OCS    : 3.213805e-10 (begin) -- 4.6e-10 (end - year 2022)
+    
+        cmip6 file of NCAR : LBC_17500116-20150116_CMIP6_0p5degLat_c180227.nc
+                             LBC_17500116-20150116_CMIP6_0p5degLat_c180905.nc
+            H2     : 5e-7         (constant)                            [both files]
+            CH2BR2 : 1.2e-12      (constant)                            [both files]
+            CHBR3  : 1.2e-12      (constant)                            [both files] 
+            OCS    : 3.213805e-10 (begin) -- 5.12e-10 (end - year 2015) [both files]
+
     INPUT
 	    species : 'CO2' | 'CH4' | 'N2O' | 'CFC11eq' | 'CFC12eq' | 'CFC12' | 'ADJ' | 
                   'CO2_LBC' | 'CH4_LBC' | ...

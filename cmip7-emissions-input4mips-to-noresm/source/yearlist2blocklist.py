@@ -7,11 +7,11 @@ def yearlist2blocklist(yearlist, activity, resolution):
         - split yearlist in blocks (for reducing size of reading/manipulating data)
         - there is a maximum size of blocks : maxlen
         - consecutive years     : can end up in same block
-        - non-consecutive years : should be in different blocks
+        - non-consecutive years : should be in different blocks !!
 
     INPUT 
-        yearlist : list of years
-        activity
+        yearlist : list of years, e.g. : ..., 2098, 2099, 2100, 2100 -> [..., 2098, 2099, 2100], [2100] 
+        activity : 'air' | 'bb' | ozone'
         resolution : ne16pg3, ne30pg2, 1.9x2.5, 0.9x1.25, ...
 
     REPORT

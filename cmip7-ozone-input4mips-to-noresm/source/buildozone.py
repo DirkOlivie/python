@@ -346,6 +346,7 @@ def buildozone(species, period, version, scenario, i4mpdownload, fromclim, dolon
 
         itime1=itime0 + nyear*nmonth
 
+#       read one block : can contain list of consecutive years
         F = readfieldozone.readfieldozone(species=species, year0=readyear0, year1=readyear1, scenario=readscenario, i4mpdownload=i4mpdownload, fromclim=fromclim)
 
 #       speciesid[itime0:itime1,0:nlev,0:nlat,0:nlon]=F['field'][0:nyear*nmonth,0:nlev,0:nlat,0:nlon]

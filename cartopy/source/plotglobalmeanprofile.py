@@ -140,8 +140,9 @@ def plotglobalmeanprofile(datalist,legendlist,wlist,figlayout,code,colorlist=Non
         desired_zunits='km'
         ax.set_ylabel('Height ['+desired_zunits+']')
 
-        ylimitslist=[[0.,40.]] # 0-40 km
-#        ylimitslist=[[0.,10.]] # 0-10 km
+#        ylimitslist=[[0.,40.]] # 0-40 km
+        ylimitslist=[[0.,20.]] # 0-10 km
+#       ylimitslist=[[0.,10.]] # 0-10 km
 #        ylimitslist=[[0.,2.]]  # 0-2  km
 
     else :

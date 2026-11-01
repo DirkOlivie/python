@@ -29,11 +29,12 @@ def main():
 #   overwriting : True : will make new file (and overwrite old file if exists)
 #                 False : if file exists, will not make new file  
     overwrite=True
+#   overwrite=False
 
 #   wavelength interpolation : for weighting of the spectrum
     wvl_interpolation_type_list=['constant','blackbody']
 
-#   var weighting
+#   var weighting : is not used in volcaodbuild.py
     var_weighting_type='single'
     var_weighting_type='combined'
 
@@ -41,7 +42,8 @@ def main():
 #    inputversion='UOEXETER-CMIP-2-1-0'
 #    outputversion='v20250115'
     inputversion='UOEXETER-CMIP-2-2-1'
-    outputversion='v20260105'
+#    outputversion='v20260105'
+    outputversion='v20261028' # 20261028
 
 #   desired units
     desiredheightunits     = 'km'         # height     [what was used in CMIP6 file given to NorESM]

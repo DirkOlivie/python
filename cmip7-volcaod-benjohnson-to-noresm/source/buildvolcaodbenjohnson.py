@@ -9,15 +9,17 @@ import os, sys
 #import correctnanfield
 #import interpolatefield
 #import transposefield
+import origindescriptionlist2ascii
 
 sys.path.insert(0,'/nird/home/olivie/code/python/cmip7-volcaod-input4mips/source')
 import getstandardunits
 import readfield_volc_cmip7_input4mips
+import assemblefield_volc_cmip7_input4mips
 
 sys.path.insert(0,'/nird/home/olivie/code/python/routines/source')
 #import bndstwodim2bnds
 
-def buildvolcaodbenjohnson(period, inputversion, outputversion, desiredheightunits, desiredextinctionunits, intpmethod, overwrite) :
+def buildvolcaodbenjohnson(inputversion, origindescriptionlist, outputversion, hybridperiod, desiredheightunits, desiredextinctionunits, intpmethod, overwrite) :
 #-------------------------
     '''
     REMARK
@@ -77,7 +79,11 @@ def buildvolcaodbenjohnson(period, inputversion, outputversion, desiredheightuni
 #   1. reading some information from CMIP7 benjohnson file # lat, lat_bnds, height, height_bnds
 ############################################################
 
-    ext_solar = readfield_volc_cmip7_input4mips.readfield_volc_cmip7_input4mips(var='ext',mipversion=inputversion,period=period,origin='benjohnson',spectrum='sw', intpmethod=intpmethod)
+#   ext_solar = readfield_volc_cmip7_input4mips.readfield_volc_cmip7_input4mips(var='ext',mipversion=inputversion,period=period,origin='benjohnson',spectrum='sw', intpmethod=intpmethod)
+    ext_solar = readfield_volc_cmip7_input4mips.readfield_volc_cmip7_input4mips(var='ext',mipversion=origindescriptionlist[0]['i4mpdownload'], \
+                                                                                          period=origindescriptionlist[0]['origperiod'], \
+                                                                                          scenario=origindescriptionlist[0]['scenario'], \
+                                                                                          origin='benjohnson',spectrum='sw', intpmethod=intpmethod)
     latitude       = ext_solar['latitude']
     latitude_units = ext_solar['latitude_units']
     latitude_bnds  = ext_solar['latitude_bnds']
@@ -90,7 +96,10 @@ def buildvolcaodbenjohnson(period, inputversion, outputversion, desiredheightuni
 
     nsun = len(ext_solar['wavelength'])
 
-    ext_earth = readfield_volc_cmip7_input4mips.readfield_volc_cmip7_input4mips(var='ext',mipversion=inputversion,period=period,origin='benjohnson',spectrum='lw', intpmethod=intpmethod)
+    ext_earth = readfield_volc_cmip7_input4mips.readfield_volc_cmip7_input4mips(var='ext',mipversion=origindescriptionlist[0]['i4mpdownload'], \
+                                                                                          period=origindescriptionlist[0]['origperiod'], \
+                                                                                          scenario=origindescriptionlist[0]['scenario'], \
+                                                                                          origin='benjohnson',spectrum='lw', intpmethod=intpmethod)
     nearth    = len(ext_earth['wavelength'])
 
 #   CHECK DESIRED UNITS
@@ -110,8 +119,12 @@ def buildvolcaodbenjohnson(period, inputversion, outputversion, desiredheightuni
 ############################
 #   2. create one new file #
 ############################
-#    
-    fn=path+'/'+inputversion+'_'+period+'_'+intpmethod+'_'+outputversion+'.nc'
+#
+#    year0=origindescriptionlist[0]['year']
+#    year1=origindescriptionlist[-1]['year']
+
+#    period=str("%4.4i"% (year0))+'01-'+str("%4.4i"% (year1))+'12'    
+    fn=path+'/'+inputversion+'_'+hybridperiod+'_'+intpmethod+'_'+outputversion+'.nc'
     print(fn)
 
 #   stop when file exists
@@ -179,19 +192,22 @@ def buildvolcaodbenjohnson(period, inputversion, outputversion, desiredheightuni
         vext_earth[i].units   = 'extinction coefficient of terrestrial bands in '+desiredextinctionunits
         vomega_earth[i].units = 'single scattering albedo of terrestrial bands'
         vg_earth[i].units     = 'asymmetry factor of terrestrial bands'
-
+#
+#   2.e global data
+    origin = origindescriptionlist2ascii.origindescriptionlist2ascii(origindescriptionlist)
+    ds.origin = origin
 #
 ######################
 #   3. read all data # (from benjohnson file)
 ######################
 #
-    ext_solar = readfield_volc_cmip7_input4mips.readfield_volc_cmip7_input4mips(var='ext',mipversion=inputversion,period=period, origin='benjohnson', spectrum='sw', intpmethod=intpmethod) # ext - sw
-    ssa_solar = readfield_volc_cmip7_input4mips.readfield_volc_cmip7_input4mips(var='ssa',mipversion=inputversion,period=period, origin='benjohnson', spectrum='sw', intpmethod=intpmethod) # ssa - sw
-    asy_solar = readfield_volc_cmip7_input4mips.readfield_volc_cmip7_input4mips(var='asy',mipversion=inputversion,period=period, origin='benjohnson', spectrum='sw', intpmethod=intpmethod) # asy - sw
+    ext_solar = assemblefield_volc_cmip7_input4mips.assemblefield_volc_cmip7_input4mips(var='ext', origindescriptionlist=origindescriptionlist, origin='benjohnson', spectrum='sw', intpmethod=intpmethod) # ext - sw
+    ssa_solar = assemblefield_volc_cmip7_input4mips.assemblefield_volc_cmip7_input4mips(var='ssa', origindescriptionlist=origindescriptionlist, origin='benjohnson', spectrum='sw', intpmethod=intpmethod) # ssa - sw
+    asy_solar = assemblefield_volc_cmip7_input4mips.assemblefield_volc_cmip7_input4mips(var='asy', origindescriptionlist=origindescriptionlist, origin='benjohnson', spectrum='sw', intpmethod=intpmethod) # asy - sw
 
-    ext_earth = readfield_volc_cmip7_input4mips.readfield_volc_cmip7_input4mips(var='ext',mipversion=inputversion,period=period, origin='benjohnson', spectrum='lw', intpmethod=intpmethod) # ext - lw
-    ssa_earth = readfield_volc_cmip7_input4mips.readfield_volc_cmip7_input4mips(var='ssa',mipversion=inputversion,period=period, origin='benjohnson', spectrum='lw', intpmethod=intpmethod) # ssa - lw
-    asy_earth = readfield_volc_cmip7_input4mips.readfield_volc_cmip7_input4mips(var='asy',mipversion=inputversion,period=period, origin='benjohnson', spectrum='lw', intpmethod=intpmethod) # asy - lw
+    ext_earth = assemblefield_volc_cmip7_input4mips.assemblefield_volc_cmip7_input4mips(var='ext', origindescriptionlist=origindescriptionlist, origin='benjohnson', spectrum='lw', intpmethod=intpmethod) # ext - lw
+    ssa_earth = assemblefield_volc_cmip7_input4mips.assemblefield_volc_cmip7_input4mips(var='ssa', origindescriptionlist=origindescriptionlist, origin='benjohnson', spectrum='lw', intpmethod=intpmethod) # ssa - lw
+    asy_earth = assemblefield_volc_cmip7_input4mips.assemblefield_volc_cmip7_input4mips(var='asy', origindescriptionlist=origindescriptionlist, origin='benjohnson', spectrum='lw', intpmethod=intpmethod) # asy - lw
 
 ####################
 #   4. correct nan #

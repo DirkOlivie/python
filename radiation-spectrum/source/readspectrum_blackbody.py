@@ -11,6 +11,10 @@ def readspectrum_blackbody(origin, wvl0, wvl1, dwvl, wvl_units, temperature, pre
     '''
     INPUT
         origin        : 'AeroTab' | 'SP2006'
+        wvl0          :
+        wvl1          :
+        dwvl          :
+        wvl_units     :
         temperature   : [K]   
         prefactor     : multiplicative factor for calculated irradiances
         
@@ -57,11 +61,11 @@ def readspectrum_blackbody(origin, wvl0, wvl1, dwvl, wvl_units, temperature, pre
         valuelist = valuelist * prefactor   
     
 #   return data
-    data= { 'variable' : 'irradiance', \
-            'valuelist' : valuelist, \
-            'units'     : units, 
-            'wavelength' : wavelength, \
-            'wavelength_bnds' : wavelength_bnds, \
+    data= { 'variable'         : 'irradiance', \
+            'valuelist'        : valuelist, \
+            'units'            : units, 
+            'wavelength'       : wavelength, \
+            'wavelength_bnds'  : wavelength_bnds, \
             'wavelength_units' : wvl_units}
 #
     return data

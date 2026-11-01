@@ -1,5 +1,6 @@
 import cfilelocation
 import buildemissionloop2
+import origindescriptionlist_generate
 
 
 def main():
@@ -13,6 +14,9 @@ def main():
          grid_fv19=dir+'/cases/Test149f19_f19/atm/hist/Test149f19_f19.cam.h0.0001-01.nc'
 
     '''
+#
+    print('+++ Starting : buildemissionloop +++')
+#
 #   define auxiliary file locations    
     dir='/nird/datalake/NS2345K/olivie/emissions-auxiliary'
     weights_360x720_to_ne16pg3=dir+'/esmf/weights/WEIGHT_lat0.5xlon0.5_lon0minus179.75_lat0minus89.75_scrip_v20251011_TO_ne16pg3_ESMFmesh_cdf5_c20211018_VERSION20251018.nc'
@@ -34,77 +38,82 @@ def main():
                                               topo_fv19    = topo_fv19, \
                                               topo_ne16pg3 = topo_ne16pg3, \
                                               topo_ne30pg3 = topo_ne30pg3)
-# 2025-06-20
-# version='version20250620' ; vertintplist=['native'] ; noresmversionlist=['noresm3'] ; periodlist=['2023-2023'] ; resolutionlist=['0.9x1.25'] ; activitylist=['anthrosurf','anthroprof','bb','air','volc'] ; i4mpdownload_anthro='CEDS-CMIP-2025-04-18' ; i4mpdownload_bb='DRES-CMIP-BB4CMIP7-2-0' ; scenariolist=['hist']
-# 2026-01-05
-#   version='version20260105' ; vertintplist=['native'] ; noresmversionlist=['noresm3'] ; periodlist=['1849-2025'] ; resolutionlist=['0.9x1.25','ne30pg3','ne16pg3'] ; activitylist=['anthrosurf','anthroprof','bb','air','volc'] ; scenariolist=['hist']
-#
-# 2026-02-06 : trying with BC, OC, S
-#   version='version20260206' ; vertintplist=['native'] ; noresmversionlist=['noresm3'] ; periodlist=['1849-2025'] ; resolutionlist=['0.9x1.25','ne30pg3','ne16pg3'] ; activitylist=['anthrosurf','anthroprof','bb','air','volc'] ; scenariolist=['hist']
-# 2026-02-09 : ALL -> SINGLE 
-    version='version20260209' ; vertintplist=['native'] ; noresmversionlist=['noresm3'] ; periodlist=['1849-2025'] ; resolutionlist=['0.9x1.25','ne30pg3','ne16pg3'] ; activitylist=['anthrosurf','anthroprof','bb','air','volc'] ; scenariolist=['ScenarioMIP']
-    version='version20260723'
+# 2026-09-27
+    version='version20261028' ; vertintplist=['native'] ; noresmversionlist=['noresm3'] ; resolutionlist=['ne16pg3']
 
-#   periodlist=['1850-1850']#,'1849-2025']
-#   periodlist=['1849-2023']
-    periodlist=['2022-2101-cmip7scenario']
-#    resolutionlist=['1.9x2.5','ne16pg3']#,'0.9x1.25','ne16pg3','ne30pg3']
-#    resolutionlist=['ne30pg3']
-    resolutionlist=['ne16pg3']
-#  resolutionlist=['ne30pg3']
+    periodlist=['2021-2105'] # still used
     project='cmip7'
+#                       
+    overwrite=False
+#   overwrite=True
 #
-#   overwrite=False
-    overwrite=True
+#    scenariolist=['h','hl','l','ln','m','l','vl']
+    scenariolist=['h']
+
+    for scenario in scenariolist :
+
+        bb_desc        = []
+        anthro_desc    = []
+        air_desc       = []
+        volc_desc      = []
+        volcstrat_desc = []
 #
-#   do something for commonblock
+#       --- YEAR 2021 : from historical ---
+        year=2021
+        bb_desc.append(       {'descriptiontype':'average','year':year,'origyearlist':[year+1],'scenariolist':['ScenarioMIP'],'i4mpdownloadlist':['IIASA-IAMC-'+scenario+'-1-1-1']})
+        anthro_desc.append(   {'descriptiontype':'average','year':year,'origyearlist':[year+1],'scenariolist':['ScenarioMIP'],'i4mpdownloadlist':['IIASA-IAMC-'+scenario+'-1-1-1']})
+        air_desc.append(      {'descriptiontype':'average','year':year,'origyearlist':[year+1],'scenariolist':['ScenarioMIP'],'i4mpdownloadlist':['IIASA-IAMC-'+scenario+'-1-1-2']}) # aircraft 1-1-2
+        volc_desc.append(     {'descriptiontype':'average','year':year,'origyearlist':[year+1],'scenariolist':['ScenarioMIP'],'i4mpdownloadlist':['Aerocom2006'                  ]})
+
+
+#       --- YEARS 2022-2023-2024-2025-20300-2035-...-2100 ---
+        yearlist = [2022,2023,2024, \
+                    2025,2030,2035,2040,2045,2050,2055,2060,2065,2070,2075,2080,2085,2090,2095,2100]        
+
+        for year in yearlist :
+
+            print('year : ', year)
+            cyear=cyear=str("%4.4i"% year)
+            period=cyear+'-'+cyear+'-annual'
+
+            bb_desc.append(       {'descriptiontype':'contiguous','period':period,'scenario':'ScenarioMIP','i4mpdownload':'IIASA-IAMC-'+scenario+'-1-1-1'})
+            anthro_desc.append(   {'descriptiontype':'contiguous','period':period,'scenario':'ScenarioMIP','i4mpdownload':'IIASA-IAMC-'+scenario+'-1-1-1'})    
+            air_desc.append(      {'descriptiontype':'contiguous','period':period,'scenario':'ScenarioMIP','i4mpdownload':'IIASA-IAMC-'+scenario+'-1-1-2'}) # aircraft 1-1-2     
+            volc_desc.append(     {'descriptiontype':'contiguous','period':period,'scenario':'ScenarioMIP','i4mpdownload':'Aerocom2006'                  })
+
+#       --- YEAR 2105 ---
+        yearlist = [2105]
+
+        for year in yearlist :
+
+            print('year : ', year)
+            cyear=cyear=str("%4.4i"% year)
+            period=cyear+'-'+cyear+'-annual'
+
+            bb_desc.append(       {'descriptiontype':'contiguous','period':period,'scenario':'ScenarioMIP','i4mpdownload':'IIASA-IAMC-'+scenario+'-ext-1-1-1'})
+            anthro_desc.append(   {'descriptiontype':'contiguous','period':period,'scenario':'ScenarioMIP','i4mpdownload':'IIASA-IAMC-'+scenario+'-ext-1-1-1'})
+            air_desc.append(      {'descriptiontype':'contiguous','period':period,'scenario':'ScenarioMIP','i4mpdownload':'IIASA-IAMC-'+scenario+'-ext-1-1-2'}) # aircraft 1-1-2     
+            volc_desc.append(     {'descriptiontype':'contiguous','period':period,'scenario':'ScenarioMIP','i4mpdownload':'Aerocom2006'                  })
+
+
+#       generate the description
+        bb_desc        = origindescriptionlist_generate.origindescriptionlist_generate(bb_desc)
+        anthro_desc    = origindescriptionlist_generate.origindescriptionlist_generate(anthro_desc)    
+        air_desc       = origindescriptionlist_generate.origindescriptionlist_generate(air_desc)        # aircraft 1-1-2
+        volc_desc      = origindescriptionlist_generate.origindescriptionlist_generate(volc_desc)
+
 #
-#    groupdescriptionlist=[ \
-#                              { 'activity' : 'bb'        , 'vertdist':'surface-to-profile' , 'sectorliststring':'AGRI-BORF-DEFO-PEAT-SAVA-TEMF', 'specieslist':['SO2','BC_NI','OM_NI','SO4_PR'       ], 'i4mpdownload':'DRES-CMIP-BB4CMIP7-2-0'}, \
-#                              { 'activity' : 'anthrosurf', 'vertdist':'surface-to-surface' , 'sectorliststring':'AGR-TRA-DOM-SOL-WST-SHP'      , 'specieslist':['SO2','BC_N','BC_AX','OM_NI','SO4_PR'], 'i4mpdownload':'CEDS-CMIP-2025-04-18'  }, \
-#                              { 'activity' : 'anthroprof', 'vertdist':'surface-to-profile' , 'sectorliststring':'ENE-IND'                      , 'specieslist':['SO2','BC_N','BC_AX','OM_NI','SO4_PR'], 'i4mpdownload':'CEDS-CMIP-2025-04-18'  }, \
-#                              { 'activity' : 'air'       , 'vertdist':'profile-to-profile' , 'sectorliststring': 'SINGLE'                         , 'specieslist':['SO2','BC_N','BC_AX','OM_NI','SO4_PR'], 'i4mpdownload':'CEDS-CMIP-2025-04-18'  }, \
-#                              { 'activity' : 'volc'      , 'vertdist':'profile-to-profile' , 'sectorliststring': 'CONT-EXPL'                   , 'specieslist':['SO2','SO4_PR']                       , 'i4mpdownload':'AeroCom2006'           }  \
-#                         ] 
+        activitydescriptionlist=[ \
+                                { 'activity' : 'bb'                    , 'vertdist':'surface-to-profile' , 'sectorliststring': 'ALL', 'specieslist':['S','BC','OC']    , 'origindescriptionlist' : bb_desc}, \
+                                { 'activity' : 'anthrosurf'            , 'vertdist':'surface-to-surface' , 'sectorliststring': 'ALL', 'specieslist':['S','BC','OC']    , 'origindescriptionlist' : anthro_desc}, \
+                                { 'activity' : 'anthroprof'            , 'vertdist':'surface-to-profile' , 'sectorliststring': 'ALL', 'specieslist':['S','BC','OC']    , 'origindescriptionlist' : anthro_desc}, \
+                                { 'activity' : 'air'                   , 'vertdist':'profile-to-profile' , 'sectorliststring': 'ALL', 'specieslist':['S','BC','OC']    , 'origindescriptionlist' : air_desc}, \
+                                { 'activity' : 'volc'                  , 'vertdist':'profile-to-profile' , 'sectorliststring': 'ALL', 'specieslist':['S']              , 'origindescriptionlist' : volc_desc} \
+                                ]
 
-#    groupdescriptionlist=[ \
-#                              { 'activity' : 'bb'        , 'vertdist':'surface-to-profile' , 'sectorliststring':'AGRI-BORF-DEFO-PEAT-SAVA-TEMF', 'specieslist':['S','BC','OC'], 'i4mpdownload':'DRES-CMIP-BB4CMIP7-2-0'}, \
-#                              { 'activity' : 'anthrosurf', 'vertdist':'surface-to-surface' , 'sectorliststring':'AGR-TRA-DOM-SOL-WST-SHP'      , 'specieslist':['S','BC','OC'], 'i4mpdownload':'CEDS-CMIP-2025-04-18'  }, \
-#                              { 'activity' : 'anthroprof', 'vertdist':'surface-to-profile' , 'sectorliststring':'ENE-IND'                      , 'specieslist':['S','BC','OC'], 'i4mpdownload':'CEDS-CMIP-2025-04-18'  }, \
-#                              { 'activity' : 'air'       , 'vertdist':'profile-to-profile' , 'sectorliststring': 'SINGLE'                         , 'specieslist':['S','BC','OC'], 'i4mpdownload':'CEDS-CMIP-2025-04-18'  }, \
-#                              { 'activity' : 'volc'      , 'vertdist':'profile-to-profile' , 'sectorliststring': 'CONT-EXPL'                   , 'specieslist':['S']          , 'i4mpdownload':'AeroCom2006'           }  \
-#                         ]
+        scenariohybrid='scenario-'+scenario
 
-    groupdescriptionlist=[ \
-                              { 'activity' : 'bb'        , 'vertdist':'surface-to-profile' , 'sectorliststring': 'ALL', 'specieslist':['S','BC','OC'], 'i4mpdownload':'IIASA-IAMC-h-1-1-1'}, \
-                              { 'activity' : 'anthrosurf', 'vertdist':'surface-to-surface' , 'sectorliststring': 'ALL', 'specieslist':['S','BC','OC'], 'i4mpdownload':'IIASA-IAMC-h-1-1-1'}, \
-                              { 'activity' : 'anthroprof', 'vertdist':'surface-to-profile' , 'sectorliststring': 'ALL', 'specieslist':['S','BC','OC'], 'i4mpdownload':'IIASA-IAMC-h-1-1-1'}, \
-                              { 'activity' : 'air'       , 'vertdist':'profile-to-profile' , 'sectorliststring': 'ALL', 'specieslist':['S','BC','OC'], 'i4mpdownload':'IIASA-IAMC-h-1-1-2'}, \
-                              { 'activity' : 'volc'      , 'vertdist':'profile-to-profile' , 'sectorliststring': 'ALL', 'specieslist':['S']          , 'i4mpdownload':'AeroCom2006'           }  \
-                         ]
-
-
-    buildemissionloop2.buildemissionloop2(groupdescriptionlist=groupdescriptionlist, resolutionlist=resolutionlist, vertintplist=vertintplist, periodlist=periodlist,version=version, noresmversionlist=noresmversionlist, scenariolist=scenariolist, project=project, filelocation=filelocation, overwrite=overwrite)
-
-
-
-#    for activity in activitylist :
-
-#     fill_commonblock
-
-#        if (   activity == 'bb'         ) : vertdist='surface-to-profile' ; sectorliststring='AGRI-BORF-DEFO-PEAT-SAVA-TEMF' ; speciesliststring='SO2-BC_NI-OM_NI-SO4_PR'
-#        elif ( activity == 'anthrosurf' ) : vertdist='surface-to-surface' ; sectorliststring='AGR-TRA-DOM-SOL-WST-SHP'       ; speciesliststring='SO2-BC_N-BC_AX-OM_NI-SO4_PR'
-#        elif ( activity == 'anthroprof' ) : vertdist='surface-to-profile' ; sectorliststring='ENE-IND'                       ; speciesliststring='SO2-BC_N-BC_AX-OM_NI-SO4_PR'
-#        elif ( activity == 'air'        ) : vertdist='profile-to-profile' ; sectorliststring='ALL'                           ; speciesliststring='SO2-BC_N-BC_AX-OM_NI-SO4_PR'
-#        elif ( activity == 'volc'       ) : vertdist='profile-to-profile' ; sectorliststring='CONT-EXPL'                     ; speciesliststring='SO2-SO4_PR'
-#        else : 
-#            print('+++ buildemissionloop +++')
-#            print('No activity recognized : ', activity) 
-#            quit()
-#    IF ALL SECTORS SHOULD BE SUMMED UP 
-#    sectorlist=['ALL']
-
-#        buildemissionloop2.buildemissionloop2(vertdist=vertdist, resolutionlist=resolutionlist, vertintplist=vertintplist, activity=activity, sectorliststring=sectorliststring,speciesliststring=speciesliststring,periodlist=periodlist,version=version, noresmversionlist=noresmversionlist, scenariolist=scenariolist, i4mpdownload_anthro=i4mpdownload_anthro, i4mpdownload_bb=i4mpdownload_bb, filelocation=filelocation, overwrite=overwrite)
+        buildemissionloop2.buildemissionloop2(activitydescriptionlist=activitydescriptionlist, resolutionlist=resolutionlist, vertintplist=vertintplist, periodlist=periodlist,version=version, noresmversionlist=noresmversionlist, scenariohybrid=scenariohybrid, project=project, filelocation=filelocation, overwrite=overwrite)
 #
 if __name__ == '__main__':
     main()

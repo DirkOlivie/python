@@ -597,6 +597,10 @@ def getbasicvarcomponents(var, expid):
           or expid == 'n1850esmGaxgGHG.LM.n30b25.20260928' \
           or expid == 'n1850esmGaxgGHG.LM.n30b25.529.20261002' \
             \
+          or expid == 'n1850GHGGaxg.LM.nor30b27.002.20261016' \
+          or expid == 'n1850esmGHGGaxg.LM.nor30b27.003.20261024' \
+          or expid == 'n1850esmGHGGaxg.LM.nor30b27.001.20261016' \
+            \
           or expid == 'n1850Gg.ne16pg3_tn14_gl4.noresm3_0_beta16.Run13.Olivia.2026-05-18_pseudo_hybrid' \
           or expid == 'n1850.ne16pg3_tn14.noresm3_0_beta18.Run14.Olivia.2026-05-28' \
           or expid == 'n1850.ne16pg3_tn14.noresm3_0_beta18.Run14-A.Olivia.2026-06-01' \

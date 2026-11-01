@@ -16,11 +16,12 @@ sys.path.insert(0,'/nird/home/olivie/scripts-python')
 import experimentdefinition
 
 #
-def buildoxidants(bctype, specieslist, expiddescriptionlist, time_units, calendar, version, overwrite):
+def buildoxidants(bctype, specieslist, expiddescriptionlist, scenario, time_units, calendar, version, overwrite):
 #-------------
     '''
     MODIFICATIONS
         (2026-10-19) added input arguments time_units and calendar
+        (2026-10-27) added input argument scenario [only to be used in final filename]
 
     REMARK
 
@@ -129,7 +130,8 @@ def buildoxidants(bctype, specieslist, expiddescriptionlist, time_units, calenda
         cperiod=cyear0+'-'+cyear1   # multiple years
 
 #   FILENAME
-    fshort=bctype+'_'+cperiod+'_'+resolution+'_'+version+'.nc'
+    if ( scenario == '' ) : fshort=bctype+'_'+cperiod+'_'+resolution+'_'+version+'.nc'
+    else                  : fshort=bctype+'_'+cperiod+'_'+scenario+'_'+resolution+'_'+version+'.nc'
 
 ##############
 #   New file #

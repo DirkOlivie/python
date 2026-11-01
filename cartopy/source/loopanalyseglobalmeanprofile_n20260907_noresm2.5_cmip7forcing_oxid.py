@@ -18,22 +18,28 @@ def main():
 
     code='n20260907_noresm2.5_cmip7forcing_oxid_glob'
     figlayoutlist=[figlayoutlog]
-    expidlist=['n1850Gaxg.LM.n30b24.513.betzy.20260905.ubcnone']*1 \
+    expidlist= \
+              ['n1850Gaxg.LM.n30b24.513.betzy.20260905.ubcnone']*1 \
              +['n1850Gaxg.LM.n30b24.513.betzy.20260905.oxid']*1 \
              +['NF1850norbc_tropstratchem_f19_f19_t02_20260829']*1 \
-             +['NF1850norbc_tropstratchem_f19_f19_20241127_test01_bis']*1 \
-             +['NF1850norbc_tropstratchem_f19_f19_20241127_test16_bis']*1
+             +['NF1850norbc_tropstratchem_f19_f19_t02_20260829']*1
+#             +['NF1850norbc_tropstratchem_f19_f19_20241127_test01_bis']*1 \
+#             +['NF1850norbc_tropstratchem_f19_f19_20241127_test16_bis']*1 \
 #
     refidlist=expidlist
     wlist=[1.,0.]
 #    
-    year0list=[1406]*2+[21]*3
-    year1list=[1415]*2+[30]*3
-    seasonlist=['YEA']*5
-    linestylelist=[0,0,0,0,0]
-    colorlist    =[0,1,2,4,5]
-    legendlist=['glob (cmip6)','glob (new)','glob (fullchem)','test01','test16']
-    regionlist=['','','','','']
+#   year0list=[1406]*2+[21]*3+[30]*1
+#   year1list=[1415]*2+[30]*3+[30]*1
+    year0list=[1406]*2+[21]*1+[30]*1
+    year1list=[1415]*2+[30]*1+[30]*1
+#   seasonlist=['YEA']*4
+    seasonlist=['JUL']*4
+    linestylelist=[0,0,0,0]
+    colorlist    =[0,1,2,4]
+#   legendlist=['glob (cmip6)','glob (new)','glob (fullchem)','test01','test16','glob (fullchem - 1 yr)']
+    legendlist=['glob (cmip6)','glob (new)','glob (fullchem)','glob (fullchem - 1 yr)']
+    regionlist=['','','','']#,'','']
     verticalaxislist=['height']
 #
     description='varcommon'
@@ -49,18 +55,25 @@ def main():
     figlayoutlist=[figlayoutlog]
     expidlist=['n1850Gaxg.LM.n30b24.513.betzy.20260905.ubcnone']*3 \
              +['n1850Gaxg.LM.n30b24.513.betzy.20260905.oxid']*3 \
+             +['NF1850norbc_tropstratchem_f19_f19_t02_20260829']*3 \
              +['NF1850norbc_tropstratchem_f19_f19_t02_20260829']*3
 #
     refidlist=expidlist
     wlist=[1.,0.]
 #    
-    year0list=[1406]*6+[21]*3
-    year1list=[1415]*6+[30]*3
+    year0list=[1406]*6+[21]*6
+    year1list=[1415]*6+[30]*6
     seasonlist=['YEA']*9
-    linestylelist=[0,1,2,0,1,2,0,1,2]
-    colorlist    =[0,0,0,1,1,1,2,2,2]
-    legendlist=['NH (cmip6)','28S28N (cmip6)','SH (cmip6)','NH (new)','28S28N (new)','SH (new)','NH (fullchem)','28S28N (fullchem)','SH (fullchem)']
-    regionlist=['NH','28S28N','SH','NH','28S28N','SH','NH','28S28N','SH']
+    linestylelist=[0,1,2,0,1,2,0,1,2,0,1,2]
+    colorlist    =[0,0,0,1,1,1,2,2,2,3,3,3]
+    legendlist=['NH (cmip6)','28S28N (cmip6)','SH (cmip6)', \
+                'NH (new)','28S28N (new)','SH (new)', \
+                'NH (fullchem)','28S28N (fullchem)','SH (fullchem)', \
+                'NH (fullchem - 1 yr)','28S28N (fullchem- 1 yr)','SH (fullchem - 1 yr)']
+    regionlist=['NH','28S28N','SH', \
+                'NH','28S28N','SH', \
+                'NH','28S28N','SH', \
+                'NH','28S28N','SH']
     verticalaxislist=['height']
 #
     description='varcommon'

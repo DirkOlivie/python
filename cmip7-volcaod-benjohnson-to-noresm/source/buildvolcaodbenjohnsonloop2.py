@@ -1,9 +1,15 @@
 import buildvolcaodbenjohnson
 
-def buildvolcaodbenjohnsonloop2(periodlist, inputversion, outputversion, desiredheightunits, desiredextinctionunits, intpmethodlist, overwrite):
+def buildvolcaodbenjohnsonloop2(inputversion,origindescriptionlist, outputversion, hybridperiod, desiredheightunits, desiredextinctionunits, intpmethodlist, overwrite):
 #------------------------------
 #
     '''
+    MODIFICATIONS
+        (2026-10-30)
+            inputarguments modified : periodlist (removed), inputversion (removed), descriptionlist (new)
+            loop over perilodlist removed
+
+
     INPUT
         period
         inputversion
@@ -21,13 +27,13 @@ def buildvolcaodbenjohnsonloop2(periodlist, inputversion, outputversion, desired
 
     '''
 #   
-    for period in periodlist :
-        for intpmethod in intpmethodlist :
+    for intpmethod in intpmethodlist :
 
-            buildvolcaodbenjohnson.buildvolcaodbenjohnson(period=period, \
-                                                          inputversion=inputversion, \
-                                                          outputversion=outputversion, \
-                                                          desiredheightunits=desiredheightunits, \
-                                                          desiredextinctionunits=desiredextinctionunits, \
-                                                          intpmethod=intpmethod, \
-                                                          overwrite=overwrite)
+        buildvolcaodbenjohnson.buildvolcaodbenjohnson(inputversion=inputversion, \
+                                                      origindescriptionlist=origindescriptionlist, \
+                                                      outputversion=outputversion, \
+                                                      hybridperiod=hybridperiod, \
+                                                      desiredheightunits=desiredheightunits, \
+                                                      desiredextinctionunits=desiredextinctionunits, \
+                                                      intpmethod=intpmethod, \
+                                                      overwrite=overwrite)

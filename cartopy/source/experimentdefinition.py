@@ -66,6 +66,8 @@ def getexpidinfo (expid) :
     lakedirns2345kovewh='/nird/datalake/NS2345K/ovewh/PPE-BASELINE'
     basedirns1004kelihho='/nird/datapeak/NS1004K/elihho'
     lakedirns9560kmpet='/nird/datalake/NS9560K/mpet/archive'
+    lakedirns11118knoresm3='/datalake/NS11118K/noresm3/cases'
+    lakedirns11118knoresm23='/datalake/NS11118K/noresm2.3/cases'
     scratchdir='/scratch/olivie/noresm/cases'    
     esgfdir='/projects/NS9252K/CMIP6'
     #
@@ -1338,6 +1340,9 @@ def getexpidinfo (expid) :
     elif expid=='NFSSP245norpddmsbc_tropstratchem_sdyn_01_f19_f19_cntr2019_h2emi_h2dep0p75_h2plus100tg_s01_hyway_20260403'    : des={'year0' : 2019, 'year1' : 2038, 'model' : 'NorESM2', 'subdir' : lakedirns2345khyway, 'cexpid' : expid, 'clmh0' : 'monthly', 'chem' : 'fullchem',  'globdatadir' : 'timeblocks-v2', 'project' : '', 'dataformat':'rawnoresm'}
 #   H2 1850
     elif expid=='NFSSP245norpddmsbc_tropstratchem_sdyn_01_f19_f19_cntr1850_h2emi_h2dep0p75_s01_hyway_20260403'                : des={'year0' : 2019, 'year1' : 2038, 'model' : 'NorESM2', 'subdir' : lakedirns2345khyway, 'cexpid' : expid, 'clmh0' : 'monthly', 'chem' : 'fullchem',  'globdatadir' : 'timeblocks-v2', 'project' : '', 'dataformat':'rawnoresm'}
+#   H2 cntr2019 : CH4 + H2 emissions
+    elif expid=='NFSSP245norpddmsbc_tropstratchem_sdyn_01_f19_f19_cntr2019_h2emi_h2dep0p75_ch4emi_s01_hyway_20260403'             : des={'year0' : 2019, 'year1' : 2058, 'model' : 'NorESM2', 'subdir' : lakedirns2345khyway, 'cexpid' : expid, 'clmh0' : 'monthly', 'chem' : 'fullchem',  'globdatadir' : 'timeblocks-v2', 'project' : '', 'dataformat':'rawnoresm'}
+    elif expid=='NFSSP245norpddmsbc_tropstratchem_sdyn_01_f19_f19_cntr2019_h2emi_h2dep0p75_ch4emi_h2plus100tg_s01_hyway_20260403' : des={'year0' : 2019, 'year1' : 2058, 'model' : 'NorESM2', 'subdir' : lakedirns2345khyway, 'cexpid' : expid, 'clmh0' : 'monthly', 'chem' : 'fullchem',  'globdatadir' : 'timeblocks-v2', 'project' : '', 'dataformat':'rawnoresm'}
 #
 # Oyvind : testing dry deposition velocity correction
     elif expid=='NF1850norbc_aer2014_f19_f19_20210530'    : des={'year0' : 1, 'year1' :  40, 'model' : 'NorESM2', 'subdir' : basedirns9560k    , 'cexpid' : expid, 'clmh0' : 'monthly', 'chem' : '', 'project' : ''}
@@ -1854,10 +1859,52 @@ def getexpidinfo (expid) :
     elif expid=='NF1850norbc_sdyn_f19_f19_20260330_test16_volcnone'         : des={'year0' : 1970, 'year1' : 1979, 'model' : 'NorESM2', 'subdir'    : lakedirns2345cmip7volcaodnoresm23, 'cexpid' : expid, 'clmh0' : 'monthly', 'chem' : '', 'globdatadir' : 'timeblocks-v2', 'project' : '', 'dataformat' : 'rawnoresm'}
 
 #   cmip7 forcing generation
+#   1850
     elif expid=='NF1850norbc_tropstratchem_f19_f19_t00_20260829'  : des={'year0' : 1, 'year1' : 30, 'model' : 'NorESM2', 'subdir'    : lakedirns9560knoresm23, 'cexpid' : expid, 'clmh0' : 'monthly', 'chem' : 'fullchem', 'globdatadir' : 'timeblocks-v2', 'project' : '', 'dataformat' : 'rawnoresm'}
     elif expid=='NF1850norbc_tropstratchem_f19_f19_t01_20260829'  : des={'year0' : 1, 'year1' : 30, 'model' : 'NorESM2', 'subdir'    : lakedirns9560knoresm23, 'cexpid' : expid, 'clmh0' : 'monthly', 'chem' : 'fullchem', 'globdatadir' : 'timeblocks-v2', 'project' : '', 'dataformat' : 'rawnoresm'}
-    elif expid=='NF1850norbc_tropstratchem_f19_f19_t02_20260829'  : des={'year0' : 1, 'year1' : 30, 'model' : 'NorESM2', 'subdir'    : lakedirns9560knoresm23, 'cexpid' : expid, 'clmh0' : 'monthly', 'chem' : 'fullchem', 'globdatadir' : 'timeblocks-v2', 'project' : '', 'dataformat' : 'rawnoresm'}
-
+    elif expid=='NF1850norbc_tropstratchem_f19_f19_t02_20260829'  : des={'year0' : 1, 'year1' : 30, 'model' : 'NorESM2', 'subdir'    : lakedirns9560knoresm23, 'cexpid' : expid, 'clmh0' : 'monthly', 'chem' : 'fullchem', 'globdatadir' : 'timeblocks-v2', 'project' : '', 'dataformat' : 'rawnoresm'} # finally used
+#   historical
+    elif expid=='NF1850norbc_1860climo_tropstratchem_f19_f19_t02_20260829' : des={'year0' : 1, 'year1' : 30, 'model' : 'NorESM2', 'subdir'    : lakedirns11118knoresm23, 'cexpid' : expid, 'clmh0' : 'monthly', 'chem' : 'fullchem', 'globdatadir' : 'timeblocks-v2', 'project' : '', 'dataformat' : 'rawnoresm'}
+    elif expid=='NF1850norbc_1870climo_tropstratchem_f19_f19_t02_20260829' : des={'year0' : 1, 'year1' : 30, 'model' : 'NorESM2', 'subdir'    : lakedirns11118knoresm23, 'cexpid' : expid, 'clmh0' : 'monthly', 'chem' : 'fullchem', 'globdatadir' : 'timeblocks-v2', 'project' : '', 'dataformat' : 'rawnoresm'}
+    elif expid=='NF1850norbc_1880climo_tropstratchem_f19_f19_t02_20260829' : des={'year0' : 1, 'year1' : 30, 'model' : 'NorESM2', 'subdir'    : lakedirns11118knoresm23, 'cexpid' : expid, 'clmh0' : 'monthly', 'chem' : 'fullchem', 'globdatadir' : 'timeblocks-v2', 'project' : '', 'dataformat' : 'rawnoresm'}
+    elif expid=='NF1850norbc_1890climo_tropstratchem_f19_f19_t02_20260829' : des={'year0' : 1, 'year1' : 30, 'model' : 'NorESM2', 'subdir'    : lakedirns11118knoresm23, 'cexpid' : expid, 'clmh0' : 'monthly', 'chem' : 'fullchem', 'globdatadir' : 'timeblocks-v2', 'project' : '', 'dataformat' : 'rawnoresm'}
+    elif expid=='NF1850norbc_1900climo_tropstratchem_f19_f19_t02_20260829' : des={'year0' : 1, 'year1' : 30, 'model' : 'NorESM2', 'subdir'    : lakedirns11118knoresm23, 'cexpid' : expid, 'clmh0' : 'monthly', 'chem' : 'fullchem', 'globdatadir' : 'timeblocks-v2', 'project' : '', 'dataformat' : 'rawnoresm'}
+    elif expid=='NF1850norbc_1910climo_tropstratchem_f19_f19_t02_20260829' : des={'year0' : 1, 'year1' : 30, 'model' : 'NorESM2', 'subdir'    : lakedirns11118knoresm23, 'cexpid' : expid, 'clmh0' : 'monthly', 'chem' : 'fullchem', 'globdatadir' : 'timeblocks-v2', 'project' : '', 'dataformat' : 'rawnoresm'}
+    elif expid=='NF1850norbc_1920climo_tropstratchem_f19_f19_t02_20260829' : des={'year0' : 1, 'year1' : 30, 'model' : 'NorESM2', 'subdir'    : lakedirns11118knoresm23, 'cexpid' : expid, 'clmh0' : 'monthly', 'chem' : 'fullchem', 'globdatadir' : 'timeblocks-v2', 'project' : '', 'dataformat' : 'rawnoresm'}
+    elif expid=='NF1850norbc_1930climo_tropstratchem_f19_f19_t02_20260829' : des={'year0' : 1, 'year1' : 30, 'model' : 'NorESM2', 'subdir'    : lakedirns11118knoresm23, 'cexpid' : expid, 'clmh0' : 'monthly', 'chem' : 'fullchem', 'globdatadir' : 'timeblocks-v2', 'project' : '', 'dataformat' : 'rawnoresm'}
+    elif expid=='NF1850norbc_1940climo_tropstratchem_f19_f19_t02_20260829' : des={'year0' : 1, 'year1' : 30, 'model' : 'NorESM2', 'subdir'    : lakedirns11118knoresm23, 'cexpid' : expid, 'clmh0' : 'monthly', 'chem' : 'fullchem', 'globdatadir' : 'timeblocks-v2', 'project' : '', 'dataformat' : 'rawnoresm'}
+    elif expid=='NF1850norbc_1950climo_tropstratchem_f19_f19_t02_20260829' : des={'year0' : 1, 'year1' : 30, 'model' : 'NorESM2', 'subdir'    : lakedirns11118knoresm23, 'cexpid' : expid, 'clmh0' : 'monthly', 'chem' : 'fullchem', 'globdatadir' : 'timeblocks-v2', 'project' : '', 'dataformat' : 'rawnoresm'}
+    elif expid=='NF1850norbc_1960climo_tropstratchem_f19_f19_t02_20260829' : des={'year0' : 1, 'year1' : 30, 'model' : 'NorESM2', 'subdir'    : lakedirns11118knoresm23, 'cexpid' : expid, 'clmh0' : 'monthly', 'chem' : 'fullchem', 'globdatadir' : 'timeblocks-v2', 'project' : '', 'dataformat' : 'rawnoresm'}
+    elif expid=='NF1850norbc_1970climo_tropstratchem_f19_f19_t02_20260829' : des={'year0' : 1, 'year1' : 30, 'model' : 'NorESM2', 'subdir'    : lakedirns11118knoresm23, 'cexpid' : expid, 'clmh0' : 'monthly', 'chem' : 'fullchem', 'globdatadir' : 'timeblocks-v2', 'project' : '', 'dataformat' : 'rawnoresm'}
+    elif expid=='NF1850norbc_1980climo_tropstratchem_f19_f19_t02_20260829' : des={'year0' : 1, 'year1' : 30, 'model' : 'NorESM2', 'subdir'    : lakedirns11118knoresm23, 'cexpid' : expid, 'clmh0' : 'monthly', 'chem' : 'fullchem', 'globdatadir' : 'timeblocks-v2', 'project' : '', 'dataformat' : 'rawnoresm'}
+    elif expid=='NF1850norbc_1990climo_tropstratchem_f19_f19_t02_20260829' : des={'year0' : 1, 'year1' : 30, 'model' : 'NorESM2', 'subdir'    : lakedirns11118knoresm23, 'cexpid' : expid, 'clmh0' : 'monthly', 'chem' : 'fullchem', 'globdatadir' : 'timeblocks-v2', 'project' : '', 'dataformat' : 'rawnoresm'}
+    elif expid=='NF1850norbc_2000climo_tropstratchem_f19_f19_t02_20260829' : des={'year0' : 1, 'year1' : 30, 'model' : 'NorESM2', 'subdir'    : lakedirns11118knoresm23, 'cexpid' : expid, 'clmh0' : 'monthly', 'chem' : 'fullchem', 'globdatadir' : 'timeblocks-v2', 'project' : '', 'dataformat' : 'rawnoresm'}
+    elif expid=='NF1850norbc_2010climo_tropstratchem_f19_f19_t02_20260829' : des={'year0' : 1, 'year1' : 30, 'model' : 'NorESM2', 'subdir'    : lakedirns11118knoresm23, 'cexpid' : expid, 'clmh0' : 'monthly', 'chem' : 'fullchem', 'globdatadir' : 'timeblocks-v2', 'project' : '', 'dataformat' : 'rawnoresm'}
+    elif expid=='NF1850norbc_2020climo_tropstratchem_f19_f19_t02_20260829' : des={'year0' : 1, 'year1' : 30, 'model' : 'NorESM2', 'subdir'    : lakedirns11118knoresm23, 'cexpid' : expid, 'clmh0' : 'monthly', 'chem' : 'fullchem', 'globdatadir' : 'timeblocks-v2', 'project' : '', 'dataformat' : 'rawnoresm'}
+    elif expid=='NF1850norbc_2023climo_tropstratchem_f19_f19_t02_20260829' : des={'year0' : 1, 'year1' : 30, 'model' : 'NorESM2', 'subdir'    : lakedirns11118knoresm23, 'cexpid' : expid, 'clmh0' : 'monthly', 'chem' : 'fullchem', 'globdatadir' : 'timeblocks-v2', 'project' : '', 'dataformat' : 'rawnoresm'}
+#   scen-h
+    elif expid=='NF1850norbc_2022scen-h_tropstratchem_f19_f19_t02_20260829' : des={'year0' : 1, 'year1' : 30, 'model' : 'NorESM2', 'subdir'    : lakedirns11118knoresm23, 'cexpid' : expid, 'clmh0' : 'monthly', 'chem' : 'fullchem', 'globdatadir' : 'timeblocks-v2', 'project' : '', 'dataformat' : 'rawnoresm'}
+    elif expid=='NF1850norbc_2025scen-h_tropstratchem_f19_f19_t02_20260829' : des={'year0' : 1, 'year1' : 30, 'model' : 'NorESM2', 'subdir'    : lakedirns11118knoresm23, 'cexpid' : expid, 'clmh0' : 'monthly', 'chem' : 'fullchem', 'globdatadir' : 'timeblocks-v2', 'project' : '', 'dataformat' : 'rawnoresm'}
+    elif expid=='NF1850norbc_2030scen-h_tropstratchem_f19_f19_t02_20260829' : des={'year0' : 1, 'year1' : 30, 'model' : 'NorESM2', 'subdir'    : lakedirns11118knoresm23, 'cexpid' : expid, 'clmh0' : 'monthly', 'chem' : 'fullchem', 'globdatadir' : 'timeblocks-v2', 'project' : '', 'dataformat' : 'rawnoresm'}
+    elif expid=='NF1850norbc_2040scen-h_tropstratchem_f19_f19_t02_20260829' : des={'year0' : 1, 'year1' : 30, 'model' : 'NorESM2', 'subdir'    : lakedirns11118knoresm23, 'cexpid' : expid, 'clmh0' : 'monthly', 'chem' : 'fullchem', 'globdatadir' : 'timeblocks-v2', 'project' : '', 'dataformat' : 'rawnoresm'}
+    elif expid=='NF1850norbc_2050scen-h_tropstratchem_f19_f19_t02_20260829' : des={'year0' : 1, 'year1' : 30, 'model' : 'NorESM2', 'subdir'    : lakedirns11118knoresm23, 'cexpid' : expid, 'clmh0' : 'monthly', 'chem' : 'fullchem', 'globdatadir' : 'timeblocks-v2', 'project' : '', 'dataformat' : 'rawnoresm'}
+    elif expid=='NF1850norbc_2060scen-h_tropstratchem_f19_f19_t02_20260829' : des={'year0' : 1, 'year1' : 30, 'model' : 'NorESM2', 'subdir'    : lakedirns11118knoresm23, 'cexpid' : expid, 'clmh0' : 'monthly', 'chem' : 'fullchem', 'globdatadir' : 'timeblocks-v2', 'project' : '', 'dataformat' : 'rawnoresm'}
+    elif expid=='NF1850norbc_2070scen-h_tropstratchem_f19_f19_t02_20260829' : des={'year0' : 1, 'year1' : 30, 'model' : 'NorESM2', 'subdir'    : lakedirns11118knoresm23, 'cexpid' : expid, 'clmh0' : 'monthly', 'chem' : 'fullchem', 'globdatadir' : 'timeblocks-v2', 'project' : '', 'dataformat' : 'rawnoresm'}
+    elif expid=='NF1850norbc_2080scen-h_tropstratchem_f19_f19_t02_20260829' : des={'year0' : 1, 'year1' : 30, 'model' : 'NorESM2', 'subdir'    : lakedirns11118knoresm23, 'cexpid' : expid, 'clmh0' : 'monthly', 'chem' : 'fullchem', 'globdatadir' : 'timeblocks-v2', 'project' : '', 'dataformat' : 'rawnoresm'}
+    elif expid=='NF1850norbc_2090scen-h_tropstratchem_f19_f19_t02_20260829' : des={'year0' : 1, 'year1' : 30, 'model' : 'NorESM2', 'subdir'    : lakedirns11118knoresm23, 'cexpid' : expid, 'clmh0' : 'monthly', 'chem' : 'fullchem', 'globdatadir' : 'timeblocks-v2', 'project' : '', 'dataformat' : 'rawnoresm'}
+    elif expid=='NF1850norbc_2100scen-h_tropstratchem_f19_f19_t02_20260829' : des={'year0' : 1, 'year1' : 30, 'model' : 'NorESM2', 'subdir'    : lakedirns11118knoresm23, 'cexpid' : expid, 'clmh0' : 'monthly', 'chem' : 'fullchem', 'globdatadir' : 'timeblocks-v2', 'project' : '', 'dataformat' : 'rawnoresm'}
+#   scen-vl
+    elif expid=='NF1850norbc_2022scen-vl_tropstratchem_f19_f19_t02_20260829' : des={'year0' : 1, 'year1' : 30, 'model' : 'NorESM2', 'subdir'    : lakedirns11118knoresm23, 'cexpid' : expid, 'clmh0' : 'monthly', 'chem' : 'fullchem', 'globdatadir' : 'timeblocks-v2', 'project' : '', 'dataformat' : 'rawnoresm'}
+    elif expid=='NF1850norbc_2025scen-vl_tropstratchem_f19_f19_t02_20260829' : des={'year0' : 1, 'year1' : 30, 'model' : 'NorESM2', 'subdir'    : lakedirns11118knoresm23, 'cexpid' : expid, 'clmh0' : 'monthly', 'chem' : 'fullchem', 'globdatadir' : 'timeblocks-v2', 'project' : '', 'dataformat' : 'rawnoresm'}
+    elif expid=='NF1850norbc_2030scen-vl_tropstratchem_f19_f19_t02_20260829' : des={'year0' : 1, 'year1' : 30, 'model' : 'NorESM2', 'subdir'    : lakedirns11118knoresm23, 'cexpid' : expid, 'clmh0' : 'monthly', 'chem' : 'fullchem', 'globdatadir' : 'timeblocks-v2', 'project' : '', 'dataformat' : 'rawnoresm'}
+    elif expid=='NF1850norbc_2040scen-vl_tropstratchem_f19_f19_t02_20260829' : des={'year0' : 1, 'year1' : 30, 'model' : 'NorESM2', 'subdir'    : lakedirns11118knoresm23, 'cexpid' : expid, 'clmh0' : 'monthly', 'chem' : 'fullchem', 'globdatadir' : 'timeblocks-v2', 'project' : '', 'dataformat' : 'rawnoresm'}
+    elif expid=='NF1850norbc_2050scen-vl_tropstratchem_f19_f19_t02_20260829' : des={'year0' : 1, 'year1' : 30, 'model' : 'NorESM2', 'subdir'    : lakedirns11118knoresm23, 'cexpid' : expid, 'clmh0' : 'monthly', 'chem' : 'fullchem', 'globdatadir' : 'timeblocks-v2', 'project' : '', 'dataformat' : 'rawnoresm'}
+    elif expid=='NF1850norbc_2060scen-vl_tropstratchem_f19_f19_t02_20260829' : des={'year0' : 1, 'year1' : 30, 'model' : 'NorESM2', 'subdir'    : lakedirns11118knoresm23, 'cexpid' : expid, 'clmh0' : 'monthly', 'chem' : 'fullchem', 'globdatadir' : 'timeblocks-v2', 'project' : '', 'dataformat' : 'rawnoresm'}
+    elif expid=='NF1850norbc_2070scen-vl_tropstratchem_f19_f19_t02_20260829' : des={'year0' : 1, 'year1' : 30, 'model' : 'NorESM2', 'subdir'    : lakedirns11118knoresm23, 'cexpid' : expid, 'clmh0' : 'monthly', 'chem' : 'fullchem', 'globdatadir' : 'timeblocks-v2', 'project' : '', 'dataformat' : 'rawnoresm'}
+    elif expid=='NF1850norbc_2080scen-vl_tropstratchem_f19_f19_t02_20260829' : des={'year0' : 1, 'year1' : 30, 'model' : 'NorESM2', 'subdir'    : lakedirns11118knoresm23, 'cexpid' : expid, 'clmh0' : 'monthly', 'chem' : 'fullchem', 'globdatadir' : 'timeblocks-v2', 'project' : '', 'dataformat' : 'rawnoresm'}
+    elif expid=='NF1850norbc_2090scen-vl_tropstratchem_f19_f19_t02_20260829' : des={'year0' : 1, 'year1' : 30, 'model' : 'NorESM2', 'subdir'    : lakedirns11118knoresm23, 'cexpid' : expid, 'clmh0' : 'monthly', 'chem' : 'fullchem', 'globdatadir' : 'timeblocks-v2', 'project' : '', 'dataformat' : 'rawnoresm'}
+    elif expid=='NF1850norbc_2100scen-vl_tropstratchem_f19_f19_t02_20260829' : des={'year0' : 1, 'year1' : 30, 'model' : 'NorESM2', 'subdir'    : lakedirns11118knoresm23, 'cexpid' : expid, 'clmh0' : 'monthly', 'chem' : 'fullchem', 'globdatadir' : 'timeblocks-v2', 'project' : '', 'dataformat' : 'rawnoresm'}
+#
 #   full chemistry
     elif expid=='N1850_tropstratchem_f19_tn14_20241127_test01'          : des={'year0' : 1600, 'year1' : 1639, 'model' : 'NorESM2', 'subdir'    : lakedirns9560knoresm23, 'cexpid' : expid, 'clmh0' : 'monthly', 'chem' : 'fullchem', 'globdatadir' : 'timeblocks-v2', 'project' : '', 'dataformat' : 'rawnoresm'}
     elif expid=='NF1850norbc_tropstratchem_f19_f19_20241127_test01'     : des={'year0' :    1, 'year1' :   30, 'model' : 'NorESM2', 'subdir'    : lakedirns9560knoresm23, 'cexpid' : expid, 'clmh0' : 'monthly', 'chem' : 'fullchem', 'globdatadir' : 'timeblocks-v2', 'project' : '', 'dataformat' : 'rawnoresm'}
@@ -2370,8 +2417,9 @@ def getexpidinfo (expid) :
     elif expid=='n1850GaxgGHG.LM.n30b24.511.betzy.20260904'  : des={'year0' :1406, 'year1' :1425, 'model' : 'NorESM2.5', 'subdir' : lakedirns9560knoresm3, 'cexpid' : expid, 'clmh0' : 'monthly', 'chem' : '', 'globdatadir' : 'timeblocks-v2', 'project' : '', 'dataformat' : 'rawnoresm'} # 511 Ada
     elif expid=='n1850Gaxg.LM.n30b24.516.20260909'           : des={'year0' :1426, 'year1' :1475, 'model' : 'NorESM2.5', 'subdir' : lakedirns9560knoresm3, 'cexpid' : expid, 'clmh0' : 'monthly', 'chem' : '', 'globdatadir' : 'timeblocks-v2', 'project' : '', 'dataformat' : 'rawnoresm'} # 516 Ada - new spinup GrIS
     elif expid=='n1850GaxgGHG.LM.n30b24.516.20260909'        : des={'year0' :1426, 'year1' :1525, 'model' : 'NorESM2.5', 'subdir' : lakedirns9560knoresm3, 'cexpid' : expid, 'clmh0' : 'monthly', 'chem' : '', 'globdatadir' : 'timeblocks-v2', 'project' : '', 'dataformat' : 'rawnoresm'} # 516 Ada - new spinup GrISn1850Gaxg.LM.n30b24.513.betzy.20260905.ubcnone
-    elif expid=='n1850GaxgGHG.LM.n30b24.517.20260911'        : des={'year0' :1456, 'year1' :1495, 'model' : 'NorESM2.5', 'subdir' : lakedirns9560knoresm3, 'cexpid' : expid, 'clmh0' : 'monthly', 'chem' : '', 'globdatadir' : 'timeblocks-v2', 'project' : '', 'dataformat' : 'rawnoresm'} # 517 Ada
+    elif expid=='n1850GaxgGHG.LM.n30b24.517.20260911'        : des={'year0' :1456, 'year1' :1525, 'model' : 'NorESM2.5', 'subdir' : lakedirns9560knoresm3, 'cexpid' : expid, 'clmh0' : 'monthly', 'chem' : '', 'globdatadir' : 'timeblocks-v2', 'project' : '', 'dataformat' : 'rawnoresm'} # 517 Ada
     elif expid=='n1850GaxgGHG.LM.n30b24.517.branch.20260913' : des={'year0' :1456, 'year1' :1475, 'model' : 'NorESM2.5', 'subdir' : lakedirns9560knoresm3, 'cexpid' : expid, 'clmh0' : 'monthly', 'chem' : '', 'globdatadir' : 'timeblocks-v2', 'project' : '', 'dataformat' : 'rawnoresm'} # 517 Ada
+    elif expid=='n1850GaxgGHG.LM.nor30b24.525.20260923'      : des={'year0' :1526, 'year1' :1571, 'model' : 'NorESM2.5', 'subdir' : lakedirns9560knoresm3, 'cexpid' : expid, 'clmh0' : 'monthly', 'chem' : '', 'globdatadir' : 'timeblocks-v2', 'project' : '', 'dataformat' : 'rawnoresm'} # 525 Ada
 #   sensitivity Dirk
     elif expid=='n1850Gaxg.LM.n30b24.513.betzy.20260905.ubcnone'   : des={'year0' :1406, 'year1' :1435, 'model' : 'NorESM2.5', 'subdir' : lakedirns9560knoresm3, 'cexpid' : expid, 'clmh0' : 'monthly', 'chem' : '', 'globdatadir' : 'timeblocks-v2', 'project' : '', 'dataformat' : 'rawnoresm'} # 513 Dirk
     elif expid=='n1850Gaxg.LM.n30b24.513.betzy.20260905.o3clim'    : des={'year0' :1406, 'year1' :1435, 'model' : 'NorESM2.5', 'subdir' : lakedirns9560knoresm3, 'cexpid' : expid, 'clmh0' : 'monthly', 'chem' : '', 'globdatadir' : 'timeblocks-v2', 'project' : '', 'dataformat' : 'rawnoresm'} # 513 Dirk
@@ -2379,8 +2427,25 @@ def getexpidinfo (expid) :
     elif expid=='n1850Gaxg.LM.n30b24.513.betzy.20260905.emish2o'   : des={'year0' :1406, 'year1' :1435, 'model' : 'NorESM2.5', 'subdir' : lakedirns9560knoresm3, 'cexpid' : expid, 'clmh0' : 'monthly', 'chem' : '', 'globdatadir' : 'timeblocks-v2', 'project' : '', 'dataformat' : 'rawnoresm'} # 513 Dirk
     elif expid=='n1850Gaxg.LM.n30b24.513.betzy.20260905.ubcfix'    : des={'year0' :1406, 'year1' :1425, 'model' : 'NorESM2.5', 'subdir' : lakedirns9560knoresm3, 'cexpid' : expid, 'clmh0' : 'monthly', 'chem' : '', 'globdatadir' : 'timeblocks-v2', 'project' : '', 'dataformat' : 'rawnoresm'} # 513 Dirk
 #   emission-driven  
-    elif expid=='n1850esmGaxgGHG.LM.n30b24.20260916'    : des={'year0' :1476, 'year1' :1485, 'model' : 'NorESM2.5', 'subdir' : scratchdir, 'cexpid' : expid, 'clmh0' : 'monthly', 'chem' : '', 'globdatadir' : 'timeblocks-v2', 'project' : '', 'dataformat' : 'rawnoresm'} # Jerry
- 
+    elif expid=='n1850esmGaxgGHG.LM.n30b24.20260916'    : des={'year0' :1476, 'year1' :1485, 'model' : 'NorESM2.5', 'subdir' : lakedirns11118knoresm3, 'cexpid' : expid, 'clmh0' : 'monthly', 'chem' : '', 'globdatadir' : 'timeblocks-v2', 'project' : '', 'dataformat' : 'rawnoresm'} # Jerry
+    elif expid=='n1850esmGaxgGHG.LM.n30b24.20260919'    : des={'year0' :1476, 'year1' :1485, 'model' : 'NorESM2.5', 'subdir' : lakedirns11118knoresm3, 'cexpid' : expid, 'clmh0' : 'monthly', 'chem' : '', 'globdatadir' : 'timeblocks-v2', 'project' : '', 'dataformat' : 'rawnoresm'} # Jerry
+#
+#   BETA25
+    elif expid=='n1850GaxgGHG.LM.nor30b25.526.redout.20260928'      : des={'year0' :1526, 'year1' :1545, 'model' : 'NorESM2.5', 'subdir' : lakedirns9560knoresm3, 'cexpid' : expid, 'clmh0' : 'monthly', 'chem' : '', 'globdatadir' : 'timeblocks-v2', 'project' : '', 'dataformat' : 'rawnoresm'} # 526 Ada
+    elif expid=='n1850GaxgGHG.LM.nor30b25.528.20260928'             : des={'year0' :1526, 'year1' :1715, 'model' : 'NorESM2.5', 'subdir' : lakedirns9560knoresm3, 'cexpid' : expid, 'clmh0' : 'monthly', 'chem' : '', 'globdatadir' : 'timeblocks-v2', 'project' : '', 'dataformat' : 'rawnoresm'} # 528 Mariana
+#   emission-driven
+    elif expid=='n1850esmGaxgGHG.LM.n30b25.20260928'                : des={'year0' :1526, 'year1' :1585, 'model' : 'NorESM2.5', 'subdir' : lakedirns9560knoresm3, 'cexpid' : expid, 'clmh0' : 'monthly', 'chem' : '', 'globdatadir' : 'timeblocks-v2', 'project' : '', 'dataformat' : 'rawnoresm'} # 523 Jerry
+    elif expid=='n1850esmGaxgGHG.LM.n30b25.529.20261002'            : des={'year0' :1566, 'year1' :1755, 'model' : 'NorESM2.5', 'subdir' : lakedirns9560knoresm3, 'cexpid' : expid, 'clmh0' : 'monthly', 'chem' : '', 'globdatadir' : 'timeblocks-v2', 'project' : '', 'dataformat' : 'rawnoresm'} # 523 Jerry
+#
+#   BETA27
+    elif expid=='n1850esmGHGGaxg.LM.nor30b27.001.20261016'          : des={'year0' :  1, 'year1' :100, 'model' : 'NorESM2.5', 'subdir' : lakedirns9560knoresm3, 'cexpid' : expid, 'clmh0' : 'monthly', 'chem' : '', 'globdatadir' : 'timeblocks-v2', 'project' : '', 'dataformat' : 'rawnoresm'} # 001 Jerry
+    elif expid=='n1850GHGGaxg.LM.nor30b27.002.20261016'             : des={'year0' :  1, 'year1' :125, 'model' : 'NorESM2.5', 'subdir' : lakedirns9560knoresm3, 'cexpid' : expid, 'clmh0' : 'monthly', 'chem' : '', 'globdatadir' : 'timeblocks-v2', 'project' : '', 'dataformat' : 'rawnoresm'} # 002 Kjetil
+
+    elif expid=='n1850esmGHGGaxg.LM.nor30b27.003.20261024'          : des={'year0' :101, 'year1' :150, 'model' : 'NorESM2.5', 'subdir' : lakedirns9560knoresm3, 'cexpid' : expid, 'clmh0' : 'monthly', 'chem' : '', 'globdatadir' : 'timeblocks-v2', 'project' : '', 'dataformat' : 'rawnoresm'} # 003 Jerry
+    elif expid=='n1pctCO2-bgcGHGGaxg.LM.nor30b27.007.20261027'      : des={'year0' :  1, 'year1' : 10, 'model' : 'NorESM2.5', 'subdir' : lakedirns9560knoresm3, 'cexpid' : expid, 'clmh0' : 'monthly', 'chem' : '', 'globdatadir' : 'timeblocks-v2', 'project' : '', 'dataformat' : 'rawnoresm'} # 003 Jerry
+
+    elif expid=='n1850GHGGaxg.LM.nor30b27.002.20261022.oxidtest'    : des={'year0' :  1, 'year1' : 20, 'model' : 'NorESM2.5', 'subdir' : lakedirns9560knoresm3, 'cexpid' : expid, 'clmh0' : 'monthly', 'chem' : '', 'globdatadir' : 'timeblocks-v2', 'project' : '', 'dataformat' : 'rawnoresm'}
+
 #   CO2-emissiondriven tests 
     elif expid=='n1850esm.ne16pg3_tn4.noresm3_0_beta10_20260120'                                        : des={'year0' : 251, 'year1' : 280, 'model' : 'NorESM2.5', 'subdir' : lakedirns9560knoresm3, 'cexpid' : expid, 'clmh0' : 'monthly', 'chem' : '', 'globdatadir' : 'timeblocks-v2', 'project' : '', 'dataformat' : 'rawnoresm'} # Jerry : only land and ocean flux
     elif expid=='n1850esm.ne16pg3_tn4.noresm3_0_beta10_20260120huit'                                    : des={'year0' : 251, 'year1' : 255, 'model' : 'NorESM2.5', 'subdir' : lakedirns9560knoresm3, 'cexpid' : expid, 'clmh0' : 'monthly', 'chem' : '', 'globdatadir' : 'timeblocks-v2', 'project' : '', 'dataformat' : 'rawnoresm'} # Jerry : only land and ocean flux
@@ -2455,9 +2520,14 @@ def getexpidinfo (expid) :
     elif expid=='N1850.n30b23MM.506.20260821'              : des={'year0' :121, 'year1' :200, 'model' : 'NorESM2.5', 'subdir' : lakedirns9560knoresm3, 'cexpid' : expid, 'clmh0' : 'monthly', 'chem' : '', 'globdatadir' : 'timeblocks-v2', 'project' : '', 'dataformat' : 'rawnoresm'} # 506 Tomas
     elif expid=='N1850.MM.nor30b23.509.20260901'           : des={'year0' :171, 'year1' :190, 'model' : 'NorESM2.5', 'subdir' : lakedirns9560knoresm3, 'cexpid' : expid, 'clmh0' : 'monthly', 'chem' : '', 'globdatadir' : 'timeblocks-v2', 'project' : '', 'dataformat' : 'rawnoresm'} # 509 Tomas
 #   BETA24
-    elif expid=='N1850.MM.nor30b24.515.20260908'           : des={'year0' :171, 'year1' :232, 'model' : 'NorESM2.5', 'subdir' : lakedirns9560knoresm3, 'cexpid' : expid, 'clmh0' : 'monthly', 'chem' : '', 'globdatadir' : 'timeblocks-v2', 'project' : '', 'dataformat' : 'rawnoresm'} # 515 Tomas
+    elif expid=='N1850.MM.nor30b24.515.20260908'           : des={'year0' :171, 'year1' :310, 'model' : 'NorESM2.5', 'subdir' : lakedirns9560knoresm3, 'cexpid' : expid, 'clmh0' : 'monthly', 'chem' : '', 'globdatadir' : 'timeblocks-v2', 'project' : '', 'dataformat' : 'rawnoresm'} # 515 Tomas
     elif expid=='N1850.MM.nor30b24.HF-output.512.20260904' : des={'year0' :171, 'year1' :175, 'model' : 'NorESM2.5', 'subdir' : lakedirns9560knoresm3, 'cexpid' : expid, 'clmh0' : 'monthly', 'chem' : '', 'globdatadir' : 'timeblocks-v2', 'project' : '', 'dataformat' : 'rawnoresm'} # 512 Tomas
-    elif expid=='N1850.MM.nor30b24.520.20260913'           : des={'year0' :201, 'year1' :220, 'model' : 'NorESM2.5', 'subdir' : lakedirns9560knoresm3, 'cexpid' : expid, 'clmh0' : 'monthly', 'chem' : '', 'globdatadir' : 'timeblocks-v2', 'project' : '', 'dataformat' : 'rawnoresm'} # 520 Tomas
+    elif expid=='N1850.MM.nor30b24.520.20260913'           : des={'year0' :201, 'year1' :280, 'model' : 'NorESM2.5', 'subdir' : lakedirns9560knoresm3, 'cexpid' : expid, 'clmh0' : 'monthly', 'chem' : '', 'globdatadir' : 'timeblocks-v2', 'project' : '', 'dataformat' : 'rawnoresm'} # 520 Tomas
+#   BETA25
+    elif expid=='n1850GHG.MM.nor30b25.527.20260928'    : des={'year0' :296, 'year1' :300, 'model' : 'NorESM2.5', 'subdir' : lakedirns9560knoresm3, 'cexpid' : expid, 'clmh0' : 'monthly', 'chem' : '', 'globdatadir' : 'timeblocks-v2', 'project' : '', 'dataformat' : 'rawnoresm'}
+    elif expid=='n1850GHG.MM.nor30b25.527.redout.20260929' : des={'year0' :301, 'year1' :420, 'model' : 'NorESM2.5', 'subdir' : lakedirns9560knoresm3, 'cexpid' : expid, 'clmh0' : 'monthly', 'chem' : '', 'globdatadir' : 'timeblocks-v2', 'project' : '', 'dataformat' : 'rawnoresm'} # 527 Ada
+
+
 #
 #   cmip7 forcing test
 #   reference
@@ -2676,6 +2746,7 @@ def getexpidinfo (expid) :
 
     else : 
         print('*** experimentdefinition.py HALLO ***')
+        print('MILJAAAAAAAAAAAAAAAAR')
         print('No expid recognized = ...'+str(expid)+'...')
         quit()
     #

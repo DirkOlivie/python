@@ -59,14 +59,17 @@ def getfinalexpidinfo(expid) :
 #   HYDROGEN JASON
 #   simulations from methaneMIP
     elif ( expid == 'NHIST_tropstratchem_01_f19_tn14_r2000_s01_20241118' ) : year0=2005 ; year1=2014 ; scenario='hist' ; realisation='r1i1p1f1' ; grid='gn'  ; model='NorESM2-LM'
-#   hyway simulation
+#   hyway simulation transient
     elif ( expid == 'NFHISTSSP245norpddmsbc_tropstratchem_sdyn_01_f19_f19_r2000_s01_hyway_20250521' ) : year0=2010 ; year1=2019 ; scenario='transient2010s' ; realisation='r1' ; grid='gn'  ; model='NorESM2-LM-C' # transient2010s
     elif ( expid == 'NFSSP245norpddmsbc_tropstratchem_sdyn_01_f19_f19_s01_hyway_3hr2015_20250521'   ) : year0=2015 ; year1=2015 ; scenario='transient2010s' ; realisation='r1' ; grid='gn'  ; model='NorESM2-LM-C' # 3-hourly
     elif ( expid == 'NFSSP245norpddmsbc_tropstratchem_sdyn_01_f19_f19_s01_hyway_3hr2019_20250521'   ) : year0=2019 ; year1=2019 ; scenario='transient2010s' ; realisation='r1' ; grid='gn'  ; model='NorESM2-LM-C' # 3-hourly
+#   hyway simulation fixed 2019
     elif ( expid == 'NFSSP245norpddmsbc_tropstratchem_sdyn_01_f19_f19_cntr2019_h2emi_h2dep0p75_s01_hyway_20260403' )             : year0=2019 ; year1=2038 ; scenario='cntr'     ; realisation='r1' ; grid='gn'  ; model='NorESM2-LM-C' # cntr
     elif ( expid == 'NFSSP245norpddmsbc_tropstratchem_sdyn_01_f19_f19_cntr2019_h2emi_h2dep0p75_ch4x1p1_s01_hyway_20260403' )     : year0=2019 ; year1=2038 ; scenario='ch4pert'  ; realisation='r1' ; grid='gn'  ; model='NorESM2-LM-C' # ch4pert
     elif ( expid == 'NFSSP245norpddmsbc_tropstratchem_sdyn_01_f19_f19_cntr2019_h2emi_h2dep0p75_h2plus100tg_s01_hyway_20260403' ) : year0=2019 ; year1=2038 ; scenario='h2pert'   ; realisation='r1' ; grid='gn'  ; model='NorESM2-LM-C' # h2pert
     elif ( expid == 'NFSSP245norpddmsbc_tropstratchem_sdyn_01_f19_f19_cntr1850_h2emi_h2dep0p75_s01_hyway_20260403' )             : year0=2019 ; year1=2038 ; scenario='cntr1850' ; realisation='r1' ; grid='gn'  ; model='NorESM2-LM-C' # cntr1850 
+    elif ( expid == 'NFSSP245norpddmsbc_tropstratchem_sdyn_01_f19_f19_cntr2019_h2emi_h2dep0p75_ch4emi_s01_hyway_20260403' )             : year0=2019 ; year1=2058 ; scenario='freech4cntr'   ; realisation='r1' ; grid='gn'  ; model='NorESM2-LM-C' # freech4cntr
+    elif ( expid == 'NFSSP245norpddmsbc_tropstratchem_sdyn_01_f19_f19_cntr2019_h2emi_h2dep0p75_ch4emi_h2plus100tg_s01_hyway_20260403' ) : year0=2019 ; year1=2058 ; scenario='freech4h2pert' ; realisation='r1' ; grid='gn'  ; model='NorESM2-LM-C' # freech4cntrh2pert
 #
 #   METHANEMIP
 #   ssp245

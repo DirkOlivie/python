@@ -74,6 +74,8 @@ def loopanalyseglobalmeanprofile2(expidlist, refidlist, wlist, legendlist, varli
 #
     for verticalaxis in verticalaxislist :
 #
+        print('verticalaxis : ', verticalaxis)
+#    
         if ( description == 'varcommon-regioncommon' \
           or description == 'regioncommon-varcommon' ) :
 
